@@ -1,4 +1,4 @@
-﻿@model Plannr.Models.DemandeReservation
+﻿@model Plannr.ViewModels.DemandeReservationEnseignement
 
 @{
     ViewBag.Title = "Create";
@@ -13,21 +13,11 @@
         <legend>DemandeReservation</legend>
 
         <div class="editor-label">
-            @Html.LabelFor(model => model.DateDemande)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.DateDemande)
-            @Html.ValidationMessageFor(model => model.DateDemande)
+            @Html.LabelFor(model => model.DemandeReservation.DateDemande)
         </div>
 
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Checked)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.Checked)
-            @Html.ValidationMessageFor(model => model.Checked)
-        </div>
-
+        @Html.DropDownListFor(x => x.Enseignements, new SelectList(ViewBag.Enseignements, "Id", "Lib"));
+        
         <p>
             <input type="submit" value="Create" />
         </p>

@@ -33,5 +33,6 @@ namespace Plannr.Models
         public DbSet<Reservation> Reservations { get; set; }
         public DbSet<DemandeReservation> DemandesReservation { get; set; }
 
+
     }
 }

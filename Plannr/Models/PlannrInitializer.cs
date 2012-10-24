@@ -11,7 +11,7 @@ using WebMatrix.WebData;
 namespace Plannr.Models
 {
 
-    public class PlannrInitializer : DropCreateDatabaseIfModelChanges<PlannrContext>
+    public class PlannrInitializer : DropCreateDatabaseAlways<PlannrContext>
     {
         protected override void Seed(PlannrContext context)
         {
@@ -150,26 +150,39 @@ namespace Plannr.Models
              cours.ForEach(x => context.Cours.Add(x));
             context.SaveChanges();
 
-            var groupe = new Groupe()
-            {
-                Id = 1,
-                Libelle = "IG5"
-            };
+       
+                var groupe = new Groupe() {
+                    Id = 1,
+                    Libelle = "IG5"
+                };
+                var sous_groupe = new Groupe()
+                {
+                    Id = 2,
+                    Libelle = "IG5 Groupe 1",
+                    GroupePere = groupe
+                };
+       
 
             context.Groupes.Add(groupe);
+            
             context.SaveChanges();
-      
+
+            context.Groupes.Add(sous_groupe);
+            context.SaveChanges();
+
             var enseignement = new List<Enseignement>()
             {
                 new Enseignement() {
                     Id = 1,
-                    Cours = cours[0],
-                    Enseignant = responsable
+                    Cours = cours[1],
+                    Enseignant = responsable,
+                    Groupe = groupe
                 },
                 new Enseignement() {
                     Id = 2,
-                    Cours = cours[1],
-                    Enseignant = enseignant
+                    Cours = cours[0],
+                    Enseignant = enseignant,
+                    Groupe = sous_groupe
                 }
             };
 
@@ -181,7 +194,10 @@ namespace Plannr.Models
                    Id = 1,
                    Checked = false,
                   Enseignement = enseignement[0],
-                  CaracteristiqueSalle = caracteristique,
+                  CapaciteNecesaire = 50,
+                  BesoinPrises = false,
+                  BesoinProjecteur = true,
+                  DateVoulue = DateTime.Parse("25/10/2012"),
                   Creneau = creneau[0],
                   DateDemande = DateTime.Parse("22/10/2012")
                },
@@ -190,7 +206,10 @@ namespace Plannr.Models
                    Id = 2,
                    Checked = true,
                    Enseignement = enseignement[1],
-                   CaracteristiqueSalle = caracteristique,
+                   CapaciteNecesaire = 100,
+                   BesoinProjecteur = false,
+                   BesoinPrises =false,
+                   DateVoulue = DateTime.Parse("25/10/2012"),
                    Creneau = creneau[1],
                    DateDemande = DateTime.Parse("24/10/2012")
                }

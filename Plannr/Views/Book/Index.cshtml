@@ -21,32 +21,33 @@
     </tr>
 
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.DateDemande)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Checked)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Enseignement.Enseignant.UserName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.CaracteristiqueSalle.Capacite)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Enseignement.Cours.Matiere.Ue.Libelle)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Enseignement.Cours.Libelle)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.DateDemande)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Creneau.HeureDebut)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Checked)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Enseignement.Enseignant.UserName)
+            </td>
+            
+            <td>
+                @Html.DisplayFor(modelItem => item.Enseignement.Cours.Matiere.Ue.Libelle)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Enseignement.Cours.Libelle)
+            </td>
+            <td>
+      
+            @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+            </td>
+        </tr>
+    }
 
 </table>

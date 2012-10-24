@@ -16,10 +16,20 @@ namespace Plannr.Models
         public DateTime DateDemande { get; set; }
         public bool Checked { get; set; }
 
+        public bool BesoinProjecteur { get; set; }
+        public bool BesoinPrises { get; set; }
+        [Required]
+        public int CapaciteNecesaire { get; set; }
+        [Required]
+        public DateTime DateVoulue { get; set; }
+        [Required]
+        public int HeureDepart { get; set; }
+        [Required]
+        public int HeureFin { get; set; }
 
         // Navigators only - table de jointure
         public virtual Enseignement Enseignement {get;set;}
-        public virtual CaracteristiqueSalle CaracteristiqueSalle { get; set; }
+
         public virtual Creneau Creneau { get; set; }
 
        

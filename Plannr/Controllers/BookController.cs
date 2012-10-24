@@ -20,7 +20,7 @@ namespace Plannr.Controllers
        [Authorize(Roles="Enseignant")]
         public ActionResult Index() {
 
-      
+            
             var id = (int) Membership.GetUser().ProviderUserKey; 
             //var id = 1;
             return View(db.DemandesReservation.Where(x => x.Enseignement.Enseignant.UserId == id).ToList());
@@ -31,6 +31,7 @@ namespace Plannr.Controllers
 
         public ActionResult Details(int id = 0)
         {
+
             DemandeReservation demandereservation = db.DemandesReservation.Find(id);
             if (demandereservation == null)
             {
@@ -44,6 +45,14 @@ namespace Plannr.Controllers
 
         public ActionResult Create()
         {
+            var id = (int)Membership.GetUser().ProviderUserKey;
+            ViewBag.Enseignements = from k in db.Enseignements.Where(x => x.Enseignant.UserId == id).ToList()
+                                    select new
+                                    {
+                                        Id = k.Id,
+                                        Lib = k.Cours.Libelle + " - " + k.Groupe.Libelle
+                                    };
+
             return View();
         }
 
@@ -63,34 +72,7 @@ namespace Plannr.Controllers
             return View(demandereservation);
         }
 
-        //
-        // GET: /Book/Edit/5
-
-        public ActionResult Edit(int id = 0)
-        {
-            DemandeReservation demandereservation = db.DemandesReservation.Find(id);
-            if (demandereservation == null)
-            {
-                return HttpNotFound();
-            }
-            return View(demandereservation);
-        }
-
-        //
-        // POST: /Book/Edit/5
-
-        [HttpPost]
-        public ActionResult Edit(DemandeReservation demandereservation)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Entry(demandereservation).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            return View(demandereservation);
-        }
-
+  
         //
         // GET: /Book/Delete/5
 
