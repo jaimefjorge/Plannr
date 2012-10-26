@@ -27,10 +27,11 @@ namespace Plannr.Models
         [Required]
         public int HeureFin { get; set; }
 
+
         // Navigators only - table de jointure
         public virtual Enseignement Enseignement {get;set;}
 
-        public virtual Creneau Creneau { get; set; }
+        public virtual Reservation ReservationAssociee { get; set; }
 
        
     }

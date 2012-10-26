@@ -1,0 +1,50 @@
+@model Plannr.Models.DemandeReservation
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<fieldset>
+    <legend>DemandeReservation</legend>
+
+    <div class="display-label">DateDemande</div>
+    <div class="display-field">@String.Format("{0:g}", Model.DateDemande)</div>
+
+    <div class="display-label">Checked</div>
+    <div class="display-field">@Model.Checked</div>
+
+    <div class="display-label">BesoinProjecteur</div>
+    <div class="display-field">@Model.BesoinProjecteur</div>
+
+    <div class="display-label">BesoinPrises</div>
+    <div class="display-field">@Model.BesoinPrises</div>
+
+    <div class="display-label">CapaciteNecesaire</div>
+    <div class="display-field">@Model.CapaciteNecesaire</div>
+
+    <div class="display-label">DateVoulue</div>
+    <div class="display-field">@String.Format("{0:g}", Model.DateVoulue)</div>
+
+    <div class="display-label">HeureDepart</div>
+    <div class="display-field">@Model.HeureDepart</div>
+
+    <div class="display-label">HeureFin</div>
+    <div class="display-field">@Model.HeureFin</div>
+
+    <div class="display-label">Enseignement</div>
+    <div class="display-field">@Html.DisplayTextFor(_ => Model.Enseignement).ToString()</div>
+
+    <div class="display-label">ReservationAssociee</div>
+    <div class="display-field">@Html.DisplayTextFor(_ => Model.ReservationAssociee).ToString()</div>
+</fieldset>
+@using (Html.BeginForm()) {
+    <p>
+        <input type="submit" value="Delete" /> |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+}
+
+

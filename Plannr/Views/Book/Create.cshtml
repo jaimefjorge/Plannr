@@ -1,4 +1,4 @@
-﻿@model Plannr.ViewModels.DemandeReservationEnseignement
+﻿@model Plannr.Models.DemandeReservation
 
 @{
     ViewBag.Title = "Create";
@@ -13,16 +13,68 @@
         <legend>DemandeReservation</legend>
 
         <div class="editor-label">
-            @Html.LabelFor(model => model.DemandeReservation.DateDemande)
+            Selectionner l'enseignement (un cours et un groupe) 
+            </div>
+      
+        <div class="editor-field">
+            @Html.DropDownListFor(model => model.Enseignement.Id, new SelectList(ViewBag.listEnseignements, "Id", "Id"))
         </div>
 
-        @Html.DropDownListFor(x => x.Enseignements, new SelectList(ViewBag.Enseignements, "Id", "Lib"));
-        
+        <div class="editor-label">
+            @Html.LabelFor(model => model.BesoinProjecteur)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.BesoinProjecteur)
+            @Html.ValidationMessageFor(model => model.BesoinProjecteur)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.BesoinPrises)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.BesoinPrises)
+            @Html.ValidationMessageFor(model => model.BesoinPrises)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.CapaciteNecesaire)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.CapaciteNecesaire)
+            @Html.ValidationMessageFor(model => model.CapaciteNecesaire)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.DateVoulue)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.DateVoulue)
+            @Html.ValidationMessageFor(model => model.DateVoulue)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.HeureDepart)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.HeureDepart)
+            @Html.ValidationMessageFor(model => model.HeureDepart)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.HeureFin)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.HeureFin)
+            @Html.ValidationMessageFor(model => model.HeureFin)
+        </div>
+
         <p>
             <input type="submit" value="Create" />
         </p>
     </fieldset>
 }
+
+  
 
 <div>
     @Html.ActionLink("Back to List", "Index")
@@ -31,3 +83,4 @@
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 }
+

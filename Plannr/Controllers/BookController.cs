@@ -26,19 +26,6 @@ namespace Plannr.Controllers
             return View(db.DemandesReservation.Where(x => x.Enseignement.Enseignant.UserId == id).ToList());
         }
 
-        //
-        // GET: /Book/Details/5
-
-        public ActionResult Details(int id = 0)
-        {
-
-            DemandeReservation demandereservation = db.DemandesReservation.Find(id);
-            if (demandereservation == null)
-            {
-                return HttpNotFound();
-            }
-            return View(demandereservation);
-        }
 
         //
         // GET: /Book/Create
@@ -46,12 +33,9 @@ namespace Plannr.Controllers
         public ActionResult Create()
         {
             var id = (int)Membership.GetUser().ProviderUserKey;
-            ViewBag.Enseignements = from k in db.Enseignements.Where(x => x.Enseignant.UserId == id).ToList()
-                                    select new
-                                    {
-                                        Id = k.Id,
-                                        Lib = k.Cours.Libelle + " - " + k.Groupe.Libelle
-                                    };
+            // On va chercher les enseignements qui sont attribués à l'enseignant pour les lister dans la DropList en sélectionner un, on le passe à la vue pour génrer la ListBox
+            ViewBag.listEnseignements = db.Enseignements.Where(x => x.Enseignant.UserId == id).ToList();
+                                    
 
             return View();
         }
@@ -60,14 +44,25 @@ namespace Plannr.Controllers
         // POST: /Book/Create
 
         [HttpPost]
-        public ActionResult Create(DemandeReservation demandereservation)
-        {
+        public ActionResult Create(DemandeReservation demandereservation) {
+            
+            demandereservation.DateDemande = DateTime.Now;
+            demandereservation.Checked = false;
+            // Mapping
+            demandereservation.Enseignement = db.Enseignements.Find(demandereservation.Enseignement.Id);
+
             if (ModelState.IsValid)
             {
                 db.DemandesReservation.Add(demandereservation);
                 db.SaveChanges();
+              
                 return RedirectToAction("Index");
             }
+
+            var id = (int)Membership.GetUser().ProviderUserKey;
+            ViewBag.listEnseignements = db.Enseignements.Where(x => x.Enseignant.UserId == id).ToList();
+
+ 
 
             return View(demandereservation);
         }

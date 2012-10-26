@@ -1,0 +1,89 @@
+@model IEnumerable<Plannr.Models.DemandeReservation>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table>
+    <tr>
+        <th></th>
+        <th>
+            DateDemande
+        </th>
+        <th>
+            Checked
+        </th>
+        <th>
+            BesoinProjecteur
+        </th>
+        <th>
+            BesoinPrises
+        </th>
+        <th>
+            CapaciteNecesaire
+        </th>
+        <th>
+            DateVoulue
+        </th>
+        <th>
+            HeureDepart
+        </th>
+        <th>
+            HeureFin
+        </th>
+        <th>
+            Enseignement
+        </th>
+        <th>
+            ReservationAssociee
+        </th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+        </td>
+        <td>
+			@String.Format("{0:g}", item.DateDemande)
+        </td>
+        <td>
+			@item.Checked
+        </td>
+        <td>
+			@item.BesoinProjecteur
+        </td>
+        <td>
+			@item.BesoinPrises
+        </td>
+        <td>
+			@item.CapaciteNecesaire
+        </td>
+        <td>
+			@String.Format("{0:g}", item.DateVoulue)
+        </td>
+        <td>
+			@item.HeureDepart
+        </td>
+        <td>
+			@item.HeureFin
+        </td>
+        <td>
+			@Html.DisplayTextFor(_ => item.Enseignement).ToString()
+        </td>
+        <td>
+			@Html.DisplayTextFor(_ => item.ReservationAssociee).ToString()
+        </td>
+    </tr>
+}
+
+</table>
+
+

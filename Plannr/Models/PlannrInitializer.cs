@@ -11,7 +11,7 @@ using WebMatrix.WebData;
 namespace Plannr.Models
 {
 
-    public class PlannrInitializer : DropCreateDatabaseAlways<PlannrContext>
+    public class PlannrInitializer : DropCreateDatabaseIfModelChanges<PlannrContext>
     {
         protected override void Seed(PlannrContext context)
         {
@@ -198,7 +198,7 @@ namespace Plannr.Models
                   BesoinPrises = false,
                   BesoinProjecteur = true,
                   DateVoulue = DateTime.Parse("25/10/2012"),
-                  Creneau = creneau[0],
+               
                   DateDemande = DateTime.Parse("22/10/2012")
                },
                new DemandeReservation() {
@@ -210,7 +210,7 @@ namespace Plannr.Models
                    BesoinProjecteur = false,
                    BesoinPrises =false,
                    DateVoulue = DateTime.Parse("25/10/2012"),
-                   Creneau = creneau[1],
+                 
                    DateDemande = DateTime.Parse("24/10/2012")
                }
             };

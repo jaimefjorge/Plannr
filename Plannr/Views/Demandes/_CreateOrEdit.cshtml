@@ -1,0 +1,68 @@
+@model Plannr.Models.DemandeReservation
+
+@* This partial view defines form fields that will appear when creating and editing entities *@
+
+<div class="editor-label">
+    @Html.LabelFor(model => model.DateDemande)
+</div>
+<div class="editor-field">
+    @Html.EditorFor(model => model.DateDemande)
+    @Html.ValidationMessageFor(model => model.DateDemande)
+</div>
+
+<div class="editor-label">
+    @Html.LabelFor(model => model.Checked)
+</div>
+<div class="editor-field">
+    @Html.EditorFor(model => model.Checked)
+    @Html.ValidationMessageFor(model => model.Checked)
+</div>
+
+<div class="editor-label">
+    @Html.LabelFor(model => model.BesoinProjecteur)
+</div>
+<div class="editor-field">
+    @Html.EditorFor(model => model.BesoinProjecteur)
+    @Html.ValidationMessageFor(model => model.BesoinProjecteur)
+</div>
+
+<div class="editor-label">
+    @Html.LabelFor(model => model.BesoinPrises)
+</div>
+<div class="editor-field">
+    @Html.EditorFor(model => model.BesoinPrises)
+    @Html.ValidationMessageFor(model => model.BesoinPrises)
+</div>
+
+<div class="editor-label">
+    @Html.LabelFor(model => model.CapaciteNecesaire)
+</div>
+<div class="editor-field">
+    @Html.EditorFor(model => model.CapaciteNecesaire)
+    @Html.ValidationMessageFor(model => model.CapaciteNecesaire)
+</div>
+
+<div class="editor-label">
+    @Html.LabelFor(model => model.DateVoulue)
+</div>
+<div class="editor-field">
+    @Html.EditorFor(model => model.DateVoulue)
+    @Html.ValidationMessageFor(model => model.DateVoulue)
+</div>
+
+<div class="editor-label">
+    @Html.LabelFor(model => model.HeureDepart)
+</div>
+<div class="editor-field">
+    @Html.EditorFor(model => model.HeureDepart)
+    @Html.ValidationMessageFor(model => model.HeureDepart)
+</div>
+
+<div class="editor-label">
+    @Html.LabelFor(model => model.HeureFin)
+</div>
+<div class="editor-field">
+    @Html.EditorFor(model => model.HeureFin)
+    @Html.ValidationMessageFor(model => model.HeureFin)
+</div>
+
