@@ -8,69 +8,90 @@ using System.Web.Mvc;
 using Plannr.Models;
 using WebMatrix.WebData;
 using System.Web.Security;
+using Plannr.DAL;
 
 namespace Plannr.Controllers
 {
     public class BookController : Controller
-    {
-        private PlannrContext db = new PlannrContext();
+    {   
+        // Repository as private member, generic interface type
+        private IDemandesRepository repository;
+        private IEnseignementsRepository enseignementsRepository;
+
+        // Constructor
+        public BookController()
+        {
+            // Share same context for both repo
+            var context = new PlannrContext();
+            this.repository = new DemandesRepository(context);
+            this.enseignementsRepository = new EnseignementsRepository(context);
+        }
+
+        // Give it as a parameter aswel
+        public BookController(IDemandesRepository repo, IEnseignementsRepository ensRepo)
+        {
+            this.repository = repo;
+            this.enseignementsRepository = ensRepo;
+        }
+
 
         //
         // GET: /Book/
        [Authorize(Roles="Enseignant")]
         public ActionResult Index() {
 
-            
             var id = (int) Membership.GetUser().ProviderUserKey; 
-            //var id = 1;
-            return View(db.DemandesReservation.Where(x => x.Enseignement.Enseignant.UserId == id).ToList());
+    
+            return View(this.repository.GetReservationsBy(id));
         }
 
 
         //
         // GET: /Book/Create
-
+        [Authorize(Roles = "Enseignant")]
         public ActionResult Create()
         {
+            // Get Session from Current Logged User
             var id = (int)Membership.GetUser().ProviderUserKey;
             // On va chercher les enseignements qui sont attribués à l'enseignant pour les lister dans la DropList en sélectionner un, on le passe à la vue pour génrer la ListBox
-            ViewBag.listEnseignements = db.Enseignements.Where(x => x.Enseignant.UserId == id).ToList();
+            ViewBag.listEnseignements = this.enseignementsRepository.GetEnseignementsForTeacher(id);
                                     
-
             return View();
         }
 
         //
         // POST: /Book/Create
-
+        [Authorize(Roles = "Enseignant")]
         [HttpPost]
         public ActionResult Create(DemandeReservation demandereservation) {
             
             demandereservation.DateDemande = DateTime.Now;
             demandereservation.Checked = false;
             // Mapping
-            demandereservation.Enseignement = db.Enseignements.Find(demandereservation.Enseignement.Id);
+            demandereservation.Enseignement = this.enseignementsRepository.Get(demandereservation.Enseignement.Id);
 
             if (ModelState.IsValid)
             {
-                db.DemandesReservation.Add(demandereservation);
-                db.SaveChanges();
+                repository.Insert(demandereservation);
+                repository.Save();
               
                 return RedirectToAction("Index");
             }
 
+
+            // Since it's returing view, we need the listEnseignements in the ViewBag aswell
             var id = (int)Membership.GetUser().ProviderUserKey;
-            ViewBag.listEnseignements = db.Enseignements.Where(x => x.Enseignant.UserId == id).ToList();
+            ViewBag.listEnseignements = this.enseignementsRepository.GetEnseignementsForTeacher(id);
 
  
 
             return View(demandereservation);
         }
 
-  
+  /*
         //
         // GET: /Book/Delete/5
-
+        [Authorize(Roles = "Enseignant")]
         public ActionResult Delete(int id = 0)
         {
             DemandeReservation demandereservation = db.DemandesReservation.Find(id);
@@ -79,24 +100,18 @@ namespace Plannr.Controllers
                 return HttpNotFound();
             }
             return View(demandereservation);
-        }
+        }*/
 
         //
         // POST: /Book/Delete/5
-
+        [Authorize(Roles = "Enseignant")]
         [HttpPost, ActionName("Delete")]
         public ActionResult DeleteConfirmed(int id)
         {
-            DemandeReservation demandereservation = db.DemandesReservation.Find(id);
-            db.DemandesReservation.Remove(demandereservation);
-            db.SaveChanges();
+            this.repository.Delete(id);
+            this.repository.Save();
             return RedirectToAction("Index");
         }
 
-        protected override void Dispose(bool disposing)
-        {
-            db.Dispose();
-            base.Dispose(disposing);
-        }
     }
 }

@@ -165,6 +165,10 @@
     <Compile Include="Controllers\BookController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\SalleController.cs" />
+    <Compile Include="DAL\DemandesRepository.cs" />
+    <Compile Include="DAL\EnseignementsRepository.cs" />
+    <Compile Include="DAL\IDemandesRepository.cs" />
+    <Compile Include="DAL\IEnseignementsRepository.cs" />
     <Compile Include="Filters\InitializeSimpleMembershipAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -319,7 +323,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="DAL\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

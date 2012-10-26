@@ -15,6 +15,15 @@ namespace Plannr.Models
         public virtual Cours Cours { get; set; }
         public virtual Enseignant Enseignant { get; set; }
         public virtual Groupe Groupe { get; set; }
+        // Helper method
+        public string Libelle
+        {
+            get
+            {
+                return this.Cours.Libelle + " - " + this.Groupe.Libelle;
+
+            }
+        }
 
 
         public virtual ICollection<DemandeReservation> DemandesReservation { get; set; }
