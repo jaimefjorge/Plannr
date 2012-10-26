@@ -4,83 +4,91 @@
     ViewBag.Title = "Create";
 }
 
-<h2>Create</h2>
+<div class="span8 offset2">
 
-@using (Html.BeginForm()) {
-    @Html.ValidationSummary(true)
+    @using (Html.BeginForm("Create", "Book", FormMethod.Post, new { @class = "form-horizontal" }))
+    {
+        <legend>
+            <h2>Faire une demande de réservation</h2>
+        </legend>
+        @Html.ValidationSummary(true)
 
-    <fieldset>
-        <legend>DemandeReservation</legend>
+        <fieldset>
 
-        <div class="editor-label">
-            Selectionner l'enseignement (un cours et un groupe) 
+
+            <div class="control-group">
+                <label class="control-label" for="">@Html.LabelFor(model => model.Enseignement)</label>
+                <div class="controls">
+                    @Html.DropDownListFor(model => model.Enseignement.Id, new SelectList(ViewBag.listEnseignements, "Id", "Libelle"))
+                </div>
             </div>
-      
-        <div class="editor-field">
-            @Html.DropDownListFor(model => model.Enseignement.Id, new SelectList(ViewBag.listEnseignements, "Id", "Libelle"))
-        </div>
 
-        <div class="editor-label">
-            @Html.LabelFor(model => model.BesoinProjecteur)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.BesoinProjecteur)
-            @Html.ValidationMessageFor(model => model.BesoinProjecteur)
-        </div>
+            <div class="editor-label">
+                @Html.LabelFor(model => model.BesoinProjecteur)
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.BesoinProjecteur)
+                @Html.ValidationMessageFor(model => model.BesoinProjecteur)
+            </div>
 
-        <div class="editor-label">
-            @Html.LabelFor(model => model.BesoinPrises)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.BesoinPrises)
-            @Html.ValidationMessageFor(model => model.BesoinPrises)
-        </div>
+            <div class="editor-label">
+                @Html.LabelFor(model => model.BesoinPrises)
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.BesoinPrises)
+                @Html.ValidationMessageFor(model => model.BesoinPrises)
+            </div>
 
-        <div class="editor-label">
-            @Html.LabelFor(model => model.CapaciteNecesaire)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.CapaciteNecesaire)
-            @Html.ValidationMessageFor(model => model.CapaciteNecesaire)
-        </div>
+            <div class="editor-label">
+                @Html.LabelFor(model => model.CapaciteNecesaire)
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.CapaciteNecesaire)
+                @Html.ValidationMessageFor(model => model.CapaciteNecesaire)
+            </div>
 
-        <div class="editor-label">
-            @Html.LabelFor(model => model.DateVoulue)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.DateVoulue)
-            @Html.ValidationMessageFor(model => model.DateVoulue)
-        </div>
+            <div class="editor-label">
+                @Html.LabelFor(model => model.DateVoulue)
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.DateVoulue)
+                @Html.ValidationMessageFor(model => model.DateVoulue)
+            </div>
 
-        <div class="editor-label">
-            @Html.LabelFor(model => model.HeureDepart)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.HeureDepart)
-            @Html.ValidationMessageFor(model => model.HeureDepart)
-        </div>
+            <div class="editor-label">
+                @Html.LabelFor(model => model.HeureDepart)
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.HeureDepart)
+                @Html.ValidationMessageFor(model => model.HeureDepart)
+            </div>
 
-        <div class="editor-label">
-            @Html.LabelFor(model => model.HeureFin)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.HeureFin)
-            @Html.ValidationMessageFor(model => model.HeureFin)
-        </div>
+            <div class="editor-label">
+                @Html.LabelFor(model => model.HeureFin)
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.HeureFin)
+                @Html.ValidationMessageFor(model => model.HeureFin)
+            </div>
 
-        <p>
-            <input type="submit" value="Create" />
-        </p>
-    </fieldset>
-}
+            <p>
+                <input type="submit" value="Créer" class="btn btn-large btn-primary" />
+                <a href="@Url.Action("Index","Book")" class="btn btn-large btn-danger">Annuler</a>
+            </p>
+        </fieldset>
+    }
 
-  
 
-<div>
-    @Html.ActionLink("Back to List", "Index")
+
+
+        
+ 
+
 </div>
-
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 }
 
+<script type="text/javascript">
+    $("#DateVoulue").datepicker()
+</script>

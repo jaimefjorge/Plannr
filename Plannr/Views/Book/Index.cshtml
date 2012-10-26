@@ -4,21 +4,27 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Mes demandes de réservation</h2>
+<div class="span12">
+          <div class="page-header">
+            <h1>Vos demandes de réservations</h1>
+          </div>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table>
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.DateDemande)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Checked)
-        </th>
-        <th></th>
-    </tr>
+<table class="table table-striped">
+  <thead>
+              <tr>
+                <th>Date de la demande <i class="icon-chevron-down"></i></th>
+                <th>Enseignement <i class="icon-chevron-down"></i></th>
+                <th>Date souhaitée <i class="icon-chevron-down"></i></th>
+                <th>Créneau </th>
+                
+                <th>Capacité demandée <i class="icon-chevron-down"></i></th>
+                <th>Statut <i class="icon-chevron-down"></i></th>
+                <th></th>
+
+              </tr>
+            </thead>
+
+    <tbody>
 
 
     @foreach (var item in Model)
@@ -27,25 +33,33 @@
             <td>
                 @Html.DisplayFor(modelItem => item.DateDemande)
             </td>
-          
+
             <td>
-                @Html.DisplayFor(modelItem => item.Checked)
+                <b>@Html.DisplayFor(modelItem => item.Enseignement.Libelle)</b>
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Enseignement.Enseignant.UserName)
-            </td>
-            
-            <td>
-                @Html.DisplayFor(modelItem => item.Enseignement.Cours.Matiere.Ue.Libelle)
+                @Html.DisplayFor(modelItem => item.DateVoulue)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Enseignement.Cours.Libelle)
+                @Html.DisplayFor(modelItem => item.HeureDepart) - @Html.DisplayFor(modelItem => item.HeureFin)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CapaciteNecesaire)
+            </td>
+            <td>
+                @if (item.ReservationAssociee == null) {
+                    <span class="label label-info">Non assigné</span>
+                }
             </td>
             <td>
       
-            @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+           <i class="icon-remove"></i>
             </td>
         </tr>
     }
-
+</tbody>
 </table>
+
+    <center>
+   <a href="@Url.Action("Create", "Book")" class="btn btn-large btn-primary"><i class="icon-pencil icon-white"></i> Faire une demande de réservation</a>
+</center>

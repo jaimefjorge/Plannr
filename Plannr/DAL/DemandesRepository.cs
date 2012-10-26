@@ -18,7 +18,7 @@ namespace Plannr.DAL
         // Retourne la liste des reservations effectuées par un utilisateur qui a l'id "id"
         public IEnumerable<DemandeReservation> GetReservationsBy(int id)
         {
-            return this.context.DemandesReservation.Where(x => x.Enseignement.Enseignant.UserId == id).ToList();
+            return this.context.DemandesReservation.Where(x => x.Enseignement.Enseignant.UserId == id).OrderByDescending(x =>x.DateDemande).ToList();
         }
         // REtourne la liste des reservations qu'un responsable doit vérifier
         public IEnumerable<DemandeReservation> GetReservationTo(int id)

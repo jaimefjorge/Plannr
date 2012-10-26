@@ -21,6 +21,7 @@ namespace Plannr.Models
         [Required]
         public int CapaciteNecesaire { get; set; }
         [Required]
+        [DisplayFormat(DataFormatString = "{0:dd MMM yyyy}")]
         public DateTime DateVoulue { get; set; }
         [Required]
         public int HeureDepart { get; set; }

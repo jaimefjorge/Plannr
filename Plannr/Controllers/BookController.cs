@@ -9,6 +9,7 @@ using Plannr.Models;
 using WebMatrix.WebData;
 using System.Web.Security;
 using Plannr.DAL;
+using Plannr.Filters;
 
 namespace Plannr.Controllers
 {
@@ -38,6 +39,7 @@ namespace Plannr.Controllers
         //
         // GET: /Book/
        [Authorize(Roles="Enseignant")]
+       [InitializeSimpleMembership]
         public ActionResult Index() {
 
             var id = (int) Membership.GetUser().ProviderUserKey; 
@@ -49,6 +51,7 @@ namespace Plannr.Controllers
         //
         // GET: /Book/Create
         [Authorize(Roles = "Enseignant")]
+        [InitializeSimpleMembership]
         public ActionResult Create()
         {
             // Get Session from Current Logged User
