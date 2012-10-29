@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -29,9 +30,35 @@ namespace Plannr.Models
         public int HeureFin { get; set; }
 
 
-        // Navigators only - table de jointure
-        public virtual Enseignement Enseignement {get;set;}
+        // Return "simple" object for API
+        public int Enseignement_Id
+        {
+            get
+            {
+                return this.Enseignement.Id;
+            }
+        }
 
+
+        public int ReservationAssociee_Id
+        {
+            get
+            {
+                if (this.ReservationAssociee != null)
+                {
+                    return this.ReservationAssociee.Id;
+                }
+                else
+                {
+                    return 0;
+                }
+            }
+        }
+
+        // Navigators only - table de jointure
+        [JsonIgnore]
+        public virtual Enseignement Enseignement {get;set;}
+        [JsonIgnore]
         public virtual Reservation ReservationAssociee { get; set; }
 
        

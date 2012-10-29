@@ -10,6 +10,8 @@ using WebMatrix.WebData;
 using System.Web.Security;
 using Plannr.DAL;
 using Plannr.Filters;
+using Newtonsoft.Json;
+using System.Web.Script.Serialization;
 
 namespace Plannr.Controllers
 {
@@ -36,22 +38,45 @@ namespace Plannr.Controllers
         }
 
 
-        //
         // GET: /Book/
+
        [Authorize(Roles="Enseignant")]
-       [InitializeSimpleMembership]
+       
         public ActionResult Index() {
 
-            var id = (int) Membership.GetUser().ProviderUserKey; 
-    
-            return View(this.repository.GetReservationsBy(id));
+            var id = (int) Membership.GetUser().ProviderUserKey;
+            IEnumerable<DemandeReservation> demandes = this.repository.GetReservationsBy(id).ToList();
+
+            var data = demandes.Select(x => new
+            {
+                DateDemande = x.DateDemande.ToString(),
+                DateVoulue = x.DateVoulue.ToString(),
+                Enseignement = x.Enseignement.Cours.Libelle+" - "+x.Enseignement.Groupe.Libelle,
+                Creneau = x.HeureDepart+" - "+x.HeureFin,
+                Capacite = x.CapaciteNecesaire
+
+           
+            });
+
+            ViewBag.demandes = new JavaScriptSerializer().Serialize(Json(data).Data);
+
+            // Render full or partial.
+            if (!Request.IsAjaxRequest())
+            {
+                return View(demandes);
+            }
+            else
+            {
+                return PartialView("_BookList", demandes);
+            }
         }
 
 
         //
         // GET: /Book/Create
+
         [Authorize(Roles = "Enseignant")]
-        [InitializeSimpleMembership]
+
         public ActionResult Create()
         {
             // Get Session from Current Logged User

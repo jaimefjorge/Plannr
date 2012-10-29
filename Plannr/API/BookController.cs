@@ -18,12 +18,15 @@ namespace Plannr.API
         private IDemandesRepository repository;
         private IEnseignementsRepository enseignementsRepository;
         private PlannrContext db = new PlannrContext();
+       
 
         // Constructor
         public BookController()
         {
+            
             // Share same context for both repo
             var context = new PlannrContext();
+  
             this.repository = new DemandesRepository(context);
             this.enseignementsRepository = new EnseignementsRepository(context);
         }
@@ -40,6 +43,11 @@ namespace Plannr.API
         {
 
             return db.DemandesReservation.AsEnumerable();
+        }
+
+        public DemandeReservation GetDemande(int id)
+        {
+            return db.DemandesReservation.Find(id);
         }
     }
 

@@ -1,0 +1,33 @@
+﻿@{
+    ViewBag.Title = "Responsable";
+}
+
+ <div class="row">
+
+        <div class="span12"><h1>Votre panel de gestion</h1>
+
+            <p>Bienvenue login sur votre panel de gestion.</p></div>
+    </div>
+    <div class="row">
+        <div class="alert alert-block alert-info">
+            <ul>
+                <li>
+                    <span class="label label-success">Réservation</span> Votre demande de réservation pour
+                    l'enseignement XX a été assigné! <a href="#">Voir la réservation</a> - <a href="#">Masquer</a>
+                </li>
+                <li>
+                    <span class="label label-warning">Demandes</span> Vous avez 4 demandes de réservations en cours. <a
+                        href="#">Consulter les demandes</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="row" style="text-align:center; margin-top:20px;">
+
+        <a href="#" class="btn btn-large btn-superlarge"><i class="icon-book"></i> Gestion des demandes (4)</a>
+        <a href="@Url.Action("Index","Book")" class="btn btn-large btn-superlarge"><i class="icon-list"></i> Mes réservations</a>
+        <a href="#" class="btn btn-large btn-superlarge"><i class="icon-briefcase"></i> Mon emploi du temps</a>
+        <a href="#" class="btn btn-large btn-superlarge"><i class="icon-wrench"></i> Mon compte</a>
+
+    </div>

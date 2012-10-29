@@ -14,8 +14,7 @@ namespace Plannr.Models
         [Required]
         public string Type {get;set;}
 
-        // Liste des cours par Type
-        public virtual ICollection<Cours> Cours { get; set; }
+      
 
     }
 }

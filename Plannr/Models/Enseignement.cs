@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -20,12 +21,14 @@ namespace Plannr.Models
         {
             get
             {
-                return this.Cours.Libelle + " - " + this.Groupe.Libelle;
-
+    
+               return this.Cours.Libelle + " - " + this.Groupe.Libelle;
+                
+          
             }
         }
 
-
+        [JsonIgnore]
         public virtual ICollection<DemandeReservation> DemandesReservation { get; set; }
 
     }

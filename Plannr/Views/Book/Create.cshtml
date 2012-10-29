@@ -3,7 +3,7 @@
 @{
     ViewBag.Title = "Create";
 }
-
+<div class="row">
 <div class="span8 offset2">
 
     @using (Html.BeginForm("Create", "Book", FormMethod.Post, new { @class = "form-horizontal" }))
@@ -85,6 +85,7 @@
  
 
 </div>
+    </div>
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 }

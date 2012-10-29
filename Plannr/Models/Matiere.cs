@@ -15,6 +15,7 @@ namespace Plannr.Models
         [Required]
         public string Libelle { get; set; }
 
+        
         public virtual ICollection<Cours> Cours { get; set; }
         public virtual Ue Ue { get; set; }
     }

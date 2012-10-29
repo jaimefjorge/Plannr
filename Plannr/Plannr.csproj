@@ -165,6 +165,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\BookController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\ManagerController.cs" />
     <Compile Include="Controllers\SalleController.cs" />
     <Compile Include="DAL\DemandesRepository.cs" />
     <Compile Include="DAL\EnseignementsRepository.cs" />
@@ -315,12 +316,11 @@
     <Content Include="Views\Book\Details.cshtml" />
     <Content Include="Views\Book\Create.cshtml" />
     <Content Include="Views\Book\Delete.cshtml" />
-    <Content Include="Views\Demandes\Create.cshtml" />
-    <Content Include="Views\Demandes\Edit.cshtml" />
-    <Content Include="Views\Demandes\Delete.cshtml" />
-    <Content Include="Views\Demandes\Details.cshtml" />
-    <Content Include="Views\Demandes\Index.cshtml" />
-    <Content Include="Views\Demandes\_CreateOrEdit.cshtml" />
+    <Content Include="Views\Book\_BookList.cshtml" />
+    <Content Include="Views\Shared\_LoginFormPartial.cshtml" />
+    <Content Include="Views\Manager\Enseignant.cshtml" />
+    <Content Include="Views\Manager\Index.cshtml" />
+    <Content Include="Views\Manager\Responsable.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

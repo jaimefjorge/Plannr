@@ -1,46 +1,18 @@
 ﻿@model Plannr.Models.LoginModel
 
 @{
-    ViewBag.Title = "Se connecter";
+    ViewBag.Title = "Connexion";
 }
-
-<hgroup class="title">
-    <h1>@ViewBag.Title.</h1>
-</hgroup>
-
-
-<h2>Utilisez un compte local pour vous connecter.</h2>
-@using (Html.BeginForm(new { ReturnUrl = ViewBag.ReturnUrl })) {
-    @Html.AntiForgeryToken()
-    @Html.ValidationSummary(true)
-
-    <fieldset>
-        <legend>Formulaire de connexion</legend>
-        <ol>
-            <li>
-                @Html.LabelFor(m => m.UserName)
-                @Html.TextBoxFor(m => m.UserName)
-                @Html.ValidationMessageFor(m => m.UserName)
-            </li>
-            <li>
-                @Html.LabelFor(m => m.Password)
-                @Html.PasswordFor(m => m.Password)
-                @Html.ValidationMessageFor(m => m.Password)
-            </li>
-            <li>
-                @Html.CheckBoxFor(m => m.RememberMe)
-                @Html.LabelFor(m => m.RememberMe, new { @class = "checkbox" })
-            </li>
-        </ol>
-        <input type="submit" value="Se connecter" />
-    </fieldset>
-    <p>
-        @Html.ActionLink("Register", "Register") si vous n’avez pas de compte.
-    </p>
-}
+<div class="span4 offset5">
+    <hgroup class="title">
+        <h1>@ViewBag.Title.</h1>
+    </hgroup>
+</div>
 
 
+<div class="span4 offset3">
 
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-}
+    @Html.Partial("_LoginFormPartial", Model)
+</div>
+
+

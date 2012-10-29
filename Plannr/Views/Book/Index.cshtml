@@ -1,65 +1,14 @@
-﻿@model IEnumerable<Plannr.Models.DemandeReservation>
+﻿
+@model IEnumerable<Plannr.Models.DemandeReservation>
 
 @{
     ViewBag.Title = "Index";
 }
+<div class="row">
 
-<div class="span12">
-          <div class="page-header">
-            <h1>Vos demandes de réservations</h1>
-          </div>
+@Html.Partial("_BookList", Model)
 
-<table class="table table-striped">
-  <thead>
-              <tr>
-                <th>Date de la demande <i class="icon-chevron-down"></i></th>
-                <th>Enseignement <i class="icon-chevron-down"></i></th>
-                <th>Date souhaitée <i class="icon-chevron-down"></i></th>
-                <th>Créneau </th>
-                
-                <th>Capacité demandée <i class="icon-chevron-down"></i></th>
-                <th>Statut <i class="icon-chevron-down"></i></th>
-                <th></th>
-
-              </tr>
-            </thead>
-
-    <tbody>
-
-
-    @foreach (var item in Model)
-    {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.DateDemande)
-            </td>
-
-            <td>
-                <b>@Html.DisplayFor(modelItem => item.Enseignement.Libelle)</b>
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DateVoulue)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.HeureDepart) - @Html.DisplayFor(modelItem => item.HeureFin)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CapaciteNecesaire)
-            </td>
-            <td>
-                @if (item.ReservationAssociee == null) {
-                    <span class="label label-info">Non assigné</span>
-                }
-            </td>
-            <td>
-      
-           <i class="icon-remove"></i>
-            </td>
-        </tr>
-    }
-</tbody>
-</table>
-
-    <center>
+  <center>
    <a href="@Url.Action("Create", "Book")" class="btn btn-large btn-primary"><i class="icon-pencil icon-white"></i> Faire une demande de réservation</a>
 </center>
+    </div>

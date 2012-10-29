@@ -14,6 +14,14 @@ namespace Plannr
                 routeTemplate: "api/{controller}/{id}",
                 defaults: new { id = RouteParameter.Optional }
             );
+
+            var json = config.Formatters.JsonFormatter;
+            // Handle circular references
+            json.SerializerSettings.PreserveReferencesHandling = Newtonsoft.Json.PreserveReferencesHandling.Objects;
+
+            // No XML for now.
+            config.Formatters.Remove(config.Formatters.XmlFormatter);
+
         }
     }
 }

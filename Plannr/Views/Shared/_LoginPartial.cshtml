@@ -1,19 +1,15 @@
-﻿@if (Request.IsAuthenticated) {
+﻿
+
+@if (Request.IsAuthenticated)
+{
     <ul class="nav pull-right">
         <li>
-        <a href="#">Connecté en tant que <b>@User.Identity.Name</b></a>
+            <a href="@Url.Action("Index","Manager")">Connecté en tant que <b>@User.Identity.Name</b></a>
+
         </li>
         <li>
-            @Html.ActionLink("Se déconnecter","LogOff","Account")
+            @Html.ActionLink("Se déconnecter", "LogOff", "Account")
         </li>
     </ul>
-} else {
-    using (Html.BeginForm("Login", "Account", FormMethod.Post, new { @class = "navbar-form pull-right" })) {
-        @Html.AntiForgeryToken()
+}
 
-                        <input class="span2" type="text" placeholder="Login">
-                        <input class="span2" type="password" placeholder="Password">
-                        <button type="submit" class="btn">Sign in</button>
-                
-}
-}
