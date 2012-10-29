@@ -31,3 +31,14 @@
         <a href="#" class="btn btn-large btn-superlarge"><i class="icon-wrench"></i> Mon compte</a>
 
     </div>
+
+<div id="dynamic" class="row">
+
+</div>
+
+<script type="text/javascript">
+
+    $.get('/Book/Index', function (data) {
+        $('#dynamic').html(data);
+    })
+</script>
