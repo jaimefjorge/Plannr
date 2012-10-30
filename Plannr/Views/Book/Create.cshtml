@@ -13,8 +13,7 @@
         </legend>
         @Html.ValidationSummary(true)
 
-        <fieldset>
-
+  
 
             <div class="control-group">
                 <label class="control-label" for="">@Html.LabelFor(model => model.Enseignement)</label>
@@ -40,11 +39,11 @@
             </div>
 
             <div class="editor-label">
-                @Html.LabelFor(model => model.CapaciteNecesaire)
+                @Html.LabelFor(model => model.CapaciteNecessaire)
             </div>
             <div class="editor-field">
-                @Html.EditorFor(model => model.CapaciteNecesaire)
-                @Html.ValidationMessageFor(model => model.CapaciteNecesaire)
+                @Html.EditorFor(model => model.CapaciteNecessaire)
+                @Html.ValidationMessageFor(model => model.CapaciteNecessaire)
             </div>
 
             <div class="editor-label">
@@ -55,27 +54,19 @@
                 @Html.ValidationMessageFor(model => model.DateVoulue)
             </div>
 
-            <div class="editor-label">
-                @Html.LabelFor(model => model.HeureDepart)
-            </div>
-            <div class="editor-field">
-                @Html.EditorFor(model => model.HeureDepart)
-                @Html.ValidationMessageFor(model => model.HeureDepart)
+         <div class="control-group">
+                <label class="control-label" for="">@Html.LabelFor(model => model.CreneauSouhaite)</label>
+                <div class="controls">
+                    @Html.DropDownListFor(model => model.CreneauSouhaite.Id, new SelectList(ViewBag.listCreneauxHoraires, "Id", "HeureConcat"))
+                </div>
             </div>
 
-            <div class="editor-label">
-                @Html.LabelFor(model => model.HeureFin)
-            </div>
-            <div class="editor-field">
-                @Html.EditorFor(model => model.HeureFin)
-                @Html.ValidationMessageFor(model => model.HeureFin)
-            </div>
 
             <p>
                 <input type="submit" value="Créer" class="btn btn-large btn-primary" />
                 <a href="@Url.Action("Index","Book")" class="btn btn-large btn-danger">Annuler</a>
             </p>
-        </fieldset>
+     
     }
 
 

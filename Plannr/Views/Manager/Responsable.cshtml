@@ -5,12 +5,11 @@
  <div class="row">
 
         <div class="span12"><h1>Votre panel de gestion</h1>
-
-            <p>Bienvenue login sur votre panel de gestion.</p></div>
+</div>
     </div>
     <div class="row">
         <div class="alert alert-block alert-info">
-            <ul>
+            <ul style="list-style-type:none;">
                 <li>
                     <span class="label label-success">Réservation</span> Votre demande de réservation pour
                     l'enseignement XX a été assigné! <a href="#">Voir la réservation</a> - <a href="#">Masquer</a>
@@ -36,9 +35,3 @@
 
 </div>
 
-<script type="text/javascript">
-
-    $.get('/Book/Index', function (data) {
-        $('#dynamic').html(data);
-    })
-</script>

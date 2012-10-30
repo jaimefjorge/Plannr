@@ -20,22 +20,36 @@ namespace Plannr.Models
         public bool BesoinProjecteur { get; set; }
         public bool BesoinPrises { get; set; }
         [Required]
-        public int CapaciteNecesaire { get; set; }
+        public int CapaciteNecessaire { get; set; }
         [Required]
         [DisplayFormat(DataFormatString = "{0:dd MMM yyyy}")]
         public DateTime DateVoulue { get; set; }
-        [Required]
-        public int HeureDepart { get; set; }
-        [Required]
-        public int HeureFin { get; set; }
+
+        [JsonIgnore]
+        public virtual CreneauHoraire CreneauSouhaite { get; set; }
 
 
         // Return "simple" object for API
+        public string Enseignement_Libelle
+        {
+            get
+            {
+                return this.Enseignement.Libelle;
+            }
+        }
+
         public int Enseignement_Id
         {
             get
             {
                 return this.Enseignement.Id;
+            }
+        
+        }
+
+        public string CreneauSouhaite_Libelle {
+            get {
+                return this.CreneauSouhaite.HeureConcat;
             }
         }
 

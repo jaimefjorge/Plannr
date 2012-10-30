@@ -12,8 +12,10 @@ namespace Plannr.DAL
         // Get reservations qu'un user ID doit valider (un resp ue)
         IEnumerable<DemandeReservation> GetReservationTo(int id);
         // 
+        DemandeReservation Find(int id);
         void Insert(DemandeReservation demande);
         void Delete(int id);
+        void Delete(DemandeReservation demande);
         void Save();
 
     }

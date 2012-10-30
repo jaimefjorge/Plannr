@@ -13,8 +13,11 @@ namespace Plannr.Models
         public int Id {get;set;}
 
         // Navigators
+        [JsonIgnore]
         public virtual Cours Cours { get; set; }
+        [JsonIgnore]
         public virtual Enseignant Enseignant { get; set; }
+        [JsonIgnore]
         public virtual Groupe Groupe { get; set; }
         // Helper method
         public string Libelle
@@ -28,8 +31,7 @@ namespace Plannr.Models
             }
         }
 
-        [JsonIgnore]
-        public virtual ICollection<DemandeReservation> DemandesReservation { get; set; }
+        
 
     }
 }

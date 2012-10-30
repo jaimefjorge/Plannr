@@ -157,6 +157,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="API\BookController.cs" />
+    <Compile Include="API\CreneauxHorairesController.cs" />
     <Compile Include="App_Start\AuthConfig.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
@@ -167,8 +168,10 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManagerController.cs" />
     <Compile Include="Controllers\SalleController.cs" />
+    <Compile Include="DAL\CreneauxHorairesRepository.cs" />
     <Compile Include="DAL\DemandesRepository.cs" />
     <Compile Include="DAL\EnseignementsRepository.cs" />
+    <Compile Include="DAL\ICreneauxHorairesRepository.cs" />
     <Compile Include="DAL\IDemandesRepository.cs" />
     <Compile Include="DAL\IEnseignementsRepository.cs" />
     <Compile Include="Filters\InitializeSimpleMembershipAttribute.cs" />
@@ -178,7 +181,7 @@
     <Compile Include="Models\Batiment.cs" />
     <Compile Include="Models\CaracteristiqueSalle.cs" />
     <Compile Include="Models\Cours.cs" />
-    <Compile Include="Models\Creneau.cs" />
+    <Compile Include="Models\CreneauHoraire.cs" />
     <Compile Include="Models\DemandeReservation.cs" />
     <Compile Include="Models\Enseignant.cs" />
     <Compile Include="Models\Enseignement.cs" />
@@ -324,6 +327,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Scripts\Plannr\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

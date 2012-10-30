@@ -9,7 +9,11 @@ namespace Plannr
         public static void RegisterBundles(BundleCollection bundles)
         {
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
-                        "~/Scripts/jquery-{version}.js"));
+                        "~/Scripts/jquery-{version}.js",
+                        "~/Scripts/Plannr/underscore.js",
+                        "~/Scripts/Plannr/backbone.js",
+                        "~/Scripts/Plannr/handlebars.js",
+                        "~/Scripts/Plannr/generic.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryui").Include(
                         "~/Scripts/jquery-ui-{version}.js"));

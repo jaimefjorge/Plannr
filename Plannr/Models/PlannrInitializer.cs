@@ -55,24 +55,34 @@ namespace Plannr.Models
             salle.ForEach(p => context.Salles.Add(p));
             context.SaveChanges();
 
-            var creneau = new List<Creneau>()
-            {
-                new Creneau() {
+            // Add Creneaux Horaires disponibles
+
+            var creneauxHoraires = new List<CreneauHoraire>() {
+                new CreneauHoraire() {
                     Id = 1,
                     HeureDebut = 8,
-                    HeureFin = 10,
-                    Date = DateTime.Parse("23/10/2012")
+                    HeureFin = 10
                 },
-                new Creneau() {
+                new CreneauHoraire() {
                     Id = 2,
                     HeureDebut = 9,
-                    HeureFin = 10,
-                    Date = DateTime.Parse("24/10/2012")
+                    HeureFin = 11
+                },
+                new CreneauHoraire() {
+                    Id = 3,
+                    HeureDebut = 9,
+                    HeureFin = 12
+                },
+                new CreneauHoraire() {
+                    Id = 4,
+                    HeureDebut = 14,
+                    HeureFin = 15
                 }
             };
 
-            creneau.ForEach(c => context.Creneaux.Add(c));
+            creneauxHoraires.ForEach(x => context.CreneauxHoraires.Add(x));
             context.SaveChanges();
+
 
             var typeCours = new TypeCours()
             {
@@ -189,39 +199,13 @@ namespace Plannr.Models
             enseignement.ForEach(x => context.Enseignements.Add(x));
             context.SaveChanges();
 
-            var demande = new List<DemandeReservation>() {
-               new DemandeReservation() {
-                   Id = 1,
-                   Checked = false,
-                  Enseignement = enseignement[0],
-                  CapaciteNecesaire = 50,
-                  BesoinPrises = false,
-                  BesoinProjecteur = true,
-                  DateVoulue = DateTime.Parse("25/10/2012"),
-               
-                  DateDemande = DateTime.Parse("22/10/2012")
-               },
-               new DemandeReservation() {
-
-                   Id = 2,
-                   Checked = true,
-                   Enseignement = enseignement[1],
-                   CapaciteNecesaire = 100,
-                   BesoinProjecteur = false,
-                   BesoinPrises =false,
-                   DateVoulue = DateTime.Parse("25/10/2012"),
-                 
-                   DateDemande = DateTime.Parse("24/10/2012")
-               }
-            };
-
-            demande.ForEach(x => context.DemandesReservation.Add(x));
-            context.SaveChanges();
+  
 
             var reservation = new Reservation()
             {
                 Id = 1,
-                Creneau = creneau[1],
+                Date = DateTime.Parse("25/10/2012"),
+                Creneau = creneauxHoraires[3],
                 Enseignement = enseignement[0],
                 DateValidation = DateTime.Parse("23/10/2012"),
                 ResponsableUe = responsable,
@@ -229,6 +213,37 @@ namespace Plannr.Models
             };
 
             context.Reservations.Add(reservation);
+            context.SaveChanges();
+
+                var demande = new List<DemandeReservation>() {
+               new DemandeReservation() {
+                   Id = 1,
+                   Checked = false,
+                  Enseignement = enseignement[0],
+                  CapaciteNecessaire = 50,
+                  BesoinPrises = false,
+                  BesoinProjecteur = true,
+                  DateVoulue = DateTime.Parse("25/10/2012"),
+                  CreneauSouhaite = creneauxHoraires[3],
+                  DateDemande = DateTime.Parse("22/10/2012"),
+                  ReservationAssociee = reservation
+               },
+               new DemandeReservation() {
+
+                   Id = 2,
+                   Checked = true,
+                   Enseignement = enseignement[1],
+                   CapaciteNecessaire = 100,
+                   BesoinProjecteur = false,
+                   BesoinPrises =false,
+                   CreneauSouhaite = creneauxHoraires[2],
+                   DateVoulue = DateTime.Parse("25/10/2012"),
+                 
+                   DateDemande = DateTime.Parse("24/10/2012")
+               }
+            };
+
+            demande.ForEach(x => context.DemandesReservation.Add(x));
             context.SaveChanges();
 
             var personne = new Personne()

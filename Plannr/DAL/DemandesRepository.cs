@@ -37,10 +37,22 @@ namespace Plannr.DAL
             this.context.DemandesReservation.Remove(e);
         }
 
+        public void Delete(DemandeReservation demande)
+        {
+            this.context.DemandesReservation.Remove(demande);
+        }
+
+        public DemandeReservation Find(int id)
+        {
+            return this.context.DemandesReservation.Find(id);
+        }
+
         public void Save()
         {
             this.context.SaveChanges();
         }
+
+        
 
 
         // DIspose

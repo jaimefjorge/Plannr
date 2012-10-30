@@ -47,7 +47,16 @@ namespace Plannr.API
 
         public DemandeReservation GetDemande(int id)
         {
-            return db.DemandesReservation.Find(id);
+            return this.repository.Find(id);
+        }
+
+        public HttpResponseMessage Delete(int id)
+        {
+            var demande = this.repository.Find(id);
+            this.repository.Delete(demande);
+            this.repository.Save();
+            return new HttpResponseMessage(HttpStatusCode.OK);
+
         }
     }
 

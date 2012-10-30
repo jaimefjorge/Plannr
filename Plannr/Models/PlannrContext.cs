@@ -21,7 +21,7 @@ namespace Plannr.Models
         public DbSet<Batiment> Batiments { get; set; }
         public DbSet<CaracteristiqueSalle> CaracteristiquesSalles { get; set; }
         public DbSet<Cours> Cours { get; set; }
-        public DbSet<Creneau> Creneaux { get; set; }
+
         public DbSet<Enseignant> Enseignants { get; set; }
         public DbSet<Enseignement> Enseignements { get; set; }
         public DbSet<Matiere> Matieres { get; set; }
@@ -32,6 +32,7 @@ namespace Plannr.Models
         public DbSet<Groupe> Groupes { get; set; }
         public DbSet<Reservation> Reservations { get; set; }
         public DbSet<DemandeReservation> DemandesReservation { get; set; }
+        public DbSet<CreneauHoraire> CreneauxHoraires { get; set; }
 
        
 
