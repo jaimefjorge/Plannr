@@ -15,7 +15,7 @@ using System.Web.Script.Serialization;
 
 namespace Plannr.Controllers
 {
-      [InitializeSimpleMembership]
+
     public class BookController : Controller
     {   
         // Repository as private member, generic interface type
