@@ -111,11 +111,11 @@ namespace Plannr.Controllers
             
             demandereservation.DateDemande = DateTime.Now;
             demandereservation.Checked = false;
-            
+            demandereservation.CheckedByTeacher = false;
             // Mapping
             demandereservation.Enseignement = this.enseignementsRepository.Get(demandereservation.Enseignement.Id);
             demandereservation.CreneauSouhaite = this.creneauxHorairesRepository.Find(demandereservation.CreneauSouhaite.Id);
-      
+            
 
             if (ModelState.IsValid)
             {

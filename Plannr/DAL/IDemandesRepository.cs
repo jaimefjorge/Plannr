@@ -11,7 +11,8 @@ namespace Plannr.DAL
         IEnumerable<DemandeReservation> GetReservationsBy(int id);
         // Get reservations qu'un user ID doit valider (un resp ue)
         IEnumerable<DemandeReservation> GetReservationTo(int id);
-        // 
+        // Obtient les réservations validées non vues par l'enseignant
+        IEnumerable<DemandeReservation> GetUnseenDemandes(int id);
         DemandeReservation Find(int id);
         void Insert(DemandeReservation demande);
         void Delete(int id);

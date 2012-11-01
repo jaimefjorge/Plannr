@@ -11,9 +11,7 @@ namespace Plannr.Models
     {
         [Key]
         public int Id { get; set; }
-        // Date à laquelle la réservation est validée
-        [Required]
-        public DateTime DateValidation { get; set; }
+
 
         [Required]
         public DateTime Date { get; set; }
@@ -46,9 +44,7 @@ namespace Plannr.Models
         public virtual Enseignement Enseignement { get; set; }
         [JsonIgnore]
         public virtual Salle Salle { get; set; }
-        // Le responsable qui valide la resa
-        [JsonIgnore]
-        public virtual ResponsableUE ResponsableUe { get; set; }
+      
 
     }
 }

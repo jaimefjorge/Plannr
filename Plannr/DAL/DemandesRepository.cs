@@ -47,6 +47,13 @@ namespace Plannr.DAL
             return this.context.DemandesReservation.Find(id);
         }
 
+        public IEnumerable<DemandeReservation> GetUnseenDemandes(int id)
+        {
+
+            return this.context.DemandesReservation.Where(x => x.Id == id && x.CheckedByTeacher == false && x.ReservationAssociee != null).ToList();
+
+        }
+
         public void Save()
         {
             this.context.SaveChanges();

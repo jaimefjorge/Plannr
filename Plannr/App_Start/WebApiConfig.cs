@@ -17,7 +17,7 @@ namespace Plannr
 
             var json = config.Formatters.JsonFormatter;
             // Handle circular references
-            json.SerializerSettings.PreserveReferencesHandling = Newtonsoft.Json.PreserveReferencesHandling.Objects;
+            json.SerializerSettings.PreserveReferencesHandling = Newtonsoft.Json.PreserveReferencesHandling.None;
 
             // No XML for now.
             config.Formatters.Remove(config.Formatters.XmlFormatter);

@@ -16,6 +16,28 @@ namespace Plannr.Models
         protected override void Seed(PlannrContext context)
         {
 
+
+
+            // Creneau génération
+            var borneMax = 22;
+            for (int i = 8; i <= 20; i++)
+            {
+                for (int j = 1; j <= 4; j++)
+                {
+                    if (i + j <= borneMax)
+                    {
+                        var cur_Creneau = new CreneauHoraire()
+                        {
+                            HeureDebut = i,
+                            HeureFin = (i + j)
+                        };
+                        context.CreneauxHoraires.Add(cur_Creneau);
+                        context.SaveChanges();
+                    }
+                }
+
+            }
+
             var batiment = new Batiment()
             {
                 Id = 1,
@@ -57,31 +79,7 @@ namespace Plannr.Models
 
             // Add Creneaux Horaires disponibles
 
-            var creneauxHoraires = new List<CreneauHoraire>() {
-                new CreneauHoraire() {
-                    Id = 1,
-                    HeureDebut = 8,
-                    HeureFin = 10
-                },
-                new CreneauHoraire() {
-                    Id = 2,
-                    HeureDebut = 9,
-                    HeureFin = 11
-                },
-                new CreneauHoraire() {
-                    Id = 3,
-                    HeureDebut = 9,
-                    HeureFin = 12
-                },
-                new CreneauHoraire() {
-                    Id = 4,
-                    HeureDebut = 14,
-                    HeureFin = 15
-                }
-            };
-
-            creneauxHoraires.ForEach(x => context.CreneauxHoraires.Add(x));
-            context.SaveChanges();
+            
 
 
             var typeCours = new TypeCours()
@@ -199,16 +197,16 @@ namespace Plannr.Models
             enseignement.ForEach(x => context.Enseignements.Add(x));
             context.SaveChanges();
 
+            var creneau1 = context.CreneauxHoraires.Find(1);
   
 
             var reservation = new Reservation()
             {
                 Id = 1,
                 Date = DateTime.Parse("25/10/2012"),
-                Creneau = creneauxHoraires[3],
+                Creneau = creneau1,
                 Enseignement = enseignement[0],
-                DateValidation = DateTime.Parse("23/10/2012"),
-                ResponsableUe = responsable,
+     
                 Salle = salle[0]
             };
 
@@ -224,9 +222,10 @@ namespace Plannr.Models
                   BesoinPrises = false,
                   BesoinProjecteur = true,
                   DateVoulue = DateTime.Parse("25/10/2012"),
-                  CreneauSouhaite = creneauxHoraires[3],
+                  CreneauSouhaite = creneau1,
                   DateDemande = DateTime.Parse("22/10/2012"),
-                  ReservationAssociee = reservation
+                  ReservationAssociee = reservation,
+                  CheckedByTeacher = false
                },
                new DemandeReservation() {
 
@@ -236,9 +235,9 @@ namespace Plannr.Models
                    CapaciteNecessaire = 100,
                    BesoinProjecteur = false,
                    BesoinPrises =false,
-                   CreneauSouhaite = creneauxHoraires[2],
+                   CreneauSouhaite = creneau1,
                    DateVoulue = DateTime.Parse("25/10/2012"),
-                 
+                   CheckedByTeacher = false,
                    DateDemande = DateTime.Parse("24/10/2012")
                }
             };

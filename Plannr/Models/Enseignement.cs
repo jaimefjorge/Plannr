@@ -24,9 +24,14 @@ namespace Plannr.Models
         {
             get
             {
-    
-               return this.Cours.Libelle + " - " + this.Groupe.Libelle;
-                
+                if (this.Cours != null)
+                {
+                    return this.Cours.Libelle + " - " + this.Groupe.Libelle;
+                }
+                else
+                {
+                    return "";
+                }
           
             }
         }
