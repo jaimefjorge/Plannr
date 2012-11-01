@@ -326,6 +326,7 @@
     <Content Include="Views\Manager\Index.cshtml" />
     <Content Include="Views\Manager\Responsable.cshtml" />
     <Content Include="Views\Book\_BookCreate.cshtml" />
+    <Content Include="Views\Manager\_NotifsDemandesUnseen.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

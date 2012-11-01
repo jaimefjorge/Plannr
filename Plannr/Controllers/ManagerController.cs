@@ -24,7 +24,7 @@ namespace Plannr.Controllers
         public ActionResult Index()
         {
             var id = (int) Membership.GetUser().ProviderUserKey;
-            ViewBag.unseen = this.demandesRepository.GetUnseenDemandes(id).Count();
+            ViewBag.unseen = this.demandesRepository.GetUnseenDemandes(id);
 
             if (Roles.IsUserInRole(User.Identity.Name,"ResponsableUE"))
             {

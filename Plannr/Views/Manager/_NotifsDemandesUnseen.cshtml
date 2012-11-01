@@ -1,0 +1,8 @@
+﻿
+@foreach (var item in ViewBag.unseen) {
+<li>
+                    <span class="label label-success">Réservation</span> Votre demande de réservation pour
+                    l'enseignement <b>@item.ReservationAssociee.Enseignement_Libelle a été assigné!</b> <a href="#">Voir la réservation</a> - <a href="#">Masquer</a>
+                </li>
+    
+}
