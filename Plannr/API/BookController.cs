@@ -58,6 +58,19 @@ namespace Plannr.API
             return new HttpResponseMessage(HttpStatusCode.OK);
 
         }
+
+        public HttpResponseMessage Post(DemandeReservation demande)
+        {
+            demande.DateDemande = DateTime.Now;
+            demande.DateVoulue = DateTime.Now;
+            demande.Enseignement = db.Enseignements.Find(demande.Enseignement.Id);
+            db.DemandesReservation.Add(demande);
+            db.SaveChanges();
+
+            var response = new HttpResponseMessage(HttpStatusCode.Created);
+
+            return response;
+        }
     }
 
         

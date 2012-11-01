@@ -92,8 +92,15 @@ namespace Plannr.Controllers
             // On va chercher les enseignements qui sont attribués à l'enseignant pour les lister dans la DropList en sélectionner un, on le passe à la vue pour génrer la ListBox
             ViewBag.listEnseignements = this.enseignementsRepository.GetEnseignementsForTeacher(id);
             ViewBag.listCreneauxHoraires = this.creneauxHorairesRepository.getCreneauxHoraires();
-                                    
-            return View();
+
+            if (!Request.IsAjaxRequest())
+            {
+                return View();
+            }
+            else
+            {
+                return PartialView("_BookCreate");
+            }
         }
 
         //
@@ -118,7 +125,7 @@ namespace Plannr.Controllers
                 return RedirectToAction("Index");
             }
 
-            ModelState.Values.Where(modelState => modelState.Errors.Count > 0).ToList().ForEach(x => x.Errors.ToList().ForEach(y => System.Diagnostics.Debug.WriteLine(y.ErrorMessage)));
+            //ModelState.Values.Where(modelState => modelState.Errors.Count > 0).ToList().ForEach(x => x.Errors.ToList().ForEach(y => System.Diagnostics.Debug.WriteLine(y.ErrorMessage)));
 
 
             // Since it's returing view, we need the listEnseignements in the ViewBag aswell
