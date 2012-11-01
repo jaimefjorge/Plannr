@@ -12,11 +12,13 @@ namespace Plannr.Controllers
     public class ManagerController : Controller
     {
         private IDemandesRepository demandesRepository;
+      
 
         public ManagerController()
         {
             var db = new PlannrContext();
             this.demandesRepository = new DemandesRepository(db);
+        
         }
         //
         // GET: /Manager/
