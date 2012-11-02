@@ -32,6 +32,7 @@ namespace Plannr.Controllers
         // GET: /AddEnseignant/
 
 
+
         public ActionResult Index()
         {
             return View(db.Enseignants.ToList());
