@@ -27,6 +27,7 @@ namespace Plannr.Controllers
 
 
         // GET: /AddEnseignant/
+
        [Authorize(Roles = "ResponsableUE")]
 
         public ActionResult Index()
