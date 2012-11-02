@@ -1,4 +1,5 @@
 ﻿using Plannr.DAL;
+using Plannr.Filters;
 using Plannr.Models;
 using System;
 using System.Collections.Generic;
@@ -9,6 +10,8 @@ using System.Web.Security;
 
 namespace Plannr.Controllers
 {
+    [Authorize]
+    [InitializeSimpleMembership]
     public class ManagerController : Controller
     {
         private IDemandesRepository demandesRepository;
@@ -22,7 +25,7 @@ namespace Plannr.Controllers
         }
         //
         // GET: /Manager/
-        [Authorize]
+        
         public ActionResult Index()
         {
             var id = (int) Membership.GetUser().ProviderUserKey;

@@ -15,7 +15,8 @@ using System.Web.Script.Serialization;
 
 namespace Plannr.Controllers
 {
-
+    [Authorize(Roles = "Enseignant")]
+    [InitializeSimpleMembership]
     public class BookController : Controller
     {   
         // Repository as private member, generic interface type
@@ -45,8 +46,7 @@ namespace Plannr.Controllers
 
         // GET: /Book/
 
-       [Authorize(Roles="Enseignant")]
-       
+      
         public ActionResult Index() {
 
             var id = (int) Membership.GetUser().ProviderUserKey;
@@ -83,7 +83,6 @@ namespace Plannr.Controllers
         //
         // GET: /Book/Create
 
-        [Authorize(Roles = "Enseignant")]
 
         public ActionResult Create()
         {
@@ -105,7 +104,7 @@ namespace Plannr.Controllers
 
         //
         // POST: /Book/Create
-        [Authorize(Roles = "Enseignant")]
+
         [HttpPost]
         public ActionResult Create(DemandeReservation demandereservation) {
             
@@ -141,7 +140,7 @@ namespace Plannr.Controllers
   
         //
         // GET: /Book/Delete/5
-        [Authorize(Roles = "Enseignant")]
+
         public ActionResult Delete(int id = 0)
         {
             DemandeReservation demandereservation = this.repository.Find(id);
@@ -154,7 +153,7 @@ namespace Plannr.Controllers
 
         //
         // POST: /Book/Delete/5
-        [Authorize(Roles = "Enseignant")]
+
         [HttpPost, ActionName("Delete")]
         public ActionResult DeleteConfirmed(int id)
         {

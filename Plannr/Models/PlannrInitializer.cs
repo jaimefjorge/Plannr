@@ -253,28 +253,7 @@ namespace Plannr.Models
             context.Personnes.Add(personne);
             context.SaveChanges();
 
-            // Add ResponsableUE role
-            WebSecurity.InitializeDatabaseConnection("PlannrContext", "Personne", "UserId", "UserName", true);
-            const string respRole = "ResponsableUE";
-            const string enseignantRole = "Enseignant";
-
-            if (!Roles.RoleExists(respRole))
-            {
-                Roles.CreateRole(respRole);
-              
-            }
-
-            if (!Roles.RoleExists(enseignantRole)) {
-                Roles.CreateRole(enseignantRole);
-            }
-
-            WebSecurity.CreateAccount("AnneLaurent", "AnneLaurent");
-            WebSecurity.CreateAccount("TiberiuStratulat", "TiberiuStratulat");
-            
-            Roles.AddUserToRole("AnneLaurent", respRole);
-            Roles.AddUserToRole("AnneLaurent",enseignantRole);
-            Roles.AddUserToRole("TiberiuStratulat", enseignantRole);
-
+        
             
             
         }

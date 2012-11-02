@@ -7,9 +7,12 @@ using System.Web;
 using System.Web.Mvc;
 using Plannr.Models;
 using Plannr.DAL;
+using Plannr.Filters;
 
 namespace Plannr.Controllers
 {
+           [Authorize(Roles = "ResponsableUE")]
+    [InitializeSimpleMembership]
     public class AddEnseignantController : Controller
     {
         private PlannrContext db = new PlannrContext();
@@ -27,7 +30,7 @@ namespace Plannr.Controllers
 
 
         // GET: /AddEnseignant/
-       [Authorize(Roles = "ResponsableUE")]
+
 
         public ActionResult Index()
         {
