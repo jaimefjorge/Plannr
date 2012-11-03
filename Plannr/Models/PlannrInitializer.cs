@@ -47,30 +47,26 @@ namespace Plannr.Models
             context.Batiments.Add(batiment);
             context.SaveChanges();
 
-            var caracteristique = new CaracteristiqueSalle()
-            {
-                Id = 1,
-                APrises = true,
-                AProjecteur = true,
-                Capacite = 100
-            };
 
-            context.CaracteristiquesSalles.Add(caracteristique);
-            context.SaveChanges();
 
             var salle = new List<Salle>()
             {
                 new Salle() {
                     Id = 1,
                     Libelle = "202",
-                    BatimentID = 1,
-                    CaracteristiqueSalle = caracteristique
+                 
+                    APrises = true,
+                AProjecteur = true,
+                Capacite = 100,
+                Batiment = batiment
                 },
                 new Salle() {
                     Id = 2,
                     Libelle = "201",
-                    BatimentID = 1,
-                    CaracteristiqueSalle = caracteristique
+                      APrises = true,
+                AProjecteur = false,
+                Capacite = 50,
+                Batiment = batiment
                 }
             };
 

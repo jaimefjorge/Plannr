@@ -28,38 +28,16 @@
             @Html.DropDownListFor(model => model.Batiment.Id, new SelectList(ViewBag.batiments, "Id", "Nom"))  
            
         </div>
-        <div>
-            
-        <td>
-            Présence de projecteur ?</td>
-            <td>
-                <p >
 
-                <input type="radio" value="oui" name="rdProjecteur" />Oui
-                <input type="radio" checked value="non" name="rdProjecteur" />Non
-                </p>
-                </td>
-            </div>
 
         <div class="editor-label">
-            @Html.LabelFor(model => model.CaracteristiqueSalle.Capacite)
+            @Html.LabelFor(model => model.Capacite)
         </div>
         <div class="editor-field">
-            @Html.EditorFor(model => model.CaracteristiqueSalle.Capacite)
-            @Html.ValidationMessageFor(model => model.CaracteristiqueSalle.Capacite)
+            @Html.EditorFor(model => model.Capacite)
+            @Html.ValidationMessageFor(model => model.Capacite)
         </div>
-
-        <div>
-        <td>
-            Présence de prises ?</td>
-            <td>
-                
-                <p>
-                <input type="radio" value="oui" name="rdPrise" />Oui
-                <input type="radio" checked value="non" name="rdPrise" />Non
-                </p>
-                </td>
-            </div>
+            
 
         <p>
             <input type="submit" value="Create" />

@@ -17,8 +17,7 @@ namespace Plannr.Controllers
         {
 
 
-            // Little hack, to be fixed LATER
-            var init = db.Enseignants.ToList();
+
 
             if (Membership.GetUser() != null)
             {

@@ -19,7 +19,7 @@ namespace Plannr.Models
 
         public DbSet<Salle> Salles { get; set; }
         public DbSet<Batiment> Batiments { get; set; }
-        public DbSet<CaracteristiqueSalle> CaracteristiquesSalles { get; set; }
+
         public DbSet<Cours> Cours { get; set; }
 
         public DbSet<Enseignant> Enseignants { get; set; }

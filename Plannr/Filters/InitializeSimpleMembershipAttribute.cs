@@ -26,21 +26,26 @@ namespace Plannr.Filters
         {
             public SimpleMembershipInitializer()
             {
-                //Database.SetInitializer<PlannrContext>(null);
-
+                Database.SetInitializer<PlannrContext>(new PlannrInitializer());
+                // Little hack, to be fixed LATER
+                
                 try
                 {
                     using (var context = new PlannrContext())
                     {
+                        
+
                         if (!context.Database.Exists())
                         {
                             // Create the SimpleMembership database without Entity Framework migration schema
                             ((IObjectContextAdapter)context).ObjectContext.CreateDatabase();
                         }
+
+                        var init = context.Enseignants.Find(1);
                     }
 
                     WebSecurity.InitializeDatabaseConnection("PlannrContext", "Personne", "UserId", "UserName", autoCreateTables: true);
-
+       
                     // Add ResponsableUE role
 
                     const string respRole = "ResponsableUE";
@@ -57,7 +62,7 @@ namespace Plannr.Filters
                         Roles.CreateRole(enseignantRole);
                     }
 
-                    if (!WebSecurity.UserExists("AnneLaurent"))
+                    if (!Roles.IsUserInRole("AnneLaurent",respRole))
                     {
                         WebSecurity.CreateAccount("AnneLaurent", "AnneLaurent");
 

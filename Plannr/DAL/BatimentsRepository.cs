@@ -40,7 +40,7 @@ namespace Plannr.DAL
 
         public IEnumerable<Batiment> GetAll()
         {
-            return this.context.Batiments.AsEnumerable();
+            return this.context.Batiments.ToList();
         }
 
         // DIspose
