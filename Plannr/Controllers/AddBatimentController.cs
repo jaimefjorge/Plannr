@@ -6,19 +6,30 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Plannr.Models;
+using Plannr.DAL;
 
 namespace Plannr.Controllers
 {
-    public class SalleController : Controller
+    public class AddBatimentController : Controller
     {
         private PlannrContext db = new PlannrContext();
+        private IBatimentsRepository batimentRepository;
 
+
+        //Constructor
+        public AddBatimentController()
+        {
+            // Share same context for both repo
+            var context = new PlannrContext();
+            this.batimentRepository = new BatimentsRepository(context);
+
+        }
         //
         // GET: /Salle/
-
+        [Authorize(Roles = "ResponsableUE")]
         public ActionResult Index()
         {
-            return View(db.Salles.ToList());
+            return View(db.Batiments.ToList());
         }
 
         //
@@ -26,12 +37,12 @@ namespace Plannr.Controllers
 
         public ActionResult Details(int id = 0)
         {
-            Salle salle = db.Salles.Find(id);
-            if (salle == null)
+            Batiment batiment = (Batiment)db.Batiments.Find(id);
+            if (batiment == null)
             {
                 return HttpNotFound();
             }
-            return View(salle);
+            return View(batiment);
         }
 
         //
@@ -46,16 +57,16 @@ namespace Plannr.Controllers
         // POST: /Salle/Create
 
         [HttpPost]
-        public ActionResult Create(Salle salle)
+        public ActionResult Create(Batiment batiment)
         {
             if (ModelState.IsValid)
             {
-                db.Salles.Add(salle);
+                db.Batiments.Add(batiment);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View(salle);
+            return View(batiment);
         }
 
         //
@@ -63,27 +74,27 @@ namespace Plannr.Controllers
 
         public ActionResult Edit(int id = 0)
         {
-            Salle salle = db.Salles.Find(id);
-            if (salle == null)
+            Batiment batiment = (Batiment)db.Batiments.Find(id);
+            if (batiment == null)
             {
                 return HttpNotFound();
             }
-            return View(salle);
+            return View(batiment);
         }
 
         //
         // POST: /Salle/Edit/5
 
         [HttpPost]
-        public ActionResult Edit(Salle salle)
+        public ActionResult Edit(Batiment batiment)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(salle).State = EntityState.Modified;
+                db.Entry(batiment).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(salle);
+            return View(batiment);
         }
 
         //
@@ -91,12 +102,12 @@ namespace Plannr.Controllers
 
         public ActionResult Delete(int id = 0)
         {
-            Salle salle = db.Salles.Find(id);
-            if (salle == null)
+            Batiment batiment = db.Batiments.Find(id);
+            if (batiment == null)
             {
                 return HttpNotFound();
             }
-            return View(salle);
+            return View(batiment);
         }
 
         //
@@ -105,8 +116,8 @@ namespace Plannr.Controllers
         [HttpPost, ActionName("Delete")]
         public ActionResult DeleteConfirmed(int id)
         {
-            Salle salle = db.Salles.Find(id);
-            db.Salles.Remove(salle);
+            Batiment batiment = (Batiment)db.Batiments.Find(id);
+            db.Batiments.Remove(batiment);
             db.SaveChanges();
             return RedirectToAction("Index");
         }
