@@ -172,6 +172,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManagerController.cs" />
     <Compile Include="Controllers\AddSalleController.cs" />
+    <Compile Include="Controllers\ReservationsController.cs" />
     <Compile Include="DAL\BatimentsRepository.cs" />
     <Compile Include="DAL\CreneauxHorairesRepository.cs" />
     <Compile Include="DAL\DemandesRepository.cs" />
@@ -182,7 +183,9 @@
     <Compile Include="DAL\IDemandesRepository.cs" />
     <Compile Include="DAL\IEnseignantsRepository.cs" />
     <Compile Include="DAL\IEnseignementsRepository.cs" />
+    <Compile Include="DAL\IReservationsRepository.cs" />
     <Compile Include="DAL\ISallesRepository.cs" />
+    <Compile Include="DAL\ReservationsRepository.cs" />
     <Compile Include="DAL\SallesRepository.cs" />
     <Compile Include="Filters\InitializeSimpleMembershipAttribute.cs" />
     <Compile Include="Global.asax.cs">
@@ -351,6 +354,11 @@
     <Content Include="Views\AddSalle\Details.cshtml" />
     <Content Include="Views\AddSalle\Edit.cshtml" />
     <Content Include="Views\AddSalle\Index.cshtml" />
+    <Content Include="Views\Reservations\Index.cshtml" />
+    <Content Include="Views\Reservations\Details.cshtml" />
+    <Content Include="Views\Reservations\Create.cshtml" />
+    <Content Include="Views\Reservations\Edit.cshtml" />
+    <Content Include="Views\Reservations\Delete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

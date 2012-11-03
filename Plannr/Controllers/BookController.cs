@@ -35,7 +35,7 @@ namespace Plannr.Controllers
 
         }
 
-        // Give it as a parameter aswel
+        // Give it as a parameter aswel for unit testing
         public BookController(IDemandesRepository repo, IEnseignementsRepository ensRepo, ICreneauxHorairesRepository crRepo)
         {
             this.repository = repo;
