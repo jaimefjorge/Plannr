@@ -14,6 +14,7 @@ namespace Plannr.Controllers
     {
         private PlannrContext db = new PlannrContext();
         private ISallesRepository salleRepository;
+        private IBatimentsRepository batimentRepository;
 
 
         //Constructor
@@ -22,7 +23,7 @@ namespace Plannr.Controllers
             // Share same context for both repo
             var context = new PlannrContext();
             this.salleRepository = new SallesRepository(context);
-
+            this.batimentRepository = new BatimentsRepository(context);
         }
         //
         // GET: /Salle/
@@ -50,7 +51,7 @@ namespace Plannr.Controllers
 
         public ActionResult Create()
         {
-            ViewData["listeBatiment"] = db.Batiments.ToList();
+            ViewBag.batiments = this.batimentRepository.GetAll();
 
             return View();
         }
@@ -61,6 +62,8 @@ namespace Plannr.Controllers
         [HttpPost]
         public ActionResult Create(Salle salle)
         {
+            salle.Batiment = this.batimentRepository.Get(salle.Batiment.Id);
+
             if (ModelState.IsValid)
             {
                 db.Salles.Add(salle);

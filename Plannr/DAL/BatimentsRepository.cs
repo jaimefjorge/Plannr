@@ -38,6 +38,11 @@ namespace Plannr.DAL
             this.context.SaveChanges();
         }
 
+        public IEnumerable<Batiment> GetAll()
+        {
+            return this.context.Batiments.AsEnumerable();
+        }
+
         // DIspose
         private bool disposed = false;
 

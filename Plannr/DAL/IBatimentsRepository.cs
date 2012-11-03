@@ -13,5 +13,6 @@ namespace Plannr.DAL
         void Insert(Batiment e);
         void Delete(int id);
         void Save();
+        IEnumerable<Batiment> GetAll();
     }
 }

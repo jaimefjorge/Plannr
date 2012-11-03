@@ -25,24 +25,8 @@
         </div>
 
          <div class="editor-field">
-             
-           <tr>
-     
-            <td>
-                
-
-            <select size="1" name="cmbValeurs">
-               
-            <tr>
-               
-                
- 
-            <option>choix1</option>
-            <option selected>choix2</option>
-            <option>choix3</option>
-            </select>
-            </td>
-            </tr>
+            @Html.DropDownListFor(model => model.Batiment.Id, new SelectList(ViewBag.batiments, "Id", "Nom"))  
+           
         </div>
         <div>
             
