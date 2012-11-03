@@ -35,7 +35,7 @@ namespace Plannr.Controllers
 
         }
 
-        // Give it as a parameter aswel
+        // Give it as a parameter aswel for unit testing
         public BookController(IDemandesRepository repo, IEnseignementsRepository ensRepo, ICreneauxHorairesRepository crRepo)
         {
             this.repository = repo;
@@ -52,16 +52,6 @@ namespace Plannr.Controllers
             var id = (int) Membership.GetUser().ProviderUserKey;
             IEnumerable<DemandeReservation> demandes = this.repository.GetReservationsBy(id).ToList();
 
-           /* var data = demandes.Select(x => new
-            {
-                DateDemande = x.DateDemande.ToString(),
-                DateVoulue = x.DateVoulue.ToString(),
-                Enseignement = x.Enseignement_Libelle,
-                Creneau = x.CreneauSouhaite.HeureConcat,
-                Capacite = x.CapaciteNecessaire,
-                Reservation_Id = x.ReservationAssociee_Id
-           
-            });*/
 
             JsonSerializerSettings jsSettings = new JsonSerializerSettings();
             jsSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;

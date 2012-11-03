@@ -12,6 +12,8 @@ namespace Plannr.DAL
         Salle Get(int id);
         void Insert(Salle e);
         void Delete(int id);
+        IEnumerable<Salle> GetList();
+        void Entry(Salle e);
         void Save();
     }
 }

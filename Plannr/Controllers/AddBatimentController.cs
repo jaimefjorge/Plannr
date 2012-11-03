@@ -29,7 +29,7 @@ namespace Plannr.Controllers
         [Authorize(Roles = "ResponsableUE")]
         public ActionResult Index()
         {
-            return View(db.Batiments.ToList());
+            return View(this.batimentRepository.GetAll());
         }
 
         //
@@ -37,7 +37,8 @@ namespace Plannr.Controllers
 
         public ActionResult Details(int id = 0)
         {
-            Batiment batiment = (Batiment)db.Batiments.Find(id);
+           // Batiment batiment = (Batiment)db.Batiments.Find(id);
+            Batiment batiment = batimentRepository.Get(id);
             if (batiment == null)
             {
                 return HttpNotFound();
@@ -61,8 +62,10 @@ namespace Plannr.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Batiments.Add(batiment);
-                db.SaveChanges();
+              //  db.Batiments.Add(batiment);
+              //  db.SaveChanges();
+                batimentRepository.Insert(batiment);
+                batimentRepository.Save();
                 return RedirectToAction("Index");
             }
 
@@ -74,7 +77,8 @@ namespace Plannr.Controllers
 
         public ActionResult Edit(int id = 0)
         {
-            Batiment batiment = (Batiment)db.Batiments.Find(id);
+           // Batiment batiment = (Batiment)db.Batiments.Find(id);
+            Batiment batiment = batimentRepository.Get(id);
             if (batiment == null)
             {
                 return HttpNotFound();
@@ -90,8 +94,10 @@ namespace Plannr.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Entry(batiment).State = EntityState.Modified;
-                db.SaveChanges();
+               // db.Entry(batiment).State = EntityState.Modified;
+               // db.SaveChanges();
+                batimentRepository.Entry(batiment);
+                batimentRepository.Save();
                 return RedirectToAction("Index");
             }
             return View(batiment);
@@ -102,7 +108,8 @@ namespace Plannr.Controllers
 
         public ActionResult Delete(int id = 0)
         {
-            Batiment batiment = db.Batiments.Find(id);
+           // Batiment batiment = db.Batiments.Find(id);
+            Batiment batiment = batimentRepository.Get(id);
             if (batiment == null)
             {
                 return HttpNotFound();
@@ -116,16 +123,19 @@ namespace Plannr.Controllers
         [HttpPost, ActionName("Delete")]
         public ActionResult DeleteConfirmed(int id)
         {
-            Batiment batiment = (Batiment)db.Batiments.Find(id);
-            db.Batiments.Remove(batiment);
-            db.SaveChanges();
+          //  Batiment batiment = (Batiment)db.Batiments.Find(id);
+          //  db.Batiments.Remove(batiment);
+         //   db.SaveChanges();
+            batimentRepository.Delete(id);
+            batimentRepository.Save();
             return RedirectToAction("Index");
         }
 
         protected override void Dispose(bool disposing)
         {
-            db.Dispose();
-            base.Dispose(disposing);
+           // db.Dispose();
+            //base.Dispose(disposing);
+            batimentRepository.Dispose();
         }
     }
 }

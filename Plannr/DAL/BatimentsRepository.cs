@@ -38,6 +38,11 @@ namespace Plannr.DAL
             this.context.SaveChanges();
         }
 
+        public IEnumerable<Batiment> GetAll()
+        {
+            return this.context.Batiments.ToList();
+        }
+
         // DIspose
         private bool disposed = false;
 
@@ -58,6 +63,13 @@ namespace Plannr.DAL
             Dispose(true);
             GC.SuppressFinalize(this);
         }
+
+        
+         public void Entry(Batiment e)
+         {
+            this.context.Entry(e).State = System.Data.EntityState.Modified;
+        }
+
     }
 
 }

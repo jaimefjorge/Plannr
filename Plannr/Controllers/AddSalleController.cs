@@ -14,6 +14,7 @@ namespace Plannr.Controllers
     {
         private PlannrContext db = new PlannrContext();
         private ISallesRepository salleRepository;
+        private IBatimentsRepository batimentRepository;
 
 
         //Constructor
@@ -22,14 +23,15 @@ namespace Plannr.Controllers
             // Share same context for both repo
             var context = new PlannrContext();
             this.salleRepository = new SallesRepository(context);
-
+            this.batimentRepository = new BatimentsRepository(context);
         }
         //
         // GET: /Salle/
         [Authorize(Roles = "ResponsableUE")]
         public ActionResult Index()
         {
-            return View(db.Salles.ToList());
+            IEnumerable<Salle> listSalles = this.salleRepository.GetList();
+            return View(listSalles);
         }
 
         //
@@ -37,7 +39,7 @@ namespace Plannr.Controllers
 
         public ActionResult Details(int id = 0)
         {
-            Salle salle = (Salle)db.Salles.Find(id);
+            Salle salle =this.salleRepository.Get(id);
             if (salle == null)
             {
                 return HttpNotFound();
@@ -50,7 +52,9 @@ namespace Plannr.Controllers
 
         public ActionResult Create()
         {
-            ViewData["listeBatiment"] = db.Batiments.ToList();
+
+            ViewBag.batiments = this.batimentRepository.GetAll();
+
 
             return View();
         }
@@ -61,10 +65,14 @@ namespace Plannr.Controllers
         [HttpPost]
         public ActionResult Create(Salle salle)
         {
+            salle.Batiment = this.batimentRepository.Get(salle.Batiment.Id);
+
             if (ModelState.IsValid)
             {
-                db.Salles.Add(salle);
-                db.SaveChanges();
+                //db.Salles.Add(salle);
+               // db.SaveChanges();
+                this.salleRepository.Insert(salle);
+                this.salleRepository.Save();
                 return RedirectToAction("Index");
             }
 
@@ -76,7 +84,8 @@ namespace Plannr.Controllers
 
         public ActionResult Edit(int id = 0)
         {
-            Salle salle = (Salle)db.Salles.Find(id);
+          //  Salle salle = (Salle)db.Salles.Find(id);
+            Salle salle = this.salleRepository.Get(id);
             if (salle == null)
             {
                 return HttpNotFound();
@@ -92,8 +101,11 @@ namespace Plannr.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Entry(salle).State = EntityState.Modified;
-                db.SaveChanges();
+               // db.Entry(salle).State = EntityState.Modified;
+                // db.SaveChanges();
+                this.salleRepository.Entry(salle);
+                this.salleRepository.Save();
+               
                 return RedirectToAction("Index");
             }
             return View(salle);
@@ -104,7 +116,8 @@ namespace Plannr.Controllers
 
         public ActionResult Delete(int id = 0)
         {
-            Salle salle = db.Salles.Find(id);
+            //Salle salle = db.Salles.Find(id);
+            Salle salle = this.salleRepository.Get(id);
             if (salle == null)
             {
                 return HttpNotFound();
@@ -118,16 +131,24 @@ namespace Plannr.Controllers
         [HttpPost, ActionName("Delete")]
         public ActionResult DeleteConfirmed(int id)
         {
-            Salle salle = (Salle)db.Salles.Find(id);
-            db.Salles.Remove(salle);
-            db.SaveChanges();
+           // Salle salle = (Salle)db.Salles.Find(id);
+           // db.Salles.Remove(salle);
+          //  db.SaveChanges();
+            
+            this.salleRepository.Delete(id);
+            this.salleRepository.Save();
+           
             return RedirectToAction("Index");
         }
 
         protected override void Dispose(bool disposing)
+
         {
-            db.Dispose();
-            base.Dispose(disposing);
+           // db.Dispose();
+            //base.Dispose(disposing);
+            this.salleRepository.Dispose();
+           
+
         }
     }
 }

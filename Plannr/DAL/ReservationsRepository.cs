@@ -6,31 +6,40 @@ using System.Web;
 
 namespace Plannr.DAL
 {
-    public class SallesRepository : ISallesRepository
+    public class ReservationsRepository : IReservationsRepository
     {
 
         private PlannrContext context;
 
-        public SallesRepository(PlannrContext context)
+        public ReservationsRepository(PlannrContext context)
         {
             this.context = context;
         }
 
-        public Salle Get(int id)
+        public Reservation Get(int id)
         {
-            return this.context.Salles.Find(id);
+            return this.context.Reservations.Find(id);
         }
 
-
-        public void Insert(Models.Salle e)
+        public IEnumerable<Reservation> GetAll()
         {
-            this.context.Salles.Add(e);
+            return this.context.Reservations.ToList();
+        }
+
+        public IEnumerable<Reservation> GetReservationsFor(int id)
+        {
+            return this.context.Reservations.Where(x => x.Enseignement.Enseignant.UserId == id).ToList();
+        }
+
+        public void Insert(Reservation e)
+        {
+            this.context.Reservations.Add(e);
         }
 
         public void Delete(int id)
         {
-            var e = this.context.Salles.Find(id);
-            this.context.Salles.Remove(e);
+            var e = this.Get(id);
+           this.context.Reservations.Remove(e);
         }
 
         public void Save()
@@ -58,16 +67,6 @@ namespace Plannr.DAL
             Dispose(true);
             GC.SuppressFinalize(this);
         }
-
-        public IEnumerable<Salle> GetList() {
-
-         return this.context.Salles.ToList();
-        }
-
-        public void Entry(Salle e) {
-            this.context.Entry(e).State = System.Data.EntityState.Modified;
-        }
-
     }
-
+    
 }

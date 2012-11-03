@@ -13,10 +13,17 @@ namespace Plannr.Models
 
         [Required]
         public string Libelle { get; set; }
+        [Required]
+        [Display(Name = "La salle a t elle un projecteur?")]
+        public bool AProjecteur { get; set; }
+        [Required]
+        public int Capacite { get; set; }
+        [Required]
+        [Display(Name = "La salle a t elle des prises?")]
+        public bool APrises { get; set; }
 
-        public int BatimentID { get; set; }
-        // Navigator
-        public virtual CaracteristiqueSalle CaracteristiqueSalle { get; set; }
+
+
         public virtual Batiment Batiment { get; set; }
     }
 }

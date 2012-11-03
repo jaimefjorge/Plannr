@@ -7,11 +7,13 @@ using System.Threading.Tasks;
 
 namespace Plannr.DAL
 {
-    interface IBatimentsRepository : IDisposable
+    public interface IBatimentsRepository : IDisposable
     {
         Batiment Get(int id);
         void Insert(Batiment e);
         void Delete(int id);
         void Save();
+        void Entry(Batiment e);
+        IEnumerable<Batiment> GetAll();
     }
 }

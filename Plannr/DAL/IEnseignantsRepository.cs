@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Plannr.DAL
 {
-    interface IEnseignantsRepository : IDisposable
+    public interface IEnseignantsRepository : IDisposable
     {
         Enseignant Get(int id);
         void Insert(Enseignant e);
