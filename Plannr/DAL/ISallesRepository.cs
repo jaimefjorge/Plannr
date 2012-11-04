@@ -7,9 +7,10 @@ using System.Threading.Tasks;
 
 namespace Plannr.DAL
 {
-    interface ISallesRepository : IDisposable
+    public interface ISallesRepository : IDisposable
     {
         Salle Get(int id);
+        IEnumerable<Salle> GetSallesCriteres(int capacite, bool projo);
         void Insert(Salle e);
         void Delete(int id);
         IEnumerable<Salle> GetList();

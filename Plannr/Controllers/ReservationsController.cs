@@ -7,13 +7,20 @@ using System.Web;
 using System.Web.Mvc;
 using Plannr.Models;
 using Plannr.DAL;
+using System.Web.Security;
+using Plannr.Filters;
 
 namespace Plannr.Controllers
 {
+    [Authorize(Roles="ResponsableUE")]
+    [InitializeSimpleMembership]
+
     public class ReservationsController : Controller
     {
         private PlannrContext db = new PlannrContext();
         private IReservationsRepository repository;
+        private IDemandesRepository demandesRepository;
+        private ISallesRepository sallesRepository;
        
           // Constructor
         public ReservationsController()
@@ -21,13 +28,17 @@ namespace Plannr.Controllers
             // Share same context for both repo
             var context = new PlannrContext();
             this.repository = new ReservationsRepository(context);
+            this.demandesRepository = new DemandesRepository(context);
+            this.sallesRepository = new SallesRepository(context);
 
         }
 
         // Give it as a parameter aswel for unit testing
-        public ReservationsController(IReservationsRepository repo)
+        public ReservationsController(IReservationsRepository repo, IDemandesRepository demandesRepo, ISallesRepository sallesRepo)
         {
             this.repository = repo;
+            this.demandesRepository = demandesRepo;
+            this.sallesRepository = sallesRepo;
 
         }
 
@@ -36,7 +47,8 @@ namespace Plannr.Controllers
 
         public ActionResult Index()
         {
-            return View(this.repository.GetAll());
+            var id = (int)Membership.GetUser().ProviderUserKey;
+            return View(this.demandesRepository.GetReservationTo(id));
         }
 
 
@@ -45,6 +57,12 @@ namespace Plannr.Controllers
 
         public ActionResult Create(int id)
         {
+            var demandeAssociee = this.demandesRepository.Find(id);
+            var salles = this.sallesRepository.GetSallesCriteres(demandeAssociee.CapaciteNecessaire, demandeAssociee.BesoinProjecteur);
+
+            ViewBag.demandeAssociee = demandeAssociee;
+            ViewBag.salles = salles;
+
             return View();
         }
 

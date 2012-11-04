@@ -19,10 +19,17 @@
             @Html.EditorFor(model => model.Date)
             @Html.ValidationMessageFor(model => model.Date)
         </div>
-
+           <div class="control-group">
+            <label class="control-label" for="">@Html.LabelFor(model => model.Salle)</label>
+            <div class="controls">
+                @Html.DropDownListFor(model => model.Salle.Id, new SelectList(ViewBag.salles, "Id", "Libelle"))
+            </div>
+        </div>
         <p>
             <input type="submit" value="Create" />
         </p>
+
+
     </fieldset>
 }
 

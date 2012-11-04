@@ -21,6 +21,12 @@ namespace Plannr.DAL
             return this.context.Salles.Find(id);
         }
 
+        public IEnumerable<Salle> GetSallesCriteres(int capacite, bool projo)
+        {
+  
+          return this.context.Salles.Where(x => x.Capacite >= capacite && x.AProjecteur == projo).ToList();
+       
+        }
 
         public void Insert(Models.Salle e)
         {
