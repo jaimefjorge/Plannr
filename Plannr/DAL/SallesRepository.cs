@@ -21,12 +21,16 @@ namespace Plannr.DAL
             return this.context.Salles.Find(id);
         }
 
-        public IEnumerable<Salle> GetSallesCriteres(int capacite, bool projo)
+        // Retourne les salles  libres pour une date, et correspondanets aux criteres capacite/projo nécessaire
+        public IEnumerable<Salle> GetSallesCriteres(int capacite, bool projo, DateTime date)
         {
-  
-          return this.context.Salles.Where(x => x.Capacite >= capacite && x.AProjecteur == projo).ToList();
+
+            return (from salle in this.context.Salles.Where(x => x.Capacite >= capacite && x.AProjecteur == projo).ToList()
+                    where !(from resa in this.context.Reservations where resa.Date == date select resa.Salle.Id).Contains(salle.Id)
+                    select salle).ToList();
        
         }
+
 
         public void Insert(Models.Salle e)
         {

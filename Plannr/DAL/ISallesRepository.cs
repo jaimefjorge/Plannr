@@ -10,7 +10,7 @@ namespace Plannr.DAL
     public interface ISallesRepository : IDisposable
     {
         Salle Get(int id);
-        IEnumerable<Salle> GetSallesCriteres(int capacite, bool projo);
+        IEnumerable<Salle> GetSallesCriteres(int capacite, bool projo, DateTime date);
         void Insert(Salle e);
         void Delete(int id);
         IEnumerable<Salle> GetList();

@@ -58,7 +58,7 @@ namespace Plannr.Controllers
         public ActionResult Create(int id)
         {
             var demandeAssociee = this.demandesRepository.Find(id);
-            var salles = this.sallesRepository.GetSallesCriteres(demandeAssociee.CapaciteNecessaire, demandeAssociee.BesoinProjecteur);
+            var salles = this.sallesRepository.GetSallesCriteres(demandeAssociee.CapaciteNecessaire, demandeAssociee.BesoinProjecteur, demandeAssociee.DateVoulue);
 
             ViewBag.demandeAssociee = demandeAssociee;
             ViewBag.salles = salles;
