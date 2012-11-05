@@ -9,6 +9,7 @@ using Plannr.Models;
 using Plannr.DAL;
 using Plannr.Filters;
 using WebMatrix.WebData;
+using System.Web.Security;
 
 namespace Plannr.Controllers
 {
@@ -76,9 +77,11 @@ namespace Plannr.Controllers
         {
             if (ModelState.IsValid)
             {
-         
+                
                 this.enseignantRepository.Insert(enseignant);
                 this.enseignantRepository.Save();
+                WebSecurity.CreateAccount(enseignant.UserName, enseignant.UserName);
+                Roles.AddUserToRole(enseignant.UserName, "Enseignant");
                 return RedirectToAction("Index");
             }
 
