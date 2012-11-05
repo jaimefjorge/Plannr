@@ -1,6 +1,7 @@
 ﻿using Plannr.Models;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Web;
 
@@ -17,6 +18,8 @@ namespace Plannr.DAL
         }
 
         public Enseignant Get(int id) {
+                
+    
             return this.context.Enseignants.Find(id);
         }
 
@@ -26,10 +29,20 @@ namespace Plannr.DAL
             this.context.Enseignants.Add(e);
         }
 
+        public void Edit(Enseignant e)
+        {
+           this.context.Entry(e).State = EntityState.Modified;
+        }
+
         public void Delete(int id)
         {
             var e = this.context.Enseignants.Find(id);
             this.context.Enseignants.Remove(e);
+        }
+
+        public IEnumerable<Enseignant> GetAll()
+        {
+            return this.context.Enseignants.ToList();
         }
 
         public void Save()

@@ -8,6 +8,7 @@ using System.Web.Mvc;
 using Plannr.Models;
 using Plannr.DAL;
 using Plannr.Filters;
+using WebMatrix.WebData;
 
 namespace Plannr.Controllers
 {
@@ -15,7 +16,7 @@ namespace Plannr.Controllers
     [InitializeSimpleMembership]
     public class AddEnseignantController : Controller
     {
-        private PlannrContext db = new PlannrContext();
+        
         private IEnseignantsRepository enseignantRepository;
 
 
@@ -28,6 +29,14 @@ namespace Plannr.Controllers
 
         }
 
+        public AddEnseignantController(IEnseignantsRepository repo)
+        {
+            this.enseignantRepository = repo;
+        }
+
+        
+        
+
 
         // GET: /AddEnseignant/
 
@@ -35,7 +44,7 @@ namespace Plannr.Controllers
 
         public ActionResult Index()
         {
-            return View(db.Enseignants.ToList());
+            return View(this.enseignantRepository.GetAll());
         }
 
         //
@@ -43,7 +52,7 @@ namespace Plannr.Controllers
 
         public ActionResult Details(int id = 0)
         {
-            Enseignant enseignant = (Enseignant)db.Personnes.Find(id);
+            Enseignant enseignant = this.enseignantRepository.Get(id);
             if (enseignant == null)
             {
                 return HttpNotFound();
@@ -67,8 +76,9 @@ namespace Plannr.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Personnes.Add(enseignant);
-                db.SaveChanges();
+         
+                this.enseignantRepository.Insert(enseignant);
+                this.enseignantRepository.Save();
                 return RedirectToAction("Index");
             }
 
@@ -80,7 +90,7 @@ namespace Plannr.Controllers
 
         public ActionResult Edit(int id = 0)
         {
-            Enseignant enseignant = (Enseignant)db.Personnes.Find(id);
+            Enseignant enseignant = this.enseignantRepository.Get(id);
             if (enseignant == null)
             {
                 return HttpNotFound();
@@ -96,8 +106,9 @@ namespace Plannr.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Entry(enseignant).State = EntityState.Modified;
-                db.SaveChanges();
+                this.enseignantRepository.Edit(enseignant);
+
+                this.enseignantRepository.Save();
                 return RedirectToAction("Index");
             }
             return View(enseignant);
@@ -108,7 +119,7 @@ namespace Plannr.Controllers
 
         public ActionResult Delete(int id = 0)
         {
-            Enseignant enseignant = (Enseignant)db.Personnes.Find(id);
+            Enseignant enseignant = this.enseignantRepository.Get(id);
             if (enseignant == null)
             {
                 return HttpNotFound();
@@ -122,15 +133,15 @@ namespace Plannr.Controllers
         [HttpPost, ActionName("Delete")]
         public ActionResult DeleteConfirmed(int id)
         {
-            Enseignant enseignant = (Enseignant)db.Personnes.Find(id);
-            db.Personnes.Remove(enseignant);
-            db.SaveChanges();
+        
+            this.enseignantRepository.Delete(id);
+            this.enseignantRepository.Save();
             return RedirectToAction("Index");
         }
 
         protected override void Dispose(bool disposing)
         {
-            db.Dispose();
+            this.enseignantRepository.Dispose();
             base.Dispose(disposing);
         }
     }

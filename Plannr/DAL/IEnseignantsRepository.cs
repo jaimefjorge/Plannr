@@ -12,6 +12,8 @@ namespace Plannr.DAL
         Enseignant Get(int id);
         void Insert(Enseignant e);
         void Delete(int id);
+        void Edit(Enseignant e);
         void Save();
+        IEnumerable<Enseignant> GetAll();
     }
 }

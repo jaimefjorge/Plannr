@@ -58,6 +58,7 @@ namespace Plannr.Controllers
 
             ViewBag.JSONModel = JsonConvert.SerializeObject(demandes, Formatting.None, jsSettings);
 
+
             // Render full or partial.
             if (!Request.IsAjaxRequest())
             {

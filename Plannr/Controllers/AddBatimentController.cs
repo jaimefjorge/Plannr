@@ -94,8 +94,7 @@ namespace Plannr.Controllers
         {
             if (ModelState.IsValid)
             {
-               // db.Entry(batiment).State = EntityState.Modified;
-               // db.SaveChanges();
+               
                 batimentRepository.Entry(batiment);
                 batimentRepository.Save();
                 return RedirectToAction("Index");
@@ -123,9 +122,7 @@ namespace Plannr.Controllers
         [HttpPost, ActionName("Delete")]
         public ActionResult DeleteConfirmed(int id)
         {
-          //  Batiment batiment = (Batiment)db.Batiments.Find(id);
-          //  db.Batiments.Remove(batiment);
-         //   db.SaveChanges();
+     
             batimentRepository.Delete(id);
             batimentRepository.Save();
             return RedirectToAction("Index");
