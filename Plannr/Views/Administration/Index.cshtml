@@ -1,17 +1,14 @@
-﻿
-
-@{
+﻿@{
     ViewBag.Title = "Index";
 }
 
 @ViewBag.monJson
-<div class="row" id="choixContainer"> 
+<div class="row" id="choixContainer" style="text-align:center; margin-top:20px;"> 
 
 
-
- <a href= class="btn btn-large btn-primary" id="EnseignemantDemand"><i class="icon-pencil icon-white"></i> Ajouter un enseignant</a>
-<a href= class="btn btn-large btn-primary" id="SalleDemand"><i class="icon-pencil icon-white"></i> Ajouter une Salle</a>
-<a href= class="btn btn-large btn-primary" id="BatimentDemand"><i class="icon-pencil icon-white"></i> Ajouter un Batiment</a>
+        <a href="@Url.Action("IndexEnseignant","Administration")" class="btn btn-large btn-primary" id="EnseignemantDemand"><i class="icon-pencil icon-white"></i> Ajouter un enseignant</a>
+        <a href="@Url.Action("CreateSalle","Administration")" class="btn btn-large btn-primary" id="SalleDemand"><i class="icon-pencil icon-white"></i> Ajouter une Salle</a>
+        <a href="@Url.Action("CreateBatiment","Administration")" class="btn btn-large btn-primary" id="BatimentDemand"><i class="icon-pencil icon-white"></i> Ajouter un Batiment</a>
 
 </div>
 
