@@ -12,7 +12,7 @@ namespace Plannr.Controllers
 {
     public class AddSalleController : Controller
     {
-        private PlannrContext db = new PlannrContext();
+
         private ISallesRepository salleRepository;
         private IBatimentsRepository batimentRepository;
 
