@@ -1,0 +1,121 @@
+﻿
+
+@{
+    ViewBag.Title = "Index";
+}
+
+@ViewBag.monJson
+<div class="row" id="choixContainer"> 
+
+
+
+ <a href= class="btn btn-large btn-primary" id="EnseignemantDemand"><i class="icon-pencil icon-white"></i> Ajouter un enseignant</a>
+<a href= class="btn btn-large btn-primary" id="SalleDemand"><i class="icon-pencil icon-white"></i> Ajouter une Salle</a>
+<a href= class="btn btn-large btn-primary" id="BatimentDemand"><i class="icon-pencil icon-white"></i> Ajouter un Batiment</a>
+
+</div>
+
+<div class="row" id="editContainer" style="display:none;">
+
+
+</div>
+
+<script type="text/javascript">
+    $(function () {
+        var editLoaded = false;
+
+        function showEdit() {
+            $('#choixContainer').slideUp()
+            $('#editContainer').fadeIn()
+        }
+
+        function showIndex() {
+            $('#editContainer').fadeOut("fast", function () {
+                $('#choixContainer').fadeIn()
+                editLoaded = false;
+            })
+
+        }
+    
+        $('#cancelEdit').live('click', function (e) {
+
+            showIndex()
+
+            e.preventDefault()
+            return false
+        })
+
+        $('#Validation').live('click', function (e) {
+
+            showIndex()
+
+            e.preventDefault()
+            return false
+        })
+
+
+           $('#EnseignemantDemand').bind('click', function (e) {
+            if (!editLoaded) {
+               $.get("@Url.Action("CreateEnseignant","Administration")", function (data) {
+
+                    $('#editContainer').html(data)
+                    showEdit()
+                    editLoaded = true
+                })
+
+            } else {
+                showEdit()
+            }
+            e.preventDefault()
+            e.stopPropagation()
+            return false
+        })
+
+          $('#SalleDemand').bind('click', function (e) {
+            if (!editLoaded) {
+                $.get("@Url.Action("CreateSalle","Administration")", function (data) {
+
+                    $('#editContainer').html(data)
+                    showEdit()
+                    editLoaded = true
+                })
+
+            } else {
+                showEdit()
+            }
+             e.preventDefault()
+             e.stopPropagation()
+             return false
+        })
+
+        $('#BatimentDemand').bind('click', function (e) {
+            if (!editLoaded) {
+                $.get("@Url.Action("CreateBatiment","Administration")", function (data) {
+
+                    $('#editContainer').html(data)
+                    showEdit()
+                    editLoaded = true
+                })
+
+            } else {
+                showEdit()
+            }
+            e.preventDefault()
+            e.stopPropagation()
+            return false
+        })
+
+      /*  $('#CreateDemandesForm').live('submit', function (e) {
+
+
+            console.log('bleh');
+            var newDemande = new Demande({ Enseignement: { 'Id': $('#Enseignement_Id').val() } })
+            newDemande.save()
+
+
+            e.preventDefault()
+            return false
+        })*/
+
+    })
+    </script>

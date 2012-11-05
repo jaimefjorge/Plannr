@@ -45,7 +45,7 @@ namespace Plannr.Controllers
 
         // GET: /Reservations/
 
-        public ActionResult Index()
+        public ActionResult Index() 
         {
             var id = (int)Membership.GetUser().ProviderUserKey;
             return View(this.demandesRepository.GetReservationTo(id));

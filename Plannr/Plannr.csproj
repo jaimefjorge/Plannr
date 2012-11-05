@@ -167,6 +167,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AddBatimentController.cs" />
     <Compile Include="Controllers\AddEnseignantController.cs" />
+    <Compile Include="Controllers\AdministrationController.cs" />
     <Compile Include="Controllers\BookController.cs" />
     <Compile Include="Controllers\AddController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -354,10 +355,25 @@
     <Content Include="Views\Reservations\Create.cshtml" />
     <Content Include="Views\Reservations\Edit.cshtml" />
     <Content Include="Views\Reservations\Delete.cshtml" />
+    <Content Include="Views\Administration\Index.cshtml" />
+    <Content Include="Views\Administration\Details.cshtml" />
+    <Content Include="Views\Administration\Create.cshtml" />
+    <Content Include="Views\Administration\Edit.cshtml" />
+    <Content Include="Views\Administration\Delete.cshtml" />
+    <Content Include="Views\Administration\_SalleCreate.cshtml" />
+    <Content Include="Views\Administration\CreateSalle.cshtml" />
+    <Content Include="Views\Administration\CreateBatiment.cshtml" />
+    <Content Include="Views\Administration\CreateEnseignant.cshtml" />
+    <Content Include="Views\Administration\IndexEnseignant.cshtml" />
+    <Content Include="Views\Administration\IndexBatiment.cshtml" />
+    <Content Include="Views\Administration\IndexSalle.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Scripts\Plannr\" />
+    <Folder Include="Views\Administration\AdministrationBatiment\" />
+    <Folder Include="Views\Administration\AdministrationEnseignant\" />
+    <Folder Include="Views\Administration\AdministrationSalle\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
