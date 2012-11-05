@@ -92,6 +92,9 @@ namespace Plannr.Models
             {
                 UserId = 1,
                 UserName = "AnneLaurent",
+                Name = "Laurent",
+                FirstName = "Anne",
+                Tel = "0601010101",
                 ResponsableDepuis = DateTime.Parse("10/01/2009")
             };
 
@@ -101,7 +104,10 @@ namespace Plannr.Models
             var enseignant = new Enseignant()
             {
                 UserId = 1,
-                UserName = "TiberiuStratulat"
+                UserName = "TiberiuStratulat",
+                Name = "Stratulat",
+                FirstName = "Tiberiu",
+                Tel = "0601010102"
             };
             context.Enseignants.Add(enseignant);
             context.SaveChanges();

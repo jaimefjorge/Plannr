@@ -17,8 +17,9 @@ namespace Plannr.Models
         [DatabaseGeneratedAttribute(DatabaseGeneratedOption.Identity)]
         public int UserId { get; set; }
         public string UserName { get; set; }
-        public string Firstname { get; set; }
-        public int Tel { get; set; }
+        public string Name { get; set; }
+        public string FirstName { get; set; }
+        public string Tel { get; set; }
     }
 
     public class RegisterExternalLoginModel
