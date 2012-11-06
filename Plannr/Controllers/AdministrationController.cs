@@ -9,9 +9,12 @@ using Plannr.Models;
 using System.Web.Security;
 using Plannr.DAL;
 using Newtonsoft.Json;
+using Plannr.Filters;
 
 namespace Plannr.Controllers
 {
+    [Authorize(Roles = "ResponsableUE")]
+    [InitializeSimpleMembership]
     public class AdministrationController : Controller
     {
         private PlannrContext db = new PlannrContext();
@@ -29,41 +32,34 @@ namespace Plannr.Controllers
             batimentRepository = new BatimentsRepository(context);
         }
 
+        public AdministrationController(IEnseignantsRepository repo, IBatimentsRepository batrepo, ISallesRepository salrepo)
+        {
+            this.enseignantRepository = repo;
+            this.batimentRepository = batrepo;
+            this.salleRepository = salrepo;
+        }
+
+        //Administration's Index
         public ActionResult Index()
         {
-           /* ViewBag.batiments = this.batimentRepository.GetAll();
-            ViewBag.enseignants = this.enseignantRepository.GetAll();
-            ViewBag.batiments = this.salleRepository.GetList();*/
-            
+           
                 return View();
             
-           
         }
 
-        public ActionResult CreateSalle() {
-            ViewBag.batiments = this.batimentRepository.GetAll();
-            return View();
+        //- - - - - - - - - - - - - - - - Enseignant - - - - - - - - - - - - - - - - - -
+
+        //Enseignant's Index
+        public ActionResult IndexEnseignant()
+        {
+            return View(this.enseignantRepository.GetAll());
         }
 
-        //
-        // GET: /Administration/Details/5
-
-     
-        //
-        // GET: /Administration/Create
-
-        public ActionResult CreateBatiment(){
-             //ViewBag.batiments = this.batimentRepository.GetAll();
-          return View();
-            }
-
- 
-      
-
+        // GET: Administration/CreateEnseignant
         public ActionResult CreateEnseignant()
         {
-     //ViewBag.batiments = this.batimentRepository.GetAll();
-         return View();
+
+            return View();
         }
 
         //
@@ -77,12 +73,97 @@ namespace Plannr.Controllers
 
                 this.enseignantRepository.Insert(enseignant);
                 this.enseignantRepository.Save();
-                return RedirectToAction("Index");
+                //WebSecurity.CreateAccount(enseignant.UserName, enseignant.UserName);
+                //Roles.AddUserToRole(enseignant.UserName, "Enseignant");
+                return RedirectToAction("IndexEnseignant");
             }
 
             return View(enseignant);
-      
+
         }
+
+        // GET: /AddEnseignant/Edit
+
+        public ActionResult EditEnseignant(int id = 0)
+        {
+            Enseignant enseignant = this.enseignantRepository.Get(id);
+            if (enseignant == null)
+            {
+                return HttpNotFound();
+            }
+            return View(enseignant);
+        }
+
+        //
+        // POST: /AddEnseignant/Edit
+
+        [HttpPost]
+        public ActionResult EditEnseignant(Enseignant enseignant)
+        {
+            if (ModelState.IsValid)
+            {
+                this.enseignantRepository.Edit(enseignant);
+
+                this.enseignantRepository.Save();
+                return RedirectToAction("IndexEnseignant");
+            }
+            return View(enseignant);
+        }
+        
+        public ActionResult CreateSalle() {
+            ViewBag.batiments = this.batimentRepository.GetAll();
+            return View();
+        }
+
+        // GET: /AddEnseignant/Delete
+
+        public ActionResult DeleteEnseignant(int id = 0)
+        {
+            Enseignant enseignant = this.enseignantRepository.Get(id);
+            if (enseignant == null)
+            {
+                return HttpNotFound();
+            }
+            return View(enseignant);
+        }
+
+        //
+        // POST: /AddEnseignant/Delete
+
+        [HttpPost, ActionName("DeleteEnseignant")]
+        public ActionResult DeleteConfirmed(int id)
+        {
+
+            this.enseignantRepository.Delete(id);
+            this.enseignantRepository.Save();
+            return RedirectToAction("IndexEnseignant");
+        }
+
+        // GET: /Administration/Details
+
+        public ActionResult DetailsEnseignant(int id = 0)
+        {
+            Enseignant enseignant = this.enseignantRepository.Get(id);
+            if (enseignant == null)
+            {
+                return HttpNotFound();
+            }
+            return View(enseignant);
+        }
+
+        // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+
+
+        //- - - - - - - - - - - - - - - - - Batiment - - - - - - - - - - - - - - - 
+
+        // GET: /Administration/Create
+
+        public ActionResult CreateBatiment(){
+             //ViewBag.batiments = this.batimentRepository.GetAll();
+          return View();
+            }
+
 
         [HttpPost]
         public ActionResult CreateBatiment(Batiment batiment)
@@ -99,6 +180,11 @@ namespace Plannr.Controllers
 
         }
 
+        // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+
+        // - - - - - - - - - - - - - - - - Salle - - - - - - - - - - - - - - - - 
+
         [HttpPost]
         public ActionResult CreateSalle(Salle salle)
         {
@@ -114,13 +200,8 @@ namespace Plannr.Controllers
 
         }
 
+        // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-        //
-        // GET: /Administration/Edit/5
-
-    
-
-        //
         // POST: /Administration/Edit/5
 
         [HttpPost]
@@ -135,14 +216,11 @@ namespace Plannr.Controllers
             return View(enseignant);
         }
 
-        //
-        // GET: /Administration/Delete/5
 
-       
 
         protected override void Dispose(bool disposing)
         {
-            db.Dispose();
+            this.enseignantRepository.Dispose();
             base.Dispose(disposing);
         }
     }

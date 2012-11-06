@@ -357,7 +357,6 @@
     <Content Include="Views\Reservations\Delete.cshtml" />
     <Content Include="Views\Administration\Index.cshtml" />
     <Content Include="Views\Administration\Details.cshtml" />
-    <Content Include="Views\Administration\Create.cshtml" />
     <Content Include="Views\Administration\Edit.cshtml" />
     <Content Include="Views\Administration\Delete.cshtml" />
     <Content Include="Views\Administration\_SalleCreate.cshtml" />
@@ -367,6 +366,9 @@
     <Content Include="Views\Administration\IndexEnseignant.cshtml" />
     <Content Include="Views\Administration\IndexBatiment.cshtml" />
     <Content Include="Views\Administration\IndexSalle.cshtml" />
+    <Content Include="Views\Administration\EditEnseignant.cshtml" />
+    <Content Include="Views\Administration\DeleteEnseignant.cshtml" />
+    <Content Include="Views\Administration\DetailsEnseignant.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

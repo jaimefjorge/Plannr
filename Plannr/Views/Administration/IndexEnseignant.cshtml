@@ -6,9 +6,12 @@
 
 <h2>Ajout d'un Enseignant</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
+<a href="@Url.Action("CreateEnseignant", "Administration")" class="btn btn-large btn-danger" style="margin-bottom:20px" >Create New</a>
+
+<!--<p>
+    @Html.ActionLink("Create New", "CreateEnseignant")
+</p>-->
+
 <table class="table table-striped table-condensed">
     <tr >
         <th style="background-color:#00A7C8; color:white">
@@ -24,11 +27,13 @@
         </td>
         <td >
 
-            @Html.ActionLink("Edit", "Edit", new { id=item.UserId }) |
-            @Html.ActionLink("Details", "Details", new { id=item.UserId }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.UserId })
+            @Html.ActionLink("Edit", "EditEnseignant", new { id=item.UserId }) |
+            @Html.ActionLink("Details", "DetailsEnseignant", new { id=item.UserId }) |
+            @Html.ActionLink("Delete", "DeleteEnseignant", new { id=item.UserId })
         </td>
     </tr>
 }
 
 </table>
+
+<a href="@Url.Action("Index", "Administration")" class="btn btn-large" id="cancelEdit">Back</a>

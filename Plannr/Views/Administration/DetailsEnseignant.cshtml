@@ -29,9 +29,7 @@
 </table>
    
 </fieldset>
-
-<a href="@Url.Action("EditEnseignant", "Administration")" class="btn btn-large btn-danger" >Edit</a>
-<!--<p>
-    @Html.ActionLink("Edit", "Edit", new { id=Model.UserId }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>-->
+<p>
+     <a href="@Url.Action("EditEnseignant", "Administration", new { id=Model.UserId })" class="btn btn-large btn-danger" >Edit</a> |
+    @Html.ActionLink("Back to List", "Indexenseignant")
+</p>

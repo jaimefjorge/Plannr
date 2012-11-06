@@ -80,8 +80,8 @@ namespace Plannr.Controllers
                 
                 this.enseignantRepository.Insert(enseignant);
                 this.enseignantRepository.Save();
-                WebSecurity.CreateAccount(enseignant.UserName, enseignant.UserName);
-                Roles.AddUserToRole(enseignant.UserName, "Enseignant");
+                //WebSecurity.CreateAccount(enseignant.UserName, enseignant.UserName);
+                //Roles.AddUserToRole(enseignant.UserName, "Enseignant");
                 return RedirectToAction("Index");
             }
 

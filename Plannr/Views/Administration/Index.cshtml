@@ -53,7 +53,7 @@
 
            $('#EnseignemantDemand').bind('click', function (e) {
             if (!editLoaded) {
-               $.get("@Url.Action("CreateEnseignant","Administration")", function (data) {
+               $.get("@Url.Action("IndexEnseignant","Administration")", function (data) {
 
                     $('#editContainer').html(data)
                     showEdit()

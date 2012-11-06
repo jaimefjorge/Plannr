@@ -1,14 +1,16 @@
 ﻿@model Plannr.Models.Enseignant
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "Delete";
 }
 
-<h2>Details</h2>
+<h2>Delete</h2>
 
+<h3>Etes vous sûr de vouloir supprimer cet enseignant?</h3>
 <fieldset>
     <legend>Enseignant</legend>
-    <table class="table table-striped table-condensed">
+
+   <table class="table table-striped table-condensed">
   <thead>
               <tr style="background-color:#00A7C8; color:white">
                 <th>@Html.DisplayNameFor(model => model.UserName)</th>
@@ -27,11 +29,11 @@
             </thead>
 
 </table>
-   
 </fieldset>
-
-<a href="@Url.Action("EditEnseignant", "Administration")" class="btn btn-large btn-danger" >Edit</a>
-<!--<p>
-    @Html.ActionLink("Edit", "Edit", new { id=Model.UserId }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>-->
+@using (Html.BeginForm()) {
+  
+    <p>
+        <input type="submit" value="Delete" class="btn btn-large btn-danger"/> |
+        @Html.ActionLink("Back to List", "IndexEnseignant")
+    </p>
+}
