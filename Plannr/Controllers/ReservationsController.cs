@@ -22,6 +22,7 @@ namespace Plannr.Controllers
         private IDemandesRepository demandesRepository;
         private ISallesRepository sallesRepository;
         private ICreneauxHorairesRepository creneauxRepository;
+        private IEnseignementsRepository ensRepository;
        
           // Constructor
         public ReservationsController()
@@ -32,10 +33,11 @@ namespace Plannr.Controllers
             this.demandesRepository = new DemandesRepository(context);
             this.sallesRepository = new SallesRepository(context);
             this.creneauxRepository = new CreneauxHorairesRepository(context);
+            this.ensRepository = new EnseignementsRepository(context);
         }
 
         // Give it as a parameter aswel for unit testing
-        public ReservationsController(IReservationsRepository repo, IDemandesRepository demandesRepo, ISallesRepository sallesRepo, ICreneauxHorairesRepository creneauxRepo)
+        public ReservationsController(IReservationsRepository repo, IDemandesRepository demandesRepo, ISallesRepository sallesRepo, ICreneauxHorairesRepository creneauxRepo, IEnseignementsRepository ensRepo)
         {
             this.repository = repo;
             this.demandesRepository = demandesRepo;
@@ -79,8 +81,13 @@ namespace Plannr.Controllers
         // POST: /Reservations/Create
 
         [HttpPost]
-        public ActionResult Create(Reservation reservation)
+        public ActionResult Create(Reservation reservation, int DemandeAssocieeId)
         {
+
+            reservation.Creneau = this.creneauxRepository.Find(reservation.Creneau.Id);
+            reservation.Salle = this.sallesRepository.Get(reservation.Salle.Id);
+
+
             if (ModelState.IsValid)
             {
                 db.Reservations.Add(reservation);
