@@ -27,8 +27,7 @@ namespace Plannr.Filters
             public SimpleMembershipInitializer()
             {
                 
-                // Little hack, to be fixed LATER
-                Database.SetInitializer<PlannrContext>(new PlannrInitializer());
+               
 
                 try
                 {
@@ -43,7 +42,6 @@ namespace Plannr.Filters
                         }
                         
 
-                        var init = context.Enseignants.Find(1);
                     }
 
                     WebSecurity.InitializeDatabaseConnection("PlannrContext", "Personne", "UserId", "UserName", autoCreateTables: true);
