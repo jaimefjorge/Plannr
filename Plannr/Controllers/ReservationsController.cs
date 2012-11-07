@@ -21,6 +21,7 @@ namespace Plannr.Controllers
         private IReservationsRepository repository;
         private IDemandesRepository demandesRepository;
         private ISallesRepository sallesRepository;
+        private ICreneauxHorairesRepository creneauxRepository;
        
           // Constructor
         public ReservationsController()
@@ -30,15 +31,16 @@ namespace Plannr.Controllers
             this.repository = new ReservationsRepository(context);
             this.demandesRepository = new DemandesRepository(context);
             this.sallesRepository = new SallesRepository(context);
-
+            this.creneauxRepository = new CreneauxHorairesRepository(context);
         }
 
         // Give it as a parameter aswel for unit testing
-        public ReservationsController(IReservationsRepository repo, IDemandesRepository demandesRepo, ISallesRepository sallesRepo)
+        public ReservationsController(IReservationsRepository repo, IDemandesRepository demandesRepo, ISallesRepository sallesRepo, ICreneauxHorairesRepository creneauxRepo)
         {
             this.repository = repo;
             this.demandesRepository = demandesRepo;
             this.sallesRepository = sallesRepo;
+            this.creneauxRepository = creneauxRepo;
 
         }
 
@@ -58,10 +60,17 @@ namespace Plannr.Controllers
         public ActionResult Create(int id)
         {
             var demandeAssociee = this.demandesRepository.Find(id);
-            var salles = this.sallesRepository.GetSallesCriteres(demandeAssociee.CapaciteNecessaire, demandeAssociee.BesoinProjecteur, demandeAssociee.DateVoulue);
+            List<Salle> salles = (List<Salle>) this.sallesRepository.GetSallesCriteres(demandeAssociee.CapaciteNecessaire, demandeAssociee.BesoinProjecteur, demandeAssociee.DateVoulue);
+            List<CreneauHoraire> creneaux = this.creneauxRepository.getCreneauxHorairesForDate(demandeAssociee.DateVoulue).ToList();
+
+
+            creneaux.ForEach(x => System.Diagnostics.Debug.WriteLine(x.HeureConcat));
 
             ViewBag.demandeAssociee = demandeAssociee;
             ViewBag.salles = salles;
+            ViewBag.creneaux = creneaux;
+
+
 
             return View();
         }

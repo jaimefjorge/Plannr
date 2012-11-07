@@ -16,7 +16,7 @@ namespace Plannr.DAL
             this.context = context;
         }
 
-        public IEnumerable<Models.CreneauHoraire> getCreneauxHoraires()
+        public IEnumerable<CreneauHoraire> getCreneauxHoraires()
         {
             return this.context.CreneauxHoraires.ToList();
         }
@@ -27,9 +27,11 @@ namespace Plannr.DAL
         }
 
         // Renvoie une liste de creneaux horaires disponibles pour une date donnée. Evite donc les créneaux déjà utilisés.
-        public IEnumerable<Models.CreneauHoraire> getCreneauxHorairesForDate(DateTime date)
+        public IEnumerable<CreneauHoraire> getCreneauxHorairesForDate(DateTime date)
         {
-            return this.context.CreneauxHoraires.AsEnumerable();
+            return (from c in this.context.CreneauxHoraires.ToList()
+                    where !(from resa in this.context.Reservations where resa.Date == date select resa.Creneau.Id).Contains(c.Id)
+                    select c);
         }
 
         public void Dispose()

@@ -28,7 +28,8 @@ namespace Plannr.Filters
             {
                 
                 // Little hack, to be fixed LATER
-                
+                Database.SetInitializer<PlannrContext>(new PlannrInitializer());
+
                 try
                 {
                     using (var context = new PlannrContext())
@@ -40,7 +41,7 @@ namespace Plannr.Filters
                             // Create the SimpleMembership database without Entity Framework migration schema
                             ((IObjectContextAdapter)context).ObjectContext.CreateDatabase();
                         }
-                        Database.SetInitializer<PlannrContext>(new PlannrInitializer());
+                        
 
                         var init = context.Enseignants.Find(1);
                     }
