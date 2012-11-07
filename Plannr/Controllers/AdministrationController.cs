@@ -111,7 +111,7 @@ namespace Plannr.Controllers
         }
         
         public ActionResult CreateSalle() {
-            ViewBag.batiments = this.batimentRepository.GetAll();
+            ViewBag.batiments = this.batimentRepository.GetAll().ToList();
             return View();
         }
 
