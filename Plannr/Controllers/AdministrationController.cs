@@ -10,6 +10,8 @@ using System.Web.Security;
 using Plannr.DAL;
 using Newtonsoft.Json;
 using Plannr.Filters;
+using WebMatrix.WebData;
+using Microsoft.Web.WebPages.OAuth;
 
 namespace Plannr.Controllers
 {
@@ -75,6 +77,7 @@ namespace Plannr.Controllers
                 this.enseignantRepository.Save();
                 //WebSecurity.CreateAccount(enseignant.UserName, enseignant.UserName);
                 //Roles.AddUserToRole(enseignant.UserName, "Enseignant");
+                
                 return RedirectToAction("IndexEnseignant");
             }
 
@@ -133,8 +136,10 @@ namespace Plannr.Controllers
         [HttpPost, ActionName("DeleteEnseignant")]
         public ActionResult DeleteConfirmed(int id)
         {
-
+            Enseignant ens = this.enseignantRepository.Get(id);
+            //System.Web.Security.Membership.DeleteUser(ens.UserName);
             this.enseignantRepository.Delete(id);
+            
             this.enseignantRepository.Save();
             return RedirectToAction("IndexEnseignant");
         }
@@ -221,6 +226,8 @@ namespace Plannr.Controllers
         protected override void Dispose(bool disposing)
         {
             this.enseignantRepository.Dispose();
+            this.batimentRepository.Dispose();
+            this.salleRepository.Dispose();
             base.Dispose(disposing);
         }
     }
