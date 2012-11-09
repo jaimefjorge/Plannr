@@ -22,7 +22,12 @@ namespace Plannr
                         "~/Scripts/jquery.unobtrusive*",
                         "~/Scripts/jquery.validate*"));
 
-            bundles.Add(new StyleBundle("~/Content/themes/bootstrap").Include("~/Content/themes/bootstrap/bootstrap.css"));
+            bundles.Add(new StyleBundle("~/Content/themes/bootstrap").Include(
+                "~/Content/themes/bootstrap/bootstrap.css",
+                "~/Content/themes/bootstrap/bootstrap-responsive.css",
+                "~/Content/themes/bootstrap/fullcalendar.css",
+                "~/Content/themes/bootstrap/unicorn.main.css",
+                "~/Content/themes/bootstrap/unicorn.grey.css"));
 
             // Utilisez la version de développement de Modernizr pour développer et apprendre. Puis, lorsque vous êtes
             // prêt pour la production, utilisez l’outil de génération sur http://modernizr.com pour sélectionner uniquement les tests dont vous avez besoin.

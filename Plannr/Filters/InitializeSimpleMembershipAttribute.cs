@@ -40,9 +40,11 @@ namespace Plannr.Filters
                             // Create the SimpleMembership database without Entity Framework migration schema
                             ((IObjectContextAdapter)context).ObjectContext.CreateDatabase();
                         }
-                        
+
+                        context.Enseignants.Find(1);
 
                     }
+                    
 
                     WebSecurity.InitializeDatabaseConnection("PlannrContext", "Personne", "UserId", "UserName", autoCreateTables: true);
        

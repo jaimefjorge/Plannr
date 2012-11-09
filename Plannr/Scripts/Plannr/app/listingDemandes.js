@@ -73,7 +73,7 @@ var ListingItem = Backbone.View.extend({
     render:function () {
         this.$el.html(this.template(this.model.toJSON()))
         // Append delete button
-        this.$el.find('.deleteButton').html(new DeleteButton({model:this.model, className:'btn btn-supersupersmall', defaultTemplate:'<i class="icon-remove" style="margin-right:0px;"></i>'}).render().$el)
+        this.$el.find('.deleteButton').html(new DeleteButton({model:this.model, className:'btn btn-small', defaultTemplate:'<i class="icon-remove" style="margin-right:0px;"></i>'}).render().$el)
         return this
     },
     remove:function () {

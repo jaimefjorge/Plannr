@@ -1,14 +1,13 @@
-﻿@{
-    ViewBag.Title = "Responsable";
-}
+﻿
+ <div id="content-header">
 
- <div class="row">
-
-        <div class="span12"><h1>Votre panel de gestion</h1>
+        <h1>Votre panel de gestion</h1>
 </div>
-    </div>
-    <div class="row">
-        <div class="alert alert-block alert-info">
+ <div class="container-fluid">
+
+    <div class="row-fluid">
+        <div class="span12">
+        <div class="alert alert-info">
             <ul style="list-style-type:none;">
        
 
@@ -20,9 +19,10 @@
                 </li>
             </ul>
         </div>
+            </div>
     </div>
 
-    <div class="row" style="text-align:center; margin-top:20px;">
+    <div class="row-fluid" style="text-align:center; margin-top:20px;">
 
         <a href="#" class="btn btn-large btn-superlarge"><i class="icon-book"></i> Gestion des demandes (4)</a>
         <a href="@Url.Action("Index","Book")" class="btn btn-large btn-superlarge"><i class="icon-list"></i> Mes réservations</a>
@@ -39,3 +39,5 @@
 
 </div>
 
+
+     </div>
