@@ -250,7 +250,9 @@ namespace Plannr.Models
             var personne = new Personne()
             {
                 UserId = 2,
-                UserName = "TestProf"
+                UserName = "TestProf",
+                Name = "Test",
+                FirstName = "prof"
             };
             context.Personnes.Add(personne);
             context.SaveChanges();

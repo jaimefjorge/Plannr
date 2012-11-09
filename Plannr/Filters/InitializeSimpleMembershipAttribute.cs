@@ -27,8 +27,8 @@ namespace Plannr.Filters
             public SimpleMembershipInitializer()
             {
                 
-               
-
+                // Little hack, to be fixed LATER
+                
                 try
                 {
                     using (var context = new PlannrContext())
@@ -42,7 +42,6 @@ namespace Plannr.Filters
                         }
 
                         context.Enseignants.Find(1);
-
                     }
                     
 

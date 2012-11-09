@@ -15,7 +15,7 @@
         <div class="editor-label">
             @Html.LabelFor(model => model.Date)
         </div>
-   
+
         <div class="editor-field">
             @Html.EditorFor(model => model.Date)
             @Html.ValidationMessageFor(model => model.Date)
@@ -24,12 +24,6 @@
             <label class="control-label" for="">@Html.LabelFor(model => model.Salle)</label>
             <div class="controls">
                 @Html.DropDownListFor(model => model.Salle.Id, new SelectList(ViewBag.salles, "Id", "Libelle"))
-            </div>
-        </div>
-         <div class="control-group">
-            <label class="control-label" for="">@Html.LabelFor(model => model.Creneau)</label>
-            <div class="controls">
-                @Html.DropDownListFor(model => model.Creneau.Id, new SelectList(ViewBag.creneaux, "Id", "HeureConcat"))
             </div>
         </div>
         <p>
