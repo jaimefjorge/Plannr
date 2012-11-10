@@ -4,48 +4,53 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta charset="utf-8" />
     <title>Plannr</title>
-    
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     @Styles.Render("~/Content/themes/bootstrap")
     <!--@Styles.Render("~/Content/themes/base/css")-->
 
 </head>
 <body>
-   
-        @Scripts.Render("~/bundles/jquery")
-     @Scripts.Render("~/bundles/jqueryui")
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryui")
 
     <div id="header">
-			<h1><a href="./dashboard.html">Unicorn Admin</a></h1>		
-		</div>
+        <h1><a href="./dashboard.html">Unicorn Admin</a></h1>
+    </div>
 
-		<div id="user-nav" class="navbar navbar-inverse">
-            @Html.Partial("_LoginPartial")
-        </div>
-            
-		<div id="sidebar">
+    <div id="user-nav" class="navbar navbar-inverse">
+        @Html.Partial("_LoginPartial")
+    </div>
 
-			<ul>
-				<li @if (@HttpContext.Current.Request.RequestContext.RouteData.Values["controller"].ToString() == "Home") { <text>class="active"</text> }><a href="index.html"><i class="icon icon-home"></i> <span>Dashboard</span></a></li>
+    <div id="sidebar">
+        <a href="@Url.Action("Index", "Manager")" class="visible-phone"><i class="icon icon-home"></i><span>Dashboard</span></a>
 
-				<li @if (@HttpContext.Current.Request.RequestContext.RouteData.Values["controller"].ToString() == "Book") { <text>class="active"</text> }><a href="buttons.html"><i class="icon icon-tint"></i> <span>Demandes de réservations</span></a></li>
-				<li><a href="interface.html"><i class="icon icon-pencil"></i> <span>Administration</span></a></li>
-                <li><a href="interface.html"><i class="icon icon-wrench"></i> <span>Mon compte</span></a></li>
-			</ul>
-		
-		</div>
-		
+        <ul>
+            <li @if ((@HttpContext.Current.Request.RequestContext.RouteData.Values["controller"].ToString() == "Home") || (@HttpContext.Current.Request.RequestContext.RouteData.Values["controller"].ToString() == "Manager"))
+                { <text>class="active"</text> }><a href="@Url.Action("Index", "Manager")"><i class="icon icon-home"></i><span>Dashboard</span></a></li>
 
-		<div id="content">
-           
-            @RenderBody()
+            <li @if (@HttpContext.Current.Request.RequestContext.RouteData.Values["controller"].ToString() == "Book")
+                { <text>class="active"</text> }><a href="@Url.Action("Index", "Book")"><i class="icon icon-tint"></i><span>Demandes de réservations</span></a></li>
+            <li><a href="@Url.Action("Index", "Administration")"><i class="icon icon-pencil"></i><span>Administration</span></a></li>
+            <li><a href="@Url.Action("Index", "Options")"><i class="icon icon-wrench"></i><span>Mon compte</span></a></li>
+        </ul>
 
-         </div>
-    
+    </div>
 
 
+    <div id="content">
+
+        @RenderBody()
+
+        
+
+    </div>
 
 
+
+    @Scripts.Render("~/bundles/plannrSinglePage")
+    @Scripts.Render("~/bundles/unicorn")
 
     @RenderSection("scripts", required: false)
 </body>

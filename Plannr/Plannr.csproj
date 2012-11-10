@@ -282,6 +282,7 @@
     <Content Include="Scripts\knockout-2.1.0.debug.js" />
     <Content Include="Scripts\knockout-2.1.0.js" />
     <Content Include="Scripts\modernizr-2.5.3.js" />
+    <Content Include="Scripts\Plannr\LayoutManager.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -371,10 +372,10 @@
     <Content Include="Views\Administration\DetailsEnseignant.cshtml" />
     <Content Include="Views\AffichageEDT.cshtml" />
     <Content Include="Views\Book\_Create.cshtml" />
+    <Content Include="Views\Book\_Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Scripts\Plannr\" />
     <Folder Include="Views\Administration\AdministrationBatiment\" />
     <Folder Include="Views\Administration\AdministrationEnseignant\" />
     <Folder Include="Views\Administration\AdministrationSalle\" />

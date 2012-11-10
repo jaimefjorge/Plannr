@@ -21,6 +21,14 @@ namespace Plannr
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
                         "~/Scripts/jquery.unobtrusive*",
                         "~/Scripts/jquery.validate*"));
+            bundles.Add(new ScriptBundle("~/bundles/plannrSinglePage").Include(
+                "~/Scripts/Plannr/LayoutManager.js"
+                ));
+
+            bundles.Add(new ScriptBundle("~/bundles/unicorn").Include(
+                "~/Scripts/Plannr/unicorn/unicorn.js",
+                "~/Scripts/Plannr/unicorn/unicorn.dashboard.js"
+                ));
 
             bundles.Add(new StyleBundle("~/Content/themes/bootstrap").Include(
                 "~/Content/themes/bootstrap/bootstrap.css",

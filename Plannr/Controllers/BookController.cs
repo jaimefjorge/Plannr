@@ -66,7 +66,7 @@ namespace Plannr.Controllers
             }
             else
             {
-                return PartialView("_BookList", demandes);
+                return PartialView("_Index", demandes);
             }
         }
 
