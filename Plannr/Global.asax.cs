@@ -25,7 +25,7 @@ namespace Plannr
             BundleConfig.RegisterBundles(BundleTable.Bundles);
             AuthConfig.RegisterAuth();
 
-            //System.Data.Entity.Database.SetInitializer<PlannrContext>(new PlannrInitializer());
+            System.Data.Entity.Database.SetInitializer<PlannrContext>(new PlannrInitializer());
         }
     }
 }
