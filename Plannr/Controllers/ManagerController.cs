@@ -33,7 +33,14 @@ namespace Plannr.Controllers
 
             if (Roles.IsUserInRole(User.Identity.Name,"ResponsableUE"))
             {
-                return View("Responsable");
+                if (!Request.IsAjaxRequest())
+                {
+                    return View("Responsable");
+                }
+                else
+                {
+                    return PartialView("_Responsable");
+                }
             }
             else if (Roles.IsUserInRole(User.Identity.Name,"Enseignant"))
             {

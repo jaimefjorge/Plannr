@@ -373,6 +373,7 @@
     <Content Include="Views\AffichageEDT.cshtml" />
     <Content Include="Views\Book\_Create.cshtml" />
     <Content Include="Views\Book\_Index.cshtml" />
+    <Content Include="Views\Manager\_Responsable.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
