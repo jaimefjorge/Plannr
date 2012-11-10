@@ -3,27 +3,26 @@
 @{
     ViewBag.Title = "Index";
 }
-
-<div id="content-header">
-    <h1>Demandes de réservations</h1>
-</div>
-<div id="breadcrumb">
-				<a href="#" class="tip-bottom" data-original-title="Go to Home"><i class="icon-home"></i> Home</a>
-				<a href="#">Demandes de réservations</a>
-    <a href="#" class="current">Listing</a>
-			</div>
+<div id="demandesContainer">
+    <div id="content-header">
+        <h1>Demandes de réservations</h1>
+    </div>
+    <div id="breadcrumb">
+        <a href="#" class="tip-bottom" data-original-title="Go to Home"><i class="icon-home"></i>Home</a>
+        <a href="#">Demandes de réservations</a>
+        <a href="#" class="current">Listing</a>
+    </div>
 
 
     @Html.Partial("_BookList", Model)
 
- <!--<center> -->
+    <center>
    <a href="@Url.Action("Create", "Book")" class="btn btn-large btn-primary" id="makeDemand"><i class="icon-pencil icon-white"></i> Faire une demande de réservation</a>
-<!--</center>-->
+</center>
+</div>
 
 
-<div class="row" id="editContainer" style="display:none;">
-
-
+<div id="editContainer" style="display: none;">
 </div>
 
 <script type="text/javascript">
@@ -31,18 +30,20 @@
         var editLoaded = false;
 
         function showEdit() {
-            $('#demandesContainer').slideUp()
-            $('#editContainer').fadeIn()
+            $('#demandesContainer').fadeOut("fast", function () {
+                $('#editContainer').fadeIn()
+            })
+            
         }
 
         function showDemandes() {
-            $('#editContainer').fadeOut("fast",function() {
+            $('#editContainer').fadeOut("fast", function () {
                 $('#demandesContainer').fadeIn()
             })
-           
+
         }
 
-        $('#cancelEdit').live('click',function(e) {
+        $('#cancelEdit').live('click', function (e) {
 
             showDemandes()
 
@@ -50,9 +51,9 @@
             return false
         })
 
-        $('#makeDemand').bind('click',function(e){
+        $('#makeDemand').bind('click', function (e) {
             if (!editLoaded) {
-                $.get("@Url.Action("Create","Book")", function (data) {
+                $.get("@Url.Action("Create", "Book")", function (data) {
 
                     $('#editContainer').html(data)
                     showEdit()
@@ -67,18 +68,18 @@
             return false
         })
 
-        $('#CreateDemandesForm').live('submit',function(e) {
+        $('#CreateDemandesForm').live('submit', function (e) {
 
 
             console.log('bleh');
             var newDemande = new Demande({ Enseignement: { 'Id': $('#Enseignement_Id').val() } })
             newDemande.save()
- 
+
 
             e.preventDefault()
             return false
         })
 
     })
-    </script>
-    </div>
+</script>
+</div>

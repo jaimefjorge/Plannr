@@ -67,33 +67,7 @@ namespace Plannr.Controllers
             return View();
         }
 
-        //
-        // POST: /Account/Register
-
-        [HttpPost]
-        [AllowAnonymous]
-        [ValidateAntiForgeryToken]
-        public ActionResult Register(RegisterModel model)
-        {
-            if (ModelState.IsValid)
-            {
-                // Tentative d'inscription de l'utilisateur
-                try
-                {
-                
-                    WebSecurity.CreateUserAndAccount(model.UserName, model.Password);
-                    WebSecurity.Login(model.UserName, model.Password);
-                    return RedirectToAction("Index", "Home");
-                }
-                catch (MembershipCreateUserException e)
-                {
-                    ModelState.AddModelError("", ErrorCodeToString(e.StatusCode));
-                }
-            }
-
-            // Si nous sommes arrivés là, quelque chose a échoué, réafficher le formulaire
-            return View(model);
-        }
+       
 
         //
         // POST: /Account/Disassociate

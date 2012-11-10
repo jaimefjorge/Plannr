@@ -20,19 +20,15 @@
 		</div>
 
 		<div id="user-nav" class="navbar navbar-inverse">
-            <ul class="nav btn-group">
-                <li class="btn btn-inverse" ><a title="" href="#"><i class="icon icon-user"></i> <span class="text">AnneLaurent</span></a></li>
-
-                <li class="btn btn-inverse"><a title="" href="login.html"><i class="icon icon-share-alt"></i> <span class="text">Logout</span></a></li>
-            </ul>
+            @Html.Partial("_LoginPartial")
         </div>
             
 		<div id="sidebar">
 
 			<ul>
-				<li class="active"><a href="index.html"><i class="icon icon-home"></i> <span>Dashboard</span></a></li>
+				<li @if (@HttpContext.Current.Request.RequestContext.RouteData.Values["controller"].ToString() == "Home") { <text>class="active"</text> }><a href="index.html"><i class="icon icon-home"></i> <span>Dashboard</span></a></li>
 
-				<li><a href="buttons.html"><i class="icon icon-tint"></i> <span>Demandes de réservations</span></a></li>
+				<li @if (@HttpContext.Current.Request.RequestContext.RouteData.Values["controller"].ToString() == "Book") { <text>class="active"</text> }><a href="buttons.html"><i class="icon icon-tint"></i> <span>Demandes de réservations</span></a></li>
 				<li><a href="interface.html"><i class="icon icon-pencil"></i> <span>Administration</span></a></li>
                 <li><a href="interface.html"><i class="icon icon-wrench"></i> <span>Mon compte</span></a></li>
 			</ul>
