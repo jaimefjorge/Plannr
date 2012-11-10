@@ -16,7 +16,10 @@ namespace Plannr
                         "~/Scripts/Plannr/generic.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryui").Include(
-                        "~/Scripts/jquery-ui-{version}.js"));
+                       
+                        "~/Scripts/jquery-ui-{version}.js",
+                         "~/Scripts/Plannr/date.js",
+                        "~/Scripts/Plannr/jquery.weekcalendar.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
                         "~/Scripts/jquery.unobtrusive*",
@@ -35,7 +38,9 @@ namespace Plannr
                 "~/Content/themes/bootstrap/bootstrap-responsive.css",
                 "~/Content/themes/bootstrap/fullcalendar.css",
                 "~/Content/themes/bootstrap/unicorn.main.css",
-                "~/Content/themes/bootstrap/unicorn.grey.css"));
+                "~/Content/themes/bootstrap/unicorn.grey.css",
+                "~/Content/themes/bootstrap/jquery-ui-1.8.16.custom.css",
+                "~/Content/themes/bootstrap/jquery.weekcalendar.css"));
 
             // Utilisez la version de développement de Modernizr pour développer et apprendre. Puis, lorsque vous êtes
             // prêt pour la production, utilisez l’outil de génération sur http://modernizr.com pour sélectionner uniquement les tests dont vous avez besoin.
