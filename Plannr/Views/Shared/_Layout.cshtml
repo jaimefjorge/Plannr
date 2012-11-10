@@ -4,46 +4,65 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta charset="utf-8" />
     <title>Plannr</title>
-    <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     @Styles.Render("~/Content/themes/bootstrap")
-    @Styles.Render("~/Content/themes/base/css")
-    <style type="text/css">
-        body {
-            padding-top: 60px;
-            padding-bottom: 40px;
-        }
-    </style>
+    @Styles.Render("~/Content/themes/fullcalendar")
+    <!--@Styles.Render("~/Content/themes/base/css")-->
+
 </head>
 <body>
-    <div class="navbar navbar-fixed-top">
-        <div class="navbar-inner">
-            <div class="container">
-                <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </a>
-                <a class="brand" href="@Url.Action("Index","Home")">Plannr</a>
-                <div class="nav-collapse collapse">
-                    <ul class="nav">
-                    </ul>
-                    @Html.Partial("_LoginPartial")
-                </div>
-                <!--/.nav-collapse -->
-            </div>
-        </div>
-    </div>
-        @Scripts.Render("~/bundles/jquery")
-     @Scripts.Render("~/bundles/jqueryui")
-    <div class="container">
 
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryui")
 
-            @RenderBody()
-    
-
+    <div id="header">
+        <h1><a href="./dashboard.html">Unicorn Admin</a></h1>
     </div>
 
+    <div id="user-nav" class="navbar navbar-inverse">
+        @Html.Partial("_LoginPartial")
+    </div>
+
+    <div id="sidebar">
+        <a href="@Url.Action("Index", "Manager")" class="visible-phone"><i class="icon icon-home"></i><span>Dashboard</span></a>
+
+        <ul>
+            <li @if ((@HttpContext.Current.Request.RequestContext.RouteData.Values["controller"].ToString() == "Home") || (@HttpContext.Current.Request.RequestContext.RouteData.Values["controller"].ToString() == "Manager"))
+                { <text>class="active"</text> }><a href="@Url.Action("Index", "Manager")"><i class="icon icon-home"></i><span>Dashboard</span></a></li>
+
+            <li @if (@HttpContext.Current.Request.RequestContext.RouteData.Values["controller"].ToString() == "Book")
+                { <text>class="active"</text> }><a href="@Url.Action("Index", "Book")"><i class="icon icon-tint"></i><span>Demandes de réservations</span></a></li>
+            <li><a href="@Url.Action("Index", "Administration")"><i class="icon icon-pencil"></i><span>Administration</span></a></li>
+            <li><a href="@Url.Action("Index", "Options")"><i class="icon icon-wrench"></i><span>Mon compte</span></a></li>
+        </ul>
+
+    </div>
+
+
+    <div id="content">
+        <div id="overlay"></div>
+        <div id="spinner"></div>
+
+        @RenderBody()
+
+        
+
+    </div>
+
+
+
+    @Scripts.Render("~/bundles/plannrSinglePage")
+    @Scripts.Render("~/bundles/unicorn")
+
+    <script type="text/javascript">
+        $(function() {
+
+            $('#content').css('min-height',$(window).height()+'px')
+
+        })
+
+    </script>
 
 
     @RenderSection("scripts", required: false)

@@ -9,7 +9,7 @@ using Plannr.Filters;
 
 namespace Plannr.Controllers
 {
-  [InitializeSimpleMembership]
+    [InitializeSimpleMembership]
     public class HomeController : Controller
     {
         private PlannrContext db = new PlannrContext();

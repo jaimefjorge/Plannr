@@ -17,12 +17,11 @@ namespace Plannr.Controllers
 
     public class ReservationsController : Controller
     {
-        private PlannrContext db = new PlannrContext();
+    
         private IReservationsRepository repository;
         private IDemandesRepository demandesRepository;
         private ISallesRepository sallesRepository;
         private ICreneauxHorairesRepository creneauxRepository;
-        private IEnseignementsRepository ensRepository;
        
           // Constructor
         public ReservationsController()
@@ -33,11 +32,10 @@ namespace Plannr.Controllers
             this.demandesRepository = new DemandesRepository(context);
             this.sallesRepository = new SallesRepository(context);
             this.creneauxRepository = new CreneauxHorairesRepository(context);
-            this.ensRepository = new EnseignementsRepository(context);
         }
 
         // Give it as a parameter aswel for unit testing
-        public ReservationsController(IReservationsRepository repo, IDemandesRepository demandesRepo, ISallesRepository sallesRepo, ICreneauxHorairesRepository creneauxRepo, IEnseignementsRepository ensRepo)
+        public ReservationsController(IReservationsRepository repo, IDemandesRepository demandesRepo, ISallesRepository sallesRepo, ICreneauxHorairesRepository creneauxRepo)
         {
             this.repository = repo;
             this.demandesRepository = demandesRepo;
@@ -62,17 +60,12 @@ namespace Plannr.Controllers
         public ActionResult Create(int id)
         {
             var demandeAssociee = this.demandesRepository.Find(id);
-            List<Salle> salles = (List<Salle>) this.sallesRepository.GetSallesCriteres(demandeAssociee.CapaciteNecessaire, demandeAssociee.BesoinProjecteur, demandeAssociee.DateVoulue);
-            List<CreneauHoraire> creneaux = this.creneauxRepository.getCreneauxHorairesForDate(demandeAssociee.DateVoulue).ToList();
+           List<Salle> salles = this.sallesRepository.GetSallesCriteres(demandeAssociee.CapaciteNecessaire, demandeAssociee.BesoinProjecteur, demandeAssociee.DateVoulue).ToList();
+           List<CreneauHoraire> creneaux = this.creneauxRepository.getCreneauxHorairesForDate(demandeAssociee.DateVoulue).ToList();
 
-
-            creneaux.ForEach(x => System.Diagnostics.Debug.WriteLine(x.HeureConcat));
 
             ViewBag.demandeAssociee = demandeAssociee;
             ViewBag.salles = salles;
-            ViewBag.creneaux = creneaux;
-
-
 
             return View();
         }
@@ -81,19 +74,38 @@ namespace Plannr.Controllers
         // POST: /Reservations/Create
 
         [HttpPost]
-        public ActionResult Create(Reservation reservation, int DemandeAssocieeId)
+        public ActionResult Create(Reservation reservation)
         {
+
 
             reservation.Creneau = this.creneauxRepository.Find(reservation.Creneau.Id);
             reservation.Salle = this.sallesRepository.Get(reservation.Salle.Id);
-
+            reservation.Date = DateTime.Now;
+            //reservation.Enseignement = this.ensRepository.Get(1);
 
             if (ModelState.IsValid)
             {
-                db.Reservations.Add(reservation);
-                db.SaveChanges();
+                this.repository.Insert(reservation);
+                this.repository.Save();
                 return RedirectToAction("Index");
             }
+
+            foreach (ModelState modelState in ViewData.ModelState.Values)
+            {
+                foreach (ModelError modelError in modelState.Errors)
+                {
+                    System.Diagnostics.Debug.WriteLine(modelError.ErrorMessage);
+                }
+            }
+
+            var demandeAssociee = this.demandesRepository.Find(1);
+            List<Salle> salles = this.sallesRepository.GetSallesCriteres(demandeAssociee.CapaciteNecessaire, demandeAssociee.BesoinProjecteur, demandeAssociee.DateVoulue).ToList();
+            List<CreneauHoraire> creneaux = this.creneauxRepository.getCreneauxHorairesForDate(demandeAssociee.DateVoulue).ToList();
+
+
+            ViewBag.demandeAssociee = demandeAssociee;
+            ViewBag.salles = salles;
+            ViewBag.creneaux = creneaux;
 
             return View(reservation);
         }
@@ -103,7 +115,7 @@ namespace Plannr.Controllers
 
         public ActionResult Edit(int id = 0)
         {
-            Reservation reservation = db.Reservations.Find(id);
+            Reservation reservation = this.repository.Get(id);
             if (reservation == null)
             {
                 return HttpNotFound();
@@ -119,8 +131,8 @@ namespace Plannr.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Entry(reservation).State = EntityState.Modified;
-                db.SaveChanges();
+               // db.Entry(reservation).State = EntityState.Modified;
+                //db.SaveChanges();
                 return RedirectToAction("Index");
             }
             return View(reservation);
@@ -132,15 +144,15 @@ namespace Plannr.Controllers
         [HttpPost, ActionName("Delete")]
         public ActionResult DeleteConfirmed(int id)
         {
-            Reservation reservation = db.Reservations.Find(id);
-            db.Reservations.Remove(reservation);
-            db.SaveChanges();
+            Reservation reservation = this.repository.Get(id);
+            //db.Reservations.Remove(reservation);
+            //db.SaveChanges();
             return RedirectToAction("Index");
         }
 
         protected override void Dispose(bool disposing)
         {
-            db.Dispose();
+            this.repository.Dispose();
             base.Dispose(disposing);
         }
     }

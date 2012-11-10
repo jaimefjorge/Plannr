@@ -1,4 +1,5 @@
-﻿using Plannr.DAL;
+﻿using Newtonsoft.Json;
+using Plannr.DAL;
 using Plannr.Filters;
 using Plannr.Models;
 using System;
@@ -15,12 +16,13 @@ namespace Plannr.Controllers
     public class ManagerController : Controller
     {
         private IDemandesRepository demandesRepository;
-      
+        private IReservationsRepository reservationsRepository;
 
         public ManagerController()
         {
             var db = new PlannrContext();
             this.demandesRepository = new DemandesRepository(db);
+            this.reservationsRepository = new ReservationsRepository(db);
         
         }
         //
@@ -31,9 +33,29 @@ namespace Plannr.Controllers
             var id = (int) Membership.GetUser().ProviderUserKey;
             ViewBag.unseen = this.demandesRepository.GetUnseenDemandes(id);
 
+
+            List<Reservation> resa = this.reservationsRepository.GetAll().ToList();
+
+            List<ReservationCalendar> resaJSON = new List<ReservationCalendar>();
+
+            resa.ForEach(x => resaJSON.Add(x.ConvertObject()));
+
+            JsonSerializerSettings jsSettings = new JsonSerializerSettings();
+            jsSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
+
+            ViewBag.resaJSON = JsonConvert.SerializeObject(resaJSON, Formatting.None, jsSettings);
+
+
             if (Roles.IsUserInRole(User.Identity.Name,"ResponsableUE"))
             {
-                return View("Responsable");
+                if (!Request.IsAjaxRequest())
+                {
+                    return View("Responsable");
+                }
+                else
+                {
+                    return PartialView("_Responsable");
+                }
             }
             else if (Roles.IsUserInRole(User.Identity.Name,"Enseignant"))
             {

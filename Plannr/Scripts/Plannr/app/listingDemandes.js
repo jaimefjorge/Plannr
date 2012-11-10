@@ -6,14 +6,17 @@ var Demande = Backbone.Model.extend({
 
     initialize:function() {
         _.bindAll(this,'updateDateFormat')
-      this.on('change',this.updateDateFormat)
 
-        this.updateDateFormat()
     },
 
     updateDateFormat:function() {
-        if (this.has('DateVoulue')) this.set('DateVoulue',new Date(this.get('DateVoulue')).getDate())
-        if (this.has('DateDemande')) this.set('DateDemande',new Date(this.get('DateDemande')).getDate())
+        if (this.has('DateVoulue')) {
+            var newDate = new Date(this.get('DateVoulueTimestamp'))
+            var printDate = newDate.getDate() + "/" + newDate.getMonth + "/" + newDate.getYear();
+            console.log(printDate);
+            this.set('DateVoulue', printDate)
+        }
+        if (this.has('DateDemande')) this.set('DateDemande',new Date(this.get('DateDemandeTimestamp')).format("dd/mm/yy"))
     }
 });
 
@@ -73,7 +76,7 @@ var ListingItem = Backbone.View.extend({
     render:function () {
         this.$el.html(this.template(this.model.toJSON()))
         // Append delete button
-        this.$el.find('.deleteButton').html(new DeleteButton({model:this.model, className:'btn btn-supersupersmall', defaultTemplate:'<i class="icon-remove" style="margin-right:0px;"></i>'}).render().$el)
+        this.$el.find('.deleteButton').html(new DeleteButton({model:this.model, className:'btn btn-small', defaultTemplate:'<i class="icon-remove" style="margin-right:0px;"></i>'}).render().$el)
         return this
     },
     remove:function () {
