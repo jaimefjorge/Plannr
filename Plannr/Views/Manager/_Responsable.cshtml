@@ -97,8 +97,8 @@
 
 
     $('#calendar').weekCalendar({
-        timeslotsPerHour: 2,
-        timeslotHeigh: 60,
+        timeslotsPerHour: 1,
+        timeslotHeight: 40,
             
         hourLine: true,
         data: eventData,
@@ -107,6 +107,7 @@
         height: function ($calendar) {
             return 600;
         },
+        allowEventCreation:false,
         firstDayOfWeek:1,
         businessHours: {
             start: 8,

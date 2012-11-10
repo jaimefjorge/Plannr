@@ -33,6 +33,29 @@ namespace Plannr.Models
        
         public virtual CreneauHoraire CreneauSouhaite { get; set; }
 
+        public int DateDemandeTimestamp
+        {
+            get
+            {
+                DateTime origin = new DateTime(1970, 1, 1, 0, 0, 0, 0);
+                var baseDate = this.DateDemande;
+                TimeSpan diff = baseDate - origin;
+                return (int)Math.Floor(diff.TotalSeconds);
+            }
+        }
+
+        public int DateVoulueTimestamp
+        {
+            get
+            {
+                DateTime origin = new DateTime(1970, 1, 1, 0, 0, 0, 0);
+                var baseDate = this.DateVoulue;
+                TimeSpan diff = baseDate - origin;
+                return (int)Math.Floor(diff.TotalSeconds);
+            }
+
+        }
+
 
         // Return "simple" object for API
         public string Enseignement_Libelle
