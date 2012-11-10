@@ -36,12 +36,14 @@ namespace Plannr
             bundles.Add(new StyleBundle("~/Content/themes/bootstrap").Include(
                 "~/Content/themes/bootstrap/bootstrap.css",
                 "~/Content/themes/bootstrap/bootstrap-responsive.css",
-                "~/Content/themes/bootstrap/fullcalendar.css",
+ 
                 "~/Content/themes/bootstrap/unicorn.main.css",
-                "~/Content/themes/bootstrap/unicorn.grey.css",
-                "~/Content/themes/bootstrap/jquery-ui-1.8.16.custom.css",
-                "~/Content/themes/bootstrap/jquery.weekcalendar.css"));
+                "~/Content/themes/bootstrap/unicorn.grey.css"));
+            bundles.Add(new StyleBundle("~/Content/themes/fullcalendar").Include(
 
+                "~/Content/themes/bootstrap/jquery-ui-1.8.16.custom.css",
+                "~/Content/themes/bootstrap/jquery.weekcalendar.css"
+                ));
             // Utilisez la version de développement de Modernizr pour développer et apprendre. Puis, lorsque vous êtes
             // prêt pour la production, utilisez l’outil de génération sur http://modernizr.com pour sélectionner uniquement les tests dont vous avez besoin.
             bundles.Add(new ScriptBundle("~/bundles/modernizr").Include(

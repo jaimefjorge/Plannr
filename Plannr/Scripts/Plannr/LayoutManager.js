@@ -1,65 +1,67 @@
 ﻿var cache;
+var xhrReq = null;
 
-(function () {
+cache = {};
+var sel = $('#content');
 
+var showContent = function (data, el) {
+    hideLoading();
+    $('#sidebar li.active').removeClass('active');
+    $(el).parent().addClass('active');
+
+    sel.html(data);
+};
+
+var clearCache = function () {
     cache = {};
-    var sel = $('#content');
+};
 
-    var showContent = function (data,el) {
-        hideLoading();
-        $('#sidebar li.active').removeClass('active');
-        $(el).parent().addClass('active');
+var showLoading = function () {
 
-        sel.html(data);
-    };
+    $('#overlay').fadeIn();
+    $('#spinner').fadeIn();
 
-    var clearCache = function () {
-        cache = {};
-    };
+};
 
-    var showLoading = function () {
-
-        $('#overlay').fadeIn();
-        $('#spinner').fadeIn();
-
-    };
-
-    var hideLoading = function () {
-        $('#overlay').fadeOut();
-        $('#spinner').fadeOut();
-    };
+var hideLoading = function () {
+    $('#overlay').fadeOut();
+    $('#spinner').fadeOut();
+};
 
 
-    $('#sidebar ul a').live('click', function (e) {
-        showLoading();
-        var that = this;
-        var loc = $(this).attr('href');
-       
-        if (typeof cache[loc] !== 'undefined') {
-            
-            showContent(cache[loc]);
-        } else {
+$('#sidebar ul a').live('click', function (e) {
+    if (xhrReq != null) {
 
-            $.ajax({
+    }
+   
+    showLoading();
+    var that = this;
+    var loc = $(this).attr('href');
 
-                url: loc,
-                success: function (data) {
+ 
 
-                    cache[loc] = data;
-                    
-                    showContent(data,that);
-                }
-            })
-        }
+    if (typeof cache[loc] !== 'undefined') {
 
-        e.preventDefault();
-        e.stopPropagation();
-        return false;
+        showContent(cache[loc],that);
+    } else {
+
+        xhrReq = $.ajax({
+
+            url: loc,
+            success: function (data) {
+
+                cache[loc] = data;
+
+                showContent(data, that);
+            }
+        })
+    }
+
+    e.preventDefault();
+    e.stopPropagation();
+    return false;
 
 
-    });
+});
 
 
-
-
-})()

@@ -10,6 +10,7 @@ namespace Plannr.DAL
     public interface IReservationsRepository : IDisposable
     {
         Reservation Get(int id);
+        Reservation GetEager(int id);
         IEnumerable<Reservation> GetAll();
         // Obtient les reservations assignées a un enseignant id
         IEnumerable<Reservation> GetReservationsFor(int id);

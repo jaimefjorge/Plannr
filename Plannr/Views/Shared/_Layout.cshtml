@@ -7,6 +7,7 @@
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     @Styles.Render("~/Content/themes/bootstrap")
+    @Styles.Render("~/Content/themes/fullcalendar")
     <!--@Styles.Render("~/Content/themes/base/css")-->
 
 </head>
@@ -53,6 +54,16 @@
 
     @Scripts.Render("~/bundles/plannrSinglePage")
     @Scripts.Render("~/bundles/unicorn")
+
+    <script type="text/javascript">
+        $(function() {
+
+            $('#content').css('min-height',$(window).height()+'px')
+
+        })
+
+    </script>
+
 
     @RenderSection("scripts", required: false)
 </body>

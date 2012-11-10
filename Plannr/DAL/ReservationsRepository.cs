@@ -21,6 +21,11 @@ namespace Plannr.DAL
             return this.context.Reservations.Find(id);
         }
 
+        public Reservation GetEager(int id)
+        {
+            return this.context.Reservations.Include("Enseignement").FirstOrDefault(p => p.Id == id);
+        }
+
         public IEnumerable<Reservation> GetAll()
         {
             return this.context.Reservations.ToList();
