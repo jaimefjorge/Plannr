@@ -64,13 +64,13 @@
 
 <script type="text/javascript">
 
-    $('#precWeek').live('click',function() {
+    $('#precWeek').bind('click',function() {
 
         $("#calendar").weekCalendar("prevWeek");
 
     });
 
-    $("#nextWeek").live('click',function() {
+    $("#nextWeek").bind('click',function() {
         $("#calendar").weekCalendar("nextWeek");
     });
 
