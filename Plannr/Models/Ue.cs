@@ -11,9 +11,7 @@ namespace Plannr.Models
         [Key]
         [ScaffoldColumn(false)]
         public int Id { get; set; }
-        [Required]
         public string Libelle { get; set; }
-        [Required]
         public string Description { get; set; }
 
         // Navigators

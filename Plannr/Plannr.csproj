@@ -177,6 +177,8 @@
     <Compile Include="Controllers\ReservationsController.cs" />
     <Compile Include="DAL\BatimentsRepository.cs" />
     <Compile Include="DAL\CreneauxHorairesRepository.cs" />
+    <Compile Include="DAL\IUeRepository.cs" />
+    <Compile Include="DAL\MatieresRepository.cs" />
     <Compile Include="DAL\DemandesRepository.cs" />
     <Compile Include="DAL\EnseignantsRepository.cs" />
     <Compile Include="DAL\EnseignementsRepository.cs" />
@@ -185,10 +187,12 @@
     <Compile Include="DAL\IDemandesRepository.cs" />
     <Compile Include="DAL\IEnseignantsRepository.cs" />
     <Compile Include="DAL\IEnseignementsRepository.cs" />
+    <Compile Include="DAL\IMatieresRepository.cs" />
     <Compile Include="DAL\IReservationsRepository.cs" />
     <Compile Include="DAL\ISallesRepository.cs" />
     <Compile Include="DAL\ReservationsRepository.cs" />
     <Compile Include="DAL\SallesRepository.cs" />
+    <Compile Include="DAL\UeRepository.cs" />
     <Compile Include="Filters\InitializeSimpleMembershipAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -370,6 +374,10 @@
     <Content Include="Views\Administration\EditEnseignant.cshtml" />
     <Content Include="Views\Administration\DeleteEnseignant.cshtml" />
     <Content Include="Views\Administration\DetailsEnseignant.cshtml" />
+    <Content Include="Views\Administration\IndexMatiere.cshtml" />
+    <Content Include="Views\Administration\CreateMatiere.cshtml" />
+    <Content Include="Views\Administration\DetailsMatiere.cshtml" />
+    <Content Include="Views\Administration\EditMatiere.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

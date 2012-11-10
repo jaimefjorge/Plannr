@@ -21,6 +21,8 @@ namespace Plannr.Controllers
         private IEnseignantsRepository enseignantRepository;
         private ISallesRepository salleRepository;
         private IBatimentsRepository batimentRepository;
+        private IMatieresRepository matiereRepository;
+        private IUeRepository ueRepository;
 
         //
         // GET: /Administration/
@@ -30,13 +32,17 @@ namespace Plannr.Controllers
             enseignantRepository = new EnseignantsRepository(context);
             salleRepository = new SallesRepository(context);
             batimentRepository = new BatimentsRepository(context);
+            matiereRepository = new MatieresRepository(context);
+            ueRepository = new UeRepository(context);
         }
 
-        public AdministrationController(IEnseignantsRepository repo, IBatimentsRepository batrepo, ISallesRepository salrepo)
+        public AdministrationController(IEnseignantsRepository repo, IBatimentsRepository batrepo, ISallesRepository salrepo, IMatieresRepository matrepo, IUeRepository uerepo)
         {
             this.enseignantRepository = repo;
             this.batimentRepository = batrepo;
             this.salleRepository = salrepo;
+            this.matiereRepository = matrepo;
+            this.ueRepository = uerepo;
         }
 
         //Administration's Index
@@ -215,6 +221,141 @@ namespace Plannr.Controllers
             }
             return View(enseignant);
         }
+
+
+        //--------------------------------------------------------------
+        //--------------------------Matière-------------------------------
+
+        //Enseignant's Index
+        public ActionResult IndexMatiere()
+        {
+            return View(this.matiereRepository.GetAll());
+        }
+
+
+        // GET: Administration/CreateMatiere
+        public ActionResult CreateMatiere()
+        {
+
+            IEnumerable<Ue> ueList = this.ueRepository.GetList();
+            ViewBag.uesList = ueList;
+            return View();
+        }
+
+
+
+        
+        // POST: /Administration/Create
+
+        [HttpPost]
+        public ActionResult CreateMatiere(Matiere matiere)
+        {
+
+            matiere.Ue = this.ueRepository.Get(matiere.Ue.Id);
+            foreach (ModelState modelState in ViewData.ModelState.Values)
+            {
+                foreach (ModelError error in modelState.Errors)
+                {
+                    System.Diagnostics.Debug.WriteLine(error.ErrorMessage);
+                }
+            }
+            if (ModelState.IsValid)
+            {
+                this.matiereRepository.Insert(matiere);
+                this.matiereRepository.Save();
+                return RedirectToAction("IndexMatiere");
+            }
+
+            return View(matiere);
+
+        }
+
+        // GET: /AddMatiere/Edit
+
+        public ActionResult EditMatiere(int id = 0)
+        {
+            Matiere matiere = this.matiereRepository.Get(id);
+            IEnumerable<Ue> ueList = this.ueRepository.GetList();
+            ViewBag.uesList = ueList;
+            if (matiere == null)
+            {
+                return HttpNotFound();
+            }
+            return View(matiere);
+        }
+
+        //
+        // POST: /AddMatiere/Edit
+
+        [HttpPost]
+        public ActionResult EditMatiere(Matiere matiere)
+        {
+            Matiere m = this.matiereRepository.GetEager(matiere.Id);
+            m.Ue = this.ueRepository.Get(matiere.Ue.Id);
+            m.Libelle = matiere.Libelle;
+          
+            if (ModelState.IsValid)
+            {
+                this.matiereRepository.Edit(m);
+              //  var m = db.Matieres.Include(p => p.Ue).Single(s => s.Id == matiere.Id);
+         
+              this.matiereRepository.Save();
+                return RedirectToAction("IndexMatiere");
+            }
+
+
+        
+
+
+
+
+            return View(m);
+        }
+
+
+
+
+
+
+
+
+        // GET: /AddMatiere/Delete
+
+        public ActionResult DeleteMatiere(int id = 0)
+        {
+            Matiere matiere = this.matiereRepository.Get(id);
+            if (matiere == null)
+            {
+                return HttpNotFound();
+            }
+            return View(matiere);
+        }
+
+        //
+        // POST: /AddMatiere/Delete
+
+        [HttpPost, ActionName("DeleteMatiere")]
+        public ActionResult DeleteConfirmedMat(int id)
+        {
+
+            this.matiereRepository.Delete(id);
+            this.matiereRepository.Save();
+            return RedirectToAction("IndexMatiere");
+        }
+
+        // GET: /Administration/Details
+
+        public ActionResult DetailsMatiere(int id = 0)
+        {
+            Matiere matiere = this.matiereRepository.Get(id);
+            if (matiere == null)
+            {
+                return HttpNotFound();
+            }
+            return View(matiere);
+        }
+
+
 
 
 

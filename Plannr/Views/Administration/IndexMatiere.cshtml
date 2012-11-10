@@ -1,0 +1,39 @@
+﻿@model IEnumerable<Plannr.Models.Matiere>
+
+@{
+    ViewBag.Title = "IndexMatiere";
+}
+
+<h2>Ajout d'une matière</h2>
+
+<a href="@Url.Action("CreateMatiere", "Administration")" class="btn btn-large btn-danger" style="margin-bottom:20px" >Create New</a>
+
+<!--<p>
+    @Html.ActionLink("Create New", "CreateMatiere")
+</p>-->
+
+<table class="table table-striped table-condensed">
+    <tr >
+        <th style="background-color:#00A7C8; color:white">
+            @Html.DisplayNameFor(model => model.Libelle)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr >
+        <td>
+            @Html.DisplayFor(modelItem => item.Libelle)
+        </td>
+        <td >
+
+            @Html.ActionLink("Edit", "EditMatiere", new { id=item.Id }) |
+            @Html.ActionLink("Details", "DetailsMatiere", new { id=item.Id }) |
+            @Html.ActionLink("Delete", "DeleteMatiere", new { id=item.Id })
+        </td>
+    </tr>
+}
+
+</table>
+
+<a href="@Url.Action("Index", "Administration")" class="btn btn-large" id="cancelEdit">Back</a>

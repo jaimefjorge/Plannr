@@ -1,4 +1,5 @@
 ﻿using System.Data.Entity;
+using System.Data.Objects;
 
 namespace Plannr.Models
 {
