@@ -369,6 +369,7 @@
     <Content Include="Views\Administration\EditEnseignant.cshtml" />
     <Content Include="Views\Administration\DeleteEnseignant.cshtml" />
     <Content Include="Views\Administration\DetailsEnseignant.cshtml" />
+    <Content Include="Views\AffichageEDT.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
