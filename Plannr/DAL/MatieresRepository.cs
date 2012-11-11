@@ -60,6 +60,7 @@ namespace Plannr.DAL
         public void Delete(int id)
         {
             var m = this.context.Matieres.Find(id);
+            m.Ue = null;
             this.context.Matieres.Remove(m);
         }
 
@@ -70,10 +71,7 @@ namespace Plannr.DAL
 
         public void Save()
         {
-         
-      
                 this.context.SaveChanges();
-    
         }
 
         // DIspose

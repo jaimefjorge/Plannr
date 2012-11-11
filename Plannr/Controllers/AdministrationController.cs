@@ -301,18 +301,10 @@ namespace Plannr.Controllers
           
             if (ModelState.IsValid)
             {
-                this.matiereRepository.Edit(m);
-              //  var m = db.Matieres.Include(p => p.Ue).Single(s => s.Id == matiere.Id);
-         
-              this.matiereRepository.Save();
+                this.matiereRepository.Edit(m);       
+                this.matiereRepository.Save();
                 return RedirectToAction("IndexMatiere");
             }
-
-
-        
-
-
-
 
             return View(m);
         }
@@ -325,24 +317,8 @@ namespace Plannr.Controllers
 
 
         // GET: /AddMatiere/Delete
-
-        public ActionResult DeleteMatiere(int id = 0)
+        public ActionResult DeleteMatiere(int id)
         {
-            Matiere matiere = this.matiereRepository.Get(id);
-            if (matiere == null)
-            {
-                return HttpNotFound();
-            }
-            return View(matiere);
-        }
-
-        //
-        // POST: /AddMatiere/Delete
-
-        [HttpPost, ActionName("DeleteMatiere")]
-        public ActionResult DeleteConfirmedMat(int id)
-        {
-
             this.matiereRepository.Delete(id);
             this.matiereRepository.Save();
             return RedirectToAction("IndexMatiere");
