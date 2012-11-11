@@ -24,7 +24,14 @@ namespace Plannr.Controllers
         public ActionResult Login(string returnUrl)
         {
             ViewBag.ReturnUrl = returnUrl;
-            return View();
+            if (!Request.IsAjaxRequest())
+            {
+                return View();
+            }
+            else
+            {
+                return PartialView("_Login");
+            }
         }
 
         //

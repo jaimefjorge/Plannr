@@ -6,17 +6,28 @@ var Demande = Backbone.Model.extend({
 
     initialize:function() {
         _.bindAll(this,'updateDateFormat')
-
+        this.updateDateFormat();
+        this.on('change', this.updateDateFormat, this);
     },
 
     updateDateFormat:function() {
         if (this.has('DateVoulue')) {
-            var newDate = new Date(this.get('DateVoulueTimestamp'))
-            var printDate = newDate.getDate() + "/" + newDate.getMonth + "/" + newDate.getYear();
-            console.log(printDate);
+            var newDate = new Date(this.get('DateVoulueTimestamp')*1000)
+            
+            var printDate = newDate.getDate() + "/" + parseInt(parseInt(newDate.getMonth())+1) + "/" + newDate.getFullYear();
+            
             this.set('DateVoulue', printDate)
         }
-        if (this.has('DateDemande')) this.set('DateDemande',new Date(this.get('DateDemandeTimestamp')).format("dd/mm/yy"))
+        if (this.has('DateDemande')) {
+            var newDate = new Date(this.get('DateDemandeTimestamp') * 1000)
+
+            var printDate = newDate.getDate() + "/" + parseInt(parseInt(newDate.getMonth())+1) + "/" + newDate.getFullYear();
+
+            this.set('DateDemande', printDate)
+        }
+
+
+        //if (this.has('DateDemande')) this.set('DateDemande',new Date(this.get('DateDemandeTimestamp')).format("dd/mm/yy"))
     }
 });
 

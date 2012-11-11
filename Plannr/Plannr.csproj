@@ -287,6 +287,7 @@
     <Content Include="Scripts\knockout-2.1.0.debug.js" />
     <Content Include="Scripts\knockout-2.1.0.js" />
     <Content Include="Scripts\modernizr-2.5.3.js" />
+    <Content Include="Scripts\Plannr\backbone-forms.js" />
     <Content Include="Scripts\Plannr\LayoutManager.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
@@ -383,6 +384,7 @@
     <Content Include="Views\Book\_Create.cshtml" />
     <Content Include="Views\Book\_Index.cshtml" />
     <Content Include="Views\Manager\_Responsable.cshtml" />
+    <Content Include="Views\Account\_Login.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

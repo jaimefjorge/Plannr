@@ -65,17 +65,7 @@
             return false
         })
 
-        $('#CreateDemandesForm').live('submit', function (e) {
-
-
-            console.log('bleh');
-            var newDemande = new Demande({ Enseignement: { 'Id': $('#Enseignement_Id').val() } })
-            newDemande.save()
-
-
-            e.preventDefault()
-            return false
-        })
+     
 
 
 </script>
