@@ -388,6 +388,10 @@
     <Content Include="Views\Reservations\_Create.cshtml" />
     <Content Include="Views\Shared\_Calendar.cshtml" />
     <Content Include="Views\Administration\_Index.cshtml" />
+    <Content Include="Views\Administration\_IndexEnseignant.cshtml" />
+    <Content Include="Views\Administration\_IndexBatiment.cshtml" />
+    <Content Include="Views\Administration\_IndexSalle.cshtml" />
+    <Content Include="Views\Administration\_IndexMatiere.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -56,6 +56,7 @@ namespace Plannr.Controllers
             }
             else
             {
+                
                 return PartialView("_Index");
             }
                // return View();
@@ -67,7 +68,17 @@ namespace Plannr.Controllers
         //Enseignant's Index
         public ActionResult IndexEnseignant()
         {
-            return View(this.enseignantRepository.GetAll());
+
+            if (!Request.IsAjaxRequest())
+            {
+                return View(this.enseignantRepository.GetAll());
+            }
+            else
+            {
+                System.Diagnostics.Debug.WriteLine("cc");
+                return PartialView("_IndexEnseignant", this.enseignantRepository.GetAll());
+            }
+            
         }
 
         // GET: Administration/CreateEnseignant
@@ -128,7 +139,16 @@ namespace Plannr.Controllers
         
         public ActionResult CreateSalle() {
             ViewBag.batiments = this.batimentRepository.GetAll().ToList();
-            return View();
+            if (!Request.IsAjaxRequest())
+            {
+                return View(this.batimentRepository.GetAll().ToList());
+            }
+            else
+            {
+
+                return PartialView("_IndexSalle", this.batimentRepository.GetAll().ToList());
+            } 
+
         }
 
         // GET: /AddEnseignant/Delete
@@ -178,8 +198,17 @@ namespace Plannr.Controllers
         // GET: /Administration/Create
 
         public ActionResult CreateBatiment(){
-             //ViewBag.batiments = this.batimentRepository.GetAll();
-          return View();
+  
+            if (!Request.IsAjaxRequest())
+            {
+                return View(this.batimentRepository.GetAll());
+            }
+            else
+            {
+
+                return PartialView("_IndexBatiment", this.batimentRepository.GetAll());
+            } 
+
             }
 
 
@@ -241,7 +270,16 @@ namespace Plannr.Controllers
         //Enseignant's Index
         public ActionResult IndexMatiere()
         {
-            return View(this.matiereRepository.GetAll());
+            if (!Request.IsAjaxRequest())
+            {
+                return View(this.matiereRepository.GetAll());
+            }
+            else
+            {
+
+                return PartialView("_IndexMatiere", this.matiereRepository.GetAll());
+            } 
+            
         }
 
 
