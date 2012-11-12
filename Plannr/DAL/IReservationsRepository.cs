@@ -14,6 +14,8 @@ namespace Plannr.DAL
         IEnumerable<Reservation> GetAll();
         // Obtient les reservations assignées a un enseignant id
         IEnumerable<Reservation> GetReservationsFor(int id);
+        // Obtietn les réservations associéeas a une promotion
+        IEnumerable<Reservation> GetReservationsForGroupe(int id);
         void Insert(Reservation e);
         void Delete(int id);
         void Save();

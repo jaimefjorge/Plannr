@@ -64,7 +64,18 @@ namespace Plannr.Controllers
            List<CreneauHoraire> creneaux = this.creneauxRepository.getCreneauxHorairesForDate(demandeAssociee.DateVoulue).ToList();
 
 
+
+               
+
+            // Print a nice calendar.
+            List<Reservation> reservationsGroupe = this.repository.GetReservationsForGroupe(demandeAssociee.Enseignement.Groupe.Id).ToList();
+            ViewBag.calendarId = "CalendarCreateReservation_" + id;
+            ViewBag.calendarJSON = ReservationCalendar.ReservationsToJson(reservationsGroupe);
+
+
+
             ViewBag.demandeAssociee = demandeAssociee;
+            ViewBag.creneaux = creneaux;
             ViewBag.salles = salles;
 
             return View();

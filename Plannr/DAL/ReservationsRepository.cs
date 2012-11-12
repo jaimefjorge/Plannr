@@ -36,6 +36,13 @@ namespace Plannr.DAL
             return this.context.Reservations.Where(x => x.Enseignement.Enseignant.UserId == id).ToList();
         }
 
+        public IEnumerable<Reservation> GetReservationsForGroupe(int id)
+        {
+
+            return this.context.Reservations.Where(x => x.Enseignement.Groupe.Id == id).ToList();
+
+        }
+
         public void Insert(Reservation e)
         {
             this.context.Reservations.Add(e);

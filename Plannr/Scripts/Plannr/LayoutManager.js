@@ -2,13 +2,18 @@
 var xhrReq = null;
 
 cache = {};
-var sel = $('#content');
+var idName = "#content";
+var sel = $(idName);
 
 var showContent = function (data, el) {
     hideLoading();
     $('#sidebar li.active').removeClass('active');
     $(el).parent().addClass('active');
 
+    // Remove events in this div
+    sel.remove();
+    $('<div id="content"></div>').appendTo('body');
+    sel = $(idName);
     sel.html(data);
 };
 

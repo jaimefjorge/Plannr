@@ -4,40 +4,4 @@
     ViewBag.Title = "Create";
 }
 
-<h2>Create</h2>
-
-@using (Html.BeginForm()) {
-    @Html.ValidationSummary(true)
-
-    <fieldset>
-        <legend>Reservation</legend>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Date)
-        </div>
-
-        <div class="editor-field">
-            @Html.EditorFor(model => model.Date)
-            @Html.ValidationMessageFor(model => model.Date)
-        </div>
-           <div class="control-group">
-            <label class="control-label" for="">@Html.LabelFor(model => model.Salle)</label>
-            <div class="controls">
-                @Html.DropDownListFor(model => model.Salle.Id, new SelectList(ViewBag.salles, "Id", "Libelle"))
-            </div>
-        </div>
-        <p>
-            <input type="submit" value="Create" />
-        </p>
-
-
-    </fieldset>
-}
-
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
-
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-}
+@Html.Partial("_Create",Model)

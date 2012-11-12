@@ -36,14 +36,10 @@ namespace Plannr.Controllers
 
             List<Reservation> resa = this.reservationsRepository.GetAll().ToList();
 
-            List<ReservationCalendar> resaJSON = new List<ReservationCalendar>();
+            // Static method
+            ViewBag.calendarJSON = ReservationCalendar.ReservationsToJson(resa);
 
-            resa.ForEach(x => resaJSON.Add(x.ConvertObject()));
-
-            JsonSerializerSettings jsSettings = new JsonSerializerSettings();
-            jsSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
-
-            ViewBag.resaJSON = JsonConvert.SerializeObject(resaJSON, Formatting.None, jsSettings);
+            ViewBag.calendarId = "CalendarManager";
 
 
             if (Roles.IsUserInRole(User.Identity.Name,"ResponsableUE"))
