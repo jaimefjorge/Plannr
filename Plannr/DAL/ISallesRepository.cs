@@ -16,5 +16,6 @@ namespace Plannr.DAL
         IEnumerable<Salle> GetList();
         void Entry(Salle e);
         void Save();
+        Salle GetEager(int id);
     }
 }

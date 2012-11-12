@@ -196,6 +196,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\Administrateur.cs" />
     <Compile Include="Models\Batiment.cs" />
     <Compile Include="Models\Cours.cs" />
     <Compile Include="Models\CreneauHoraire.cs" />
@@ -366,7 +367,6 @@
     <Content Include="Views\Administration\Details.cshtml" />
     <Content Include="Views\Administration\Edit.cshtml" />
     <Content Include="Views\Administration\Delete.cshtml" />
-    <Content Include="Views\Administration\_SalleCreate.cshtml" />
     <Content Include="Views\Administration\CreateSalle.cshtml" />
     <Content Include="Views\Administration\CreateBatiment.cshtml" />
     <Content Include="Views\Administration\CreateEnseignant.cshtml" />
@@ -392,6 +392,7 @@
     <Content Include="Views\Administration\_IndexBatiment.cshtml" />
     <Content Include="Views\Administration\_IndexSalle.cshtml" />
     <Content Include="Views\Administration\_IndexMatiere.cshtml" />
+    <Content Include="Views\Administration\_CreateEnseignant.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

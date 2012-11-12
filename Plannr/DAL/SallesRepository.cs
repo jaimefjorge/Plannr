@@ -21,6 +21,14 @@ namespace Plannr.DAL
             return this.context.Salles.Find(id);
         }
 
+        public Salle GetEager(int id)
+        {
+            var a = this.context.Salles.Include("Batiment").Single(s => s.Id == id);
+            //var m = db.Matieres.Include(p => p.Ue).Single(s => s.Id == matiere.Id);
+
+            return a;
+        }
+
         // Retourne les salles  libres pour une date, et correspondanets aux criteres capacite/projo nécessaire
         public IEnumerable<Salle> GetSallesCriteres(int capacite, bool projo, DateTime date)
         {
@@ -74,6 +82,7 @@ namespace Plannr.DAL
          return this.context.Salles.ToList();
         }
 
+     
         public void Entry(Salle e) {
             this.context.Entry(e).State = System.Data.EntityState.Modified;
         }

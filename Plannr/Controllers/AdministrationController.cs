@@ -75,7 +75,7 @@ namespace Plannr.Controllers
             }
             else
             {
-                System.Diagnostics.Debug.WriteLine("cc");
+
                 return PartialView("_IndexEnseignant", this.enseignantRepository.GetAll());
             }
             
@@ -85,7 +85,17 @@ namespace Plannr.Controllers
         public ActionResult CreateEnseignant()
         {
 
-            return View();
+            if (!Request.IsAjaxRequest())
+            {
+                System.Diagnostics.Debug.WriteLine("test");
+                return View();
+
+            }
+            else
+            {
+                System.Diagnostics.Debug.WriteLine("test2");
+                return PartialView("_CreateEnseignant");
+            }
         }
 
         //
@@ -99,8 +109,7 @@ namespace Plannr.Controllers
 
                 this.enseignantRepository.Insert(enseignant);
                 this.enseignantRepository.Save();
-                //WebSecurity.CreateAccount(enseignant.UserName, enseignant.UserName);
-                //Roles.AddUserToRole(enseignant.UserName, "Enseignant");
+
                 
                 return RedirectToAction("IndexEnseignant");
             }
@@ -137,19 +146,7 @@ namespace Plannr.Controllers
             return View(enseignant);
         }
         
-        public ActionResult CreateSalle() {
-            ViewBag.batiments = this.batimentRepository.GetAll().ToList();
-            if (!Request.IsAjaxRequest())
-            {
-                return View(this.batimentRepository.GetAll().ToList());
-            }
-            else
-            {
-
-                return PartialView("_IndexSalle", this.batimentRepository.GetAll().ToList());
-            } 
-
-        }
+        
 
         // GET: /AddEnseignant/Delete
 
@@ -170,7 +167,6 @@ namespace Plannr.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             Enseignant ens = this.enseignantRepository.Get(id);
-            //System.Web.Security.Membership.DeleteUser(ens.UserName);
             this.enseignantRepository.Delete(id);
             
             this.enseignantRepository.Save();
@@ -194,6 +190,21 @@ namespace Plannr.Controllers
 
 
         //- - - - - - - - - - - - - - - - - Batiment - - - - - - - - - - - - - - - 
+        //Batiment/Index
+        public ActionResult IndexBatiment()
+        {
+
+            if (!Request.IsAjaxRequest())
+            {
+                return View(this.batimentRepository.GetAll());
+            }
+            else
+            {
+                return PartialView("_IndexBatiment", this.batimentRepository.GetAll());
+            } 
+
+        }
+
 
         // GET: /Administration/Create
 
@@ -201,12 +212,12 @@ namespace Plannr.Controllers
   
             if (!Request.IsAjaxRequest())
             {
-                return View(this.batimentRepository.GetAll());
+                return View();
             }
             else
             {
 
-                return PartialView("_IndexBatiment", this.batimentRepository.GetAll());
+                return PartialView("_CreateBatiment");
             } 
 
             }
@@ -220,49 +231,193 @@ namespace Plannr.Controllers
 
                 this.batimentRepository.Insert(batiment);
                 this.batimentRepository.Save();
-                return RedirectToAction("Index");
+                return RedirectToAction("_IndexBatiment");
             }
 
             return View(batiment);
 
         }
 
+        // GET: /Salle/Details/5
+
+        public ActionResult DetailsBatiment(int id = 0)
+        {
+            // Batiment batiment = (Batiment)db.Batiments.Find(id);
+            Batiment batiment = batimentRepository.Get(id);
+            if (batiment == null)
+            {
+                return HttpNotFound();
+            }
+            return View(batiment);
+        }
+
+        public ActionResult EditBatiment(int id = 0)
+        {
+            // Batiment batiment = (Batiment)db.Batiments.Find(id);
+            Batiment batiment = batimentRepository.Get(id);
+            if (batiment == null)
+            {
+                return HttpNotFound();
+            }
+            return View(batiment);
+        }
+
+        [HttpPost]
+        public ActionResult EditBatiment(Batiment batiment)
+        {
+            if (ModelState.IsValid)
+            {
+
+                batimentRepository.Entry(batiment);
+                batimentRepository.Save();
+                return RedirectToAction("Index");
+            }
+            return View(batiment);
+        }
+
+        // GET: /Batiment/Delete/
+
+        public ActionResult DeleteBatiment(int id = 0)
+        {
+            // Batiment batiment = db.Batiments.Find(id);
+            Batiment batiment = batimentRepository.Get(id);
+            if (batiment == null)
+            {
+                return HttpNotFound();
+            }
+            return View(batiment);
+        }
+
+        //
+        /* POST: /Batiment/Delete/
+
+        [HttpPost, ActionName("DeleteBatiment")]
+        public ActionResult DeleteConfirmed(int id)
+        {
+
+            batimentRepository.Delete(id);
+            batimentRepository.Save();
+            return RedirectToAction("Index");
+        }*/
+
+
         // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 
         // - - - - - - - - - - - - - - - - Salle - - - - - - - - - - - - - - - - 
+        //Batiment/Index
+        public ActionResult IndexSalle()
+        {
 
+            if (!Request.IsAjaxRequest())
+            {
+                return View(this.salleRepository.GetList());
+            }
+            else
+            {
+                return PartialView("_IndexSalle", this.salleRepository.GetList());
+            }
+
+        }
+
+        //Get CreateSalle
+       
+        public ActionResult CreateSalle()
+        {
+   
+            ViewBag.batiments = this.batimentRepository.GetAll().ToList();
+            if (!Request.IsAjaxRequest())
+            {
+                return View();
+            }
+            else
+            {
+
+                return PartialView("CreateSalle");
+            }
+
+        }
+
+        
         [HttpPost]
         public ActionResult CreateSalle(Salle salle)
         {
+            
+            salle.Batiment = this.batimentRepository.Get(salle.Batiment.Id);
+            foreach (ModelState modelState in ViewData.ModelState.Values)
+            {
+                foreach (ModelError error in modelState.Errors)
+                {
+                    System.Diagnostics.Debug.WriteLine(error.ErrorMessage);
+                }
+            }
             if (ModelState.IsValid)
             {
-
                 this.salleRepository.Insert(salle);
                 this.salleRepository.Save();
-                return RedirectToAction("Index");
+                return RedirectToAction("IndexSalle");
             }
 
             return View(salle);
-
         }
 
-        // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+        // GET: /Salle/Edit/
 
-        // POST: /Administration/Edit/5
+        public ActionResult EditSalle(int id = 0)
+        {
+            //  Salle salle = (Salle)db.Salles.Find(id);
+            Salle salle = this.salleRepository.Get(id);
+            if (salle == null)
+            {
+                return HttpNotFound();
+            }
+            return View(salle);
+        }
+
+        //
+        // POST: /Salle/Edit
 
         [HttpPost]
-        public ActionResult Edit(Enseignant enseignant)
+        public ActionResult EditSalle(Salle salle)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(enseignant).State = EntityState.Modified;
-                db.SaveChanges();
+                // db.Entry(salle).State = EntityState.Modified;
+                // db.SaveChanges();
+                this.salleRepository.Entry(salle);
+                this.salleRepository.Save();
+
                 return RedirectToAction("Index");
             }
-            return View(enseignant);
+            return View(salle);
         }
 
+        // GET: /Salle/Delete
+
+        public ActionResult DeleteSalle(int id = 0)
+        {
+            Salle salle = this.salleRepository.Get(id);
+            if (salle == null)
+            {
+                return HttpNotFound();
+            }
+            return View(salle);
+        }
+
+        //
+        /* POST: /Salle/Delete
+
+        [HttpPost, ActionName("DeleteSalle")]
+        public ActionResult DeleteConfirmed(int id)
+        {
+           
+            this.salleRepository.Delete(id);
+            this.salleRepository.Save();
+
+            return RedirectToAction("Index");
+        }
+         */
+        // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
         //--------------------------------------------------------------
         //--------------------------Matière-------------------------------
@@ -353,10 +508,6 @@ namespace Plannr.Controllers
 
             return View(m);
         }
-
-
-
-
 
 
 
