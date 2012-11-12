@@ -33,7 +33,22 @@
 
             <li @if (@HttpContext.Current.Request.RequestContext.RouteData.Values["controller"].ToString() == "Book")
                 { <text>class="active"</text> }><a href="@Url.Action("Index", "Book")"><i class="icon icon-tint"></i><span>Demandes de réservations</span></a></li>
-            <li><a href="@Url.Action("Index", "Administration")"><i class="icon icon-pencil"></i><span>Administration</span></a></li>
+           
+            
+            
+            
+             <li><a href="@Url.Action("Index", "Administration")"><i class="icon icon-pencil"></i><span>Administration</span></a></li>
+
+            <li class="submenu">
+					<a href="#"><i class="icon icon-th-list"></i> <span>Administration</span> <span class="label">2</span></a>
+					<ul style="display: none;">
+						<li> <a href="@Url.Action("IndexEnseignant","Administration")">Gestion Enseignant</a></li>
+						<li><a href="@Url.Action("IndexMatiere", "Administration")">Gestion Matière</a></li>
+					</ul>
+				</li>
+
+
+
             <li><a href="@Url.Action("Index", "Options")"><i class="icon icon-wrench"></i><span>Mon compte</span></a></li>
         </ul>
 
