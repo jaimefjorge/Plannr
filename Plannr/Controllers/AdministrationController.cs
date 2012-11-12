@@ -50,8 +50,15 @@ namespace Plannr.Controllers
         //Administration's Index
         public ActionResult Index()
         {
-           
+            if (!Request.IsAjaxRequest())
+            {
                 return View();
+            }
+            else
+            {
+                return PartialView("_Index");
+            }
+               // return View();
             
         }
 

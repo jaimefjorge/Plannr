@@ -387,6 +387,7 @@
     <Content Include="Views\Account\_Login.cshtml" />
     <Content Include="Views\Reservations\_Create.cshtml" />
     <Content Include="Views\Shared\_Calendar.cshtml" />
+    <Content Include="Views\Administration\_Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
