@@ -19,7 +19,7 @@
 <div class="container-fluid">
     <div class="alert">
     <button class="close" data-dismiss="alert">×</button>
-    Il y a actuellement 2 matières recensées dans la base de données.
+    Il y a actuellement @ViewBag.count matière(s) recensée(s) dans la base de données.
 </div>
     <div class="row-fluid">
         <div class="span12">
@@ -37,6 +37,8 @@
             @Html.DisplayNameFor(model => model.Libelle)
         </th>
         <th></th>
+        <th></th>
+        <th></th>
     </tr>
 
 @foreach (var item in Model) {
@@ -44,13 +46,19 @@
         <td>
             @Html.DisplayFor(modelItem => item.Libelle)
         </td>
-        <td >
-            <a href="@Url.Action("DetailsMatiere", "Administration", new { id=item.Id })" style="margin-left:900px"  class ="btn btn-success"><i class="icon-eye-open"></i>Détails</a>      
-        
-            <a href="@Url.Action("EditMatiere", "Administration", new { id=item.Id })"  style="margin-left:50px" class="btn btn-primary"><i class="icon-pencil icon-white"></i>Editer</a>
-      
-            <a href="@Url.Action("DeleteMatiere", "Administration", new { id=item.Id })" style="margin-left:50px" class="btn btn-danger"><i class="icon-remove icon-white"></i></a>
-         
+        <td ><center>
+            <a href="@Url.Action("DetailsMatiere", "Administration", new { id=item.Id })"  class ="btn btn-success"><i class="icon-eye-open"></i>Détails</a>      
+            </center>
+        </td>
+        <td>
+            <center>
+            <a href="@Url.Action("EditMatiere", "Administration", new { id=item.Id })"   class="btn btn-primary"><i class="icon-pencil icon-white"></i>Editer</a>
+            </center>
+        </td>
+        <td>
+            <center>
+            <a href="@Url.Action("DeleteMatiere", "Administration", new { id=item.Id })" class="btn btn-danger"><i class="icon-remove icon-white"></i></a>
+            </center>
     </td>
     </tr>
 }

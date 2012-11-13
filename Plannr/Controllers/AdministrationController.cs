@@ -425,6 +425,8 @@ namespace Plannr.Controllers
         //Enseignant's Index
         public ActionResult IndexMatiere()
         {
+            ViewBag.count = this.matiereRepository.Count();
+
             if (!Request.IsAjaxRequest())
             {
                 return View(this.matiereRepository.GetAll());

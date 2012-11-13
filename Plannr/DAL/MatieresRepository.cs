@@ -94,6 +94,11 @@ namespace Plannr.DAL
             Dispose(true);
             GC.SuppressFinalize(this);
         }
+
+        public int Count()
+        {
+            return context.Matieres.Count();
+        }
     }
 
 }

@@ -16,5 +16,6 @@ namespace Plannr.DAL
         void Edit(Matiere m);
         void Save();
         IEnumerable<Matiere> GetAll();
+        int Count();
     }
 }
