@@ -51,6 +51,7 @@ namespace Plannr.Filters
 
                     const string respRole = "ResponsableUE";
                     const string enseignantRole = "Enseignant";
+                    const string adminRole = "Administrateur";
 
                     if (!Roles.RoleExists(respRole))
                     {

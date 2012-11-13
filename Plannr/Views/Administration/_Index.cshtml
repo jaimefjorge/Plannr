@@ -6,10 +6,10 @@
 <div class="row" id="choixContainer" style="text-align:center; margin-top:20px;"> 
 
 
-        <a href="@Url.Action("IndexEnseignant","Administration")" class="btn btn-large btn-primary" id="EnseignemantDemand"><i class="icon-pencil icon-white"></i> Ajouter un enseignant</a>
-        <a href="@Url.Action("CreateSalle","Administration")" class="btn btn-large btn-primary" id="SalleDemand"><i class="icon-pencil icon-white"></i> Ajouter une Salle</a>
-        <a href="@Url.Action("CreateBatiment","Administration")" class="btn btn-large btn-primary" id="BatimentDemand"><i class="icon-pencil icon-white"></i> Ajouter un Batiment</a>
-        <a href="@Url.Action("IndexMatiere","Administration")" class="btn btn-large btn-primary" id="MatiereDemand"><i class="icon-pencil icon-white"></i> Ajouter une matière</a>
+        <a href="@Url.Action("IndexEnseignant","Administration")" class="btn btn-large btn-primary" id="EnseignemantDemand"><i class="icon-pencil icon-white"></i> Gestion des enseignants</a>
+        <a href="@Url.Action("IndexSalle","Administration")" class="btn btn-large btn-primary" id="SalleDemand"><i class="icon-pencil icon-white"></i> Gestion des salles</a>
+        <a href="@Url.Action("IndexBatiment","Administration")" class="btn btn-large btn-primary" id="BatimentDemand"><i class="icon-pencil icon-white"></i> Gestion des batiments</a>
+        <a href="@Url.Action("IndexMatiere","Administration")" class="btn btn-large btn-primary" id="MatiereDemand"><i class="icon-pencil icon-white"></i> Gestion des matières</a>
 </div>
 
 <div class="row" id="editContainer" style="display:none;">
@@ -32,7 +32,11 @@
     function showIndex() {
         $('#editContainer').fadeOut("fast", function () {
             $('#choixContainer').fadeIn()
+
            
+
+            editLoaded = false;
+
         })
 
     }
@@ -62,9 +66,9 @@
          return false
      })
 
-    $('#SalleDemand').bind('click', function (e) {
+    $('#SalleDemand').live('click', function (e) {
         if (!editLoaded) {
-            $.get("@Url.Action("CreateSalle","Administration")", function (data) {
+            $.get("@Url.Action("IndexSalle","Administration")", function (data) {
 
                     $('#editContainer').html(data)
                     showEdit()
@@ -79,9 +83,9 @@
               return false
           })
 
-        $('#BatimentDemand').bind('click', function (e) {
+        $('#BatimentDemand').live('click', function (e) {
             if (!editLoaded) {
-                $.get("@Url.Action("CreateBatiment","Administration")", function (data) {
+                $.get("@Url.Action("IndexBatiment","Administration")", function (data) {
 
                     $('#editContainer').html(data)
                     showEdit()
@@ -96,7 +100,7 @@
             return false
         })
 
-        $('#MatiereDemand').bind('click', function (e) {
+        $('#MatiereDemand').live('click', function (e) {
             if (!editLoaded) {
                 $.get("@Url.Action("IndexMatiere","Administration")", function (data) {
 

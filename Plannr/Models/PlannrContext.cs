@@ -26,6 +26,7 @@ namespace Plannr.Models
         public DbSet<Matiere> Matieres { get; set; }
         public DbSet<Personne> Personnes { get; set; }
         public DbSet<ResponsableUE> ResponsablesUE { get; set; }
+        public DbSet<Administrateur> Administrateurs { get; set; }
         public DbSet<TypeCours> TypesCours { get; set; }
         public DbSet<Ue> Ues { get; set; }
         public DbSet<Groupe> Groupes { get; set; }
