@@ -402,6 +402,17 @@
     <Content Include="Views\Administration\_CreateMatiere.cshtml" />
     <Content Include="Views\Administration\_DetailsEnseignant.cshtml" />
     <Content Include="Views\Administration\_DetailsMatiere.cshtml" />
+    <Content Include="Views\Administration\_DeleteBatiment.cshtml" />
+    <Content Include="Views\Administration\_DeleteEnseignant.cshtml" />
+    <Content Include="Views\Administration\_DeleteMatiere.cshtml" />
+    <Content Include="Views\Administration\_DeleteSalle.cshtml" />
+    <Content Include="Views\Administration\_DetailsBatiment.cshtml" />
+    <Content Include="Views\Administration\_DetailsSalle.cshtml" />
+    <Content Include="Views\Administration\DeleteBatiment.cshtml" />
+    <Content Include="Views\Administration\DeleteMatiere.cshtml" />
+    <Content Include="Views\Administration\DeleteSalle.cshtml" />
+    <Content Include="Views\Administration\DetailsBatiment.cshtml" />
+    <Content Include="Views\Administration\DetailsSalle.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
