@@ -90,7 +90,8 @@ namespace Plannr.Controllers
             if (!Request.IsAjaxRequest())
             {
                 System.Diagnostics.Debug.WriteLine("test");
-                return View();
+                //return View();
+                return PartialView("_CreateEnseignant");
 
             }
             else
