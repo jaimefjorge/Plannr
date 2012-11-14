@@ -90,8 +90,8 @@ namespace Plannr.Controllers
             if (!Request.IsAjaxRequest())
             {
                 System.Diagnostics.Debug.WriteLine("test");
-                //return View();
-                return PartialView("_CreateEnseignant");
+                return View();
+
 
             }
             else
@@ -130,7 +130,16 @@ namespace Plannr.Controllers
             {
                 return HttpNotFound();
             }
-            return View(enseignant);
+            if (!Request.IsAjaxRequest())
+            {
+                return View(enseignant);
+            }
+            else
+            {
+
+                return PartialView("_EditEnseignant", enseignant);
+            }
+            
         }
 
         //
@@ -160,7 +169,16 @@ namespace Plannr.Controllers
             {
                 return HttpNotFound();
             }
-            return View(enseignant);
+            if (!Request.IsAjaxRequest())
+            {
+                return View(enseignant);
+            }
+            else
+            {
+
+                return PartialView("_DeleteEnseignant", enseignant);
+            }
+
         }
 
         //
