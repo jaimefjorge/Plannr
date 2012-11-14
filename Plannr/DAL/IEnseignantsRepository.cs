@@ -15,5 +15,6 @@ namespace Plannr.DAL
         void Edit(Enseignant e);
         void Save();
         IEnumerable<Enseignant> GetAll();
+        int Count();
     }
 }

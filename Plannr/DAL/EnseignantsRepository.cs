@@ -70,6 +70,11 @@ namespace Plannr.DAL
             Dispose(true);
             GC.SuppressFinalize(this);
         }
+
+        public int Count()
+        {
+            return context.Enseignants.Count();
+        }
     }
 
 }

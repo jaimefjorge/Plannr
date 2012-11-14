@@ -70,6 +70,11 @@ namespace Plannr.DAL
             this.context.Entry(e).State = System.Data.EntityState.Modified;
         }
 
+         public int Count()
+         {
+             return context.Batiments.Count();
+         }
+
     }
 
 }

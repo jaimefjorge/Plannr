@@ -68,6 +68,8 @@ namespace Plannr.Controllers
         //Enseignant's Index
         public ActionResult IndexEnseignant()
         {
+            ViewBag.count = this.enseignantRepository.Count();
+           
 
             if (!Request.IsAjaxRequest())
             {
@@ -193,6 +195,7 @@ namespace Plannr.Controllers
         //Batiment/Index
         public ActionResult IndexBatiment()
         {
+            ViewBag.count = this.batimentRepository.Count();
 
             if (!Request.IsAjaxRequest())
             {
@@ -308,6 +311,7 @@ namespace Plannr.Controllers
         //Batiment/Index
         public ActionResult IndexSalle()
         {
+            ViewBag.count = this.salleRepository.Count();
 
             if (!Request.IsAjaxRequest())
             {

@@ -1,6 +1,84 @@
 ﻿@model IEnumerable<Plannr.Models.Salle>
 
 @{
+    ViewBag.Title = "IndexSalle";
+}
+
+
+<div id ="content-header">
+<h1>Gestion des salles</h1>
+</div>
+<div id="breadcrumb">
+				<a href="#" class="tip-bottom" data-original-title="Go to Home"><i class="icon-home"></i> Home</a>
+				<a href="#" class="tip-bottom"> Administration</a>
+                <a href="#" class="current">Gestion Salles</a>
+			</div>
+
+
+
+<div class="container-fluid">
+    <div class="alert">
+    <button class="close" data-dismiss="alert">×</button>
+    Il y a actuellement @ViewBag.count salle(s) recensée(s) dans la base de données.
+</div>
+    <div class="row-fluid">
+        <div class="span12">
+        <div class="widget-box">
+            <div class="widget-title">
+								<span class="icon">
+									<i class="icon-th"></i>
+								</span>
+                            <h5>Liste des salles</h5>
+                        </div>
+            <div class="widget-content nopadding">
+  <table class="table table-bordered">
+    <tr >
+        <th>
+            @Html.DisplayNameFor(model => model.Libelle)
+        </th>
+        <th></th>
+        <th></th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr >
+        <td>
+            @Html.DisplayFor(modelItem => item.Libelle)
+        </td>
+        <td ><center>
+            <a href="@Url.Action("DetailsSalle", "Administration", new { id=item.Id })"  class ="btn btn-success"><i class="icon-eye-open"></i>Détails</a>      
+            </center>
+        </td>
+        <td>
+            <center>
+            <a href="@Url.Action("EditSalle", "Administration", new { id=item.Id })"   class="btn btn-primary"><i class="icon-pencil icon-white"></i>Editer</a>
+            </center>
+        </td>
+        <td>
+            <center>
+            <a href="@Url.Action("DeleteSalle", "Administration", new { id=item.Id })" class="btn btn-danger"><i class="icon-remove icon-white"></i></a>
+            </center>
+    </td>
+    </tr>
+}
+
+</table>
+        </div>
+        
+
+        
+
+    </div>
+    </div>
+        </div>
+</div>
+<center>
+<a href="@Url.Action("CreateSalle", "Administration")" class="btn btn-large btn-primary" ><i class="icon-pencil icon-white"></i>Créer une nouvelle salle</a>
+</center>
+
+<!--
+@{
     ViewBag.Title = "IndexSalles";
 }
 
@@ -33,4 +111,4 @@
 
 </table>
 
-<a href="@Url.Action("IndexSalle", "Administration")" class="btn btn-large" id="cancelEdit">Back</a>
+<a href="@Url.Action("IndexSalle", "Administration")" class="btn btn-large" id="cancelEdit">Back</a>-->
