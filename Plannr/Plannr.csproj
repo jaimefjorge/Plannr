@@ -392,6 +392,17 @@
     <Content Include="Views\Administration\_IndexSalle.cshtml" />
     <Content Include="Views\Administration\_IndexMatiere.cshtml" />
     <Content Include="Views\Administration\_CreateEnseignant.cshtml" />
+    <Content Include="Views\Administration\_EditMatiere.cshtml" />
+    <Content Include="Views\Administration\_EditBatiment.cshtml" />
+    <Content Include="Views\Administration\_EditEnseignant.cshtml" />
+    <Content Include="Views\Administration\_EditSalle.cshtml" />
+    <Content Include="Views\Administration\EditBatiment.cshtml" />
+    <Content Include="Views\Administration\EditSalle.cshtml" />
+    <Content Include="Views\Administration\_CreateBatiment.cshtml" />
+    <Content Include="Views\Administration\_CreateSalle.cshtml" />
+    <Content Include="Views\Administration\_CreateMatiere.cshtml" />
+    <Content Include="Views\Administration\_DetailsEnseignant.cshtml" />
+    <Content Include="Views\Administration\_DetailsMatiere.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
