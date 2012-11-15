@@ -4,13 +4,21 @@
     ViewBag.Title = "_CreateBatiment";
 }
 
-<h2>Create</h2>
+<div id ="content-header">
+<h1>Creation</h1>
+</div>
+<div id="breadcrumb">
+				<a href="#" class="tip-bottom" data-original-title="Go to Home"><i class="icon-home"></i> Home</a>
+				<a href="#" class="tip-bottom"> Administration</a>
+                <a href="#" class="current">Gestion Batiments</a>
+                <a href="#" class="current">Creation Batiment</a>
+			</div>
 
 @using (Html.BeginForm()) {
     @Html.ValidationSummary(true)
-
-    <fieldset>
-        <legend>Batiment</legend>
+    <center>
+    <fieldset style="margin-left:30px">
+        <legend> </legend>
 
         <div class="editor-label">
             @Html.LabelFor(model => model.Nom)
@@ -21,10 +29,11 @@
         </div>
 
         <p>
-            <input class="btn btn-large btn-danger" type="submit" value="Create"  />
+            <input class="btn btn-large btn-primary" type="submit" value="Create"  />
              <a href="@Url.Action("IndexBatiment", "Administration")" class="btn btn-large" id="cancelEdit">Annuler</a>
         </p>
     </fieldset>
+        </center>
 }
 
 

@@ -113,8 +113,8 @@ namespace Plannr.Controllers
 
                 this.enseignantRepository.Insert(enseignant);
                 this.enseignantRepository.Save();
-                /*Roles.AddUserToRole(enseignant.UserName, "Enseignant");
-                WebSecurity.CreateAccount(enseignant.UserName, enseignant.UserName);*/
+               // Roles.AddUserToRole(enseignant.UserName, "Enseignant");
+                //WebSecurity.CreateAccount(enseignant.UserName, enseignant.UserName);
 
                 
                 return RedirectToAction("IndexEnseignant");
@@ -172,7 +172,17 @@ namespace Plannr.Controllers
             {
                 return HttpNotFound();
             }
-            if (!Request.IsAjaxRequest())
+            else
+            {
+               // Membership.DeleteUser(enseignant.UserName);
+               // Roles.RemoveUserFromRole(enseignant.UserName, "Enseignant");
+               
+                this.enseignantRepository.Delete(id);
+                
+                this.enseignantRepository.Save();
+                return RedirectToAction("IndexEnseignant");
+            }
+           /* if (!Request.IsAjaxRequest())
             {
                 return View(enseignant);
             }
@@ -180,7 +190,7 @@ namespace Plannr.Controllers
             {
 
                 return PartialView("_DeleteEnseignant", enseignant);
-            }
+            }*/
 
         }
 
@@ -323,7 +333,7 @@ namespace Plannr.Controllers
 
                 batimentRepository.Entry(batiment);
                 batimentRepository.Save();
-                return RedirectToAction("Index");
+                return RedirectToAction("IndexBatiment");
             }
             return View(batiment);
         }
@@ -413,7 +423,7 @@ namespace Plannr.Controllers
         public ActionResult CreateSalle(Salle salle)
         {
             
-            Salle s = this.salleRepository.GetEager(salle.Id);
+            Salle s = this.salleRepository.Get(salle.Id);
             salle.Batiment = this.batimentRepository.Get(salle.Batiment.Id);
             foreach (ModelState modelState in ViewData.ModelState.Values)
             {

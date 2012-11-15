@@ -4,11 +4,19 @@
     ViewBag.Title = "_CreateSalle";
 }
 
-<h2>Create</h2>
+<div id ="content-header">
+<h1>Création</h1>
+</div>
+<div id="breadcrumb">
+				<a href="#" class="tip-bottom" data-original-title="Go to Home"><i class="icon-home"></i> Home</a>
+				<a href="#" class="tip-bottom"> Administration</a>
+                <a href="#" class="current">Gestion Salles</a>
+                <a href="#" class="current">Creation Salle</a>
+			</div>
 
 @using (Html.BeginForm()) {
     @Html.ValidationSummary(true)
-
+    <center>
     <fieldset>
         <legend>Salle</legend>
 
@@ -40,10 +48,11 @@
             
 
         <p>
-            <input class="btn btn-large btn-danger" type="submit" value="Create"  />
+            <input class="btn btn-large btn-primary" type="submit" value="Create"  />
             <a href="@Url.Action("IndexSalle", "Administration")" class="btn btn-large" id="cancelEdit">Annuler</a>
         </p>
     </fieldset>
+    </center>
 }
 
 

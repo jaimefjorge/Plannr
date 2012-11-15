@@ -35,9 +35,8 @@
     <tr >
         <th>
             @Html.DisplayNameFor(model => model.Libelle)
-        </th>
-        <th></th>
-        <th></th>
+         </th>
+        <th>@Html.DisplayNameFor(model => model.Batiment.Nom)</th>
         <th></th>
     </tr>
 
@@ -45,7 +44,10 @@
     <tr >
         <td>
             @Html.DisplayFor(modelItem => item.Libelle)
-        </td>
+            </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Batiment.Nom)
+            </td>
         <td ><center>
             <a href="@Url.Action("DetailsSalle", "Administration", new { id=item.Id })"  class ="btn btn-success"><i class="icon-eye-open"></i>Détails</a>      
             </center>
