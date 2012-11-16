@@ -1,7 +1,7 @@
 ﻿@model Plannr.Models.Salle
 
 @{
-    ViewBag.Title = "_CreateSalle";
+    ViewBag.Title = "CreateSalle";
 }
 
 <div id ="content-header">
@@ -32,11 +32,13 @@
             @Html.LabelFor(model => model.Batiment)
         </div>
 
+         <div class="control-group">
+        <label class="control-label" for="">@Html.LabelFor(model => model.Batiment.Id)</label>
          <div class="editor-field">
-            @Html.DropDownListFor(model => model.Batiment.Id, new SelectList(ViewBag.batiments, "Id", "Nom"))  
+            @Html.DropDownListFor(model => model.Batiment.Id, new SelectList(ViewBag.batsList, "Id", "Nom"), "Sélectionnez un Batiment")  
            
         </div>
-
+        </div>
 
         <div class="editor-label">
             @Html.LabelFor(model => model.Capacite)

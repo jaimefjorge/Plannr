@@ -404,8 +404,9 @@ namespace Plannr.Controllers
        
         public ActionResult CreateSalle()
         {
-   
-            ViewBag.batiments = this.batimentRepository.GetAll().ToList();
+            IEnumerable<Batiment> batList = this.batimentRepository.GetAll().ToList();
+            ViewBag.batsList = batList;
+          
             if (!Request.IsAjaxRequest())
             {
                 return View();
@@ -423,7 +424,7 @@ namespace Plannr.Controllers
         public ActionResult CreateSalle(Salle salle)
         {
             
-            Salle s = this.salleRepository.Get(salle.Id);
+     
             salle.Batiment = this.batimentRepository.Get(salle.Batiment.Id);
             foreach (ModelState modelState in ViewData.ModelState.Values)
             {
@@ -446,8 +447,9 @@ namespace Plannr.Controllers
 
         public ActionResult EditSalle(int id = 0)
         {
-     
             Salle salle = this.salleRepository.Get(id);
+            IEnumerable<Batiment> batList = this.batimentRepository.GetAll().ToList();
+            ViewBag.batsList = batList;
             if (salle == null)
             {
                 return HttpNotFound();
@@ -470,6 +472,9 @@ namespace Plannr.Controllers
         [HttpPost]
         public ActionResult EditSalle(Salle salle)
         {
+            Salle s = this.salleRepository.GetEager(salle.Id);
+            s.Batiment = this.batimentRepository.Get(salle.Batiment.Id);
+            s.Libelle = salle.Libelle;
             if (ModelState.IsValid)
             {
 
