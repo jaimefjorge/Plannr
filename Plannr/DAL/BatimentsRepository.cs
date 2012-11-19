@@ -15,7 +15,11 @@ namespace Plannr.DAL
         {
             this.context = context;
         }
+        public IEnumerable<Batiment> GetList()
+        {
 
+            return this.context.Batiments.ToList();
+        }
         public Batiment Get(int id)
         {
             return this.context.Batiments.Find(id);

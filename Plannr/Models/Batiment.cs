@@ -11,7 +11,6 @@ namespace Plannr.Models
         [Key]
         public int Id { get; set; }
 
-        [Required]
         public string Nom { get; set; }
 
         public virtual ICollection<Salle> Salles { get; set; }

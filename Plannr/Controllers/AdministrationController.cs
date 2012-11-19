@@ -159,6 +159,7 @@ namespace Plannr.Controllers
                 return RedirectToAction("IndexEnseignant");
             }
             return View(enseignant);
+
         }
         
         
@@ -404,7 +405,7 @@ namespace Plannr.Controllers
        
         public ActionResult CreateSalle()
         {
-            IEnumerable<Batiment> batList = this.batimentRepository.GetAll().ToList();
+            IEnumerable<Batiment> batList = this.batimentRepository.GetList();
             ViewBag.batsList = batList;
           
             if (!Request.IsAjaxRequest())
@@ -423,9 +424,10 @@ namespace Plannr.Controllers
         [HttpPost]
         public ActionResult CreateSalle(Salle salle)
         {
-            
-     
+
+            System.Diagnostics.Debug.WriteLine("test");
             salle.Batiment = this.batimentRepository.Get(salle.Batiment.Id);
+            //System.Diagnostics.Debug.WriteLine("test : %d",salle.Batiment.Id);
             foreach (ModelState modelState in ViewData.ModelState.Values)
             {
                 foreach (ModelError error in modelState.Errors)
@@ -448,7 +450,7 @@ namespace Plannr.Controllers
         public ActionResult EditSalle(int id = 0)
         {
             Salle salle = this.salleRepository.Get(id);
-            IEnumerable<Batiment> batList = this.batimentRepository.GetAll().ToList();
+            IEnumerable<Batiment> batList = this.batimentRepository.GetList();
             ViewBag.batsList = batList;
             if (salle == null)
             {
@@ -472,18 +474,19 @@ namespace Plannr.Controllers
         [HttpPost]
         public ActionResult EditSalle(Salle salle)
         {
+            
             Salle s = this.salleRepository.GetEager(salle.Id);
             s.Batiment = this.batimentRepository.Get(salle.Batiment.Id);
             s.Libelle = salle.Libelle;
             if (ModelState.IsValid)
             {
 
-                this.salleRepository.Entry(salle);
+                this.salleRepository.Entry(s);
                 this.salleRepository.Save();
 
                 return RedirectToAction("IndexSalle");
             }
-            return View(salle);
+            return View(s);
         }
 
         // GET: /Salle/Delete

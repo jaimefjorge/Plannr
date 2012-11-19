@@ -40,6 +40,11 @@ namespace Plannr.DAL
             this.context.Enseignants.Remove(e);
         }
 
+        public void Entry(Enseignant e)
+        {
+            this.context.Entry(e).State = System.Data.EntityState.Modified;
+        }
+
         public IEnumerable<Enseignant> GetAll()
         {
             return this.context.Enseignants.ToList();
