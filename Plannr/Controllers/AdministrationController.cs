@@ -92,7 +92,7 @@ namespace Plannr.Controllers
 
             if (!Request.IsAjaxRequest())
             {
-                System.Diagnostics.Debug.WriteLine("test");
+                
                 return View();
 
 
@@ -133,16 +133,17 @@ namespace Plannr.Controllers
         {
             Enseignant enseignant = this.enseignantRepository.Get(id);
             if (enseignant == null)
-            {
+            {System.Diagnostics.Debug.WriteLine("testedit0");
                 return HttpNotFound();
             }
-            if (!Request.IsAjaxRequest())
+            else if (!Request.IsAjaxRequest())
             {
+                System.Diagnostics.Debug.WriteLine("testedit1");
                 return View(enseignant);
             }
             else
             {
-
+                System.Diagnostics.Debug.WriteLine("testedit");
                 return PartialView("_EditEnseignant", enseignant);
             }
             
@@ -708,7 +709,7 @@ namespace Plannr.Controllers
 
         //--------------------------Responsable-------------------------------
 
-        //Enseignant's Index
+        //Responsables Index
         public ActionResult IndexResponsable()
         {
             ViewBag.count = this.respRepository.Count();
@@ -716,18 +717,87 @@ namespace Plannr.Controllers
             if (!Request.IsAjaxRequest())
             {
                 System.Diagnostics.Debug.WriteLine("test0");
-                return View(this.respRepository.GetAll());
+                return View(this.ueRepository.GetList());
             }
             else
             {
                 System.Diagnostics.Debug.WriteLine("test1");
-                return PartialView("_IndexResponsable", this.respRepository.GetAll());
+                return PartialView("_IndexResponsable", this.ueRepository.GetList());
                 
             }
 
         }
 
+        // GET: /AddMatiere/Edit
 
+       public ActionResult EditResponsable(int id = 0)
+        {
+            Ue ue = this.ueRepository.Get(id);
+      
+            IEnumerable<Enseignant> ensList = this.enseignantRepository.GetList();
+            ViewBag.enseignantList = ensList;
+            if (ue == null)
+            {
+                return HttpNotFound();
+            }
+            if (!Request.IsAjaxRequest())
+            {
+                return View(ue);
+            }
+            else
+            {
+
+                return PartialView("_EditResponsable", ue);
+            }
+
+        }
+
+        //
+        // POST: /AddMatiere/Edit
+
+        [HttpPost]
+        public ActionResult EditResponsable(Ue ue)
+        {
+            Ue m = this.ueRepository.GetEager(ue.Id);
+            m.ResponsableUe = this.respRepository.Get(ue.ResponsableUe.UserId);
+            if (!Roles.IsUserInRole(m.ResponsableUe.UserName, "ResponsableUe"))
+            {
+                Roles.AddUserToRole(m.ResponsableUe.UserName, "ResponsableUe");
+            }
+           /* m.Libelle = ue.Libelle;
+            m.ResponsableUe.UserName = ue.ResponsableUe.UserName;*/
+
+            if (ModelState.IsValid)
+            {
+                this.ueRepository.Edit(m);
+                this.matiereRepository.Save();
+                return RedirectToAction("IndexResponsable");
+            }
+
+            return View(m);
+        }
+
+        // GET: /Responsable/Details/5
+
+        public ActionResult DetailsResponsable(int id = 0)
+        {
+
+            Ue ue = ueRepository.Get(id);
+            if (ue == null)
+            {
+                return HttpNotFound();
+            }
+            if (!Request.IsAjaxRequest())
+            {
+                return View(ue);
+            }
+            else
+            {
+
+                return PartialView("_DetailsResponsable", ue);
+            }
+
+        }
 
 
         protected override void Dispose(bool disposing)
@@ -737,7 +807,150 @@ namespace Plannr.Controllers
             this.salleRepository.Dispose();
             this.matiereRepository.Dispose();
             this.respRepository.Dispose();
+            this.ueRepository.Dispose();
             base.Dispose(disposing);
         }
+
+
+        //--------------------------------UE---------------------------------------------------------------
+
+
+        //UE/Index
+        public ActionResult IndexUE()
+        {
+            ViewBag.count = this.ueRepository.Count();
+
+            if (!Request.IsAjaxRequest())
+            {
+                return View(this.ueRepository.GetList());
+            }
+            else
+            {
+                return PartialView("_IndexUE", this.ueRepository.GetList());
+            }
+
+        }
+
+
+        // GET: /Administration/Create
+
+        public ActionResult CreateUE()
+        {
+
+            if (!Request.IsAjaxRequest())
+            {
+                return View();
+            }
+            else
+            {
+
+                return PartialView("_CreateUE");
+            }
+
+        }
+
+
+        [HttpPost]
+        public ActionResult CreateUE(Ue ue)
+        {
+   
+            if (ModelState.IsValid)
+            {
+   
+                this.ueRepository.Insert(ue);
+                this.ueRepository.Save();
+         
+                return RedirectToAction("IndexUE");
+            }
+
+            return View(ue);
+           
+        }
+
+        // GET: /Salle/Details/5
+
+        public ActionResult DetailsUE(int id = 0)
+        {
+
+            Ue ue = ueRepository.Get(id);
+            if (ue == null)
+            {
+                return HttpNotFound();
+            }
+            if (!Request.IsAjaxRequest())
+            {
+                return View(ue);
+            }
+            else
+            {
+
+                return PartialView("_DetailsUE", ue);
+            }
+
+        }
+
+        //Get
+        public ActionResult EditUE(int id = 0)
+        {
+
+            Ue ue = ueRepository.Get(id);
+            if (ue == null)
+            {
+                return HttpNotFound();
+            }
+            if (!Request.IsAjaxRequest())
+            {
+                return View(ue);
+            }
+            else
+            {
+
+                return PartialView("_EditUE", ue);
+            }
+
+        }
+
+        [HttpPost]
+        public ActionResult EditUE(Ue ue)
+        {
+            if (ModelState.IsValid)
+            {
+
+                ueRepository.Entry(ue);
+                ueRepository.Save();
+                return RedirectToAction("IndexUE");
+            }
+            return View(ue);
+        }
+
+        // GET: /Batiment/Delete/
+
+        public ActionResult DeleteUE(int id = 0)
+        {
+
+            Ue ue = ueRepository.Get(id);
+            if (ue == null)
+            {
+                return HttpNotFound();
+            }
+            else
+            {
+                this.ueRepository.Delete(id);
+                this.ueRepository.Save();
+
+                return RedirectToAction("IndexUE");
+            }
+            /* if (!Request.IsAjaxRequest())
+             {
+                 return View(batiment);
+             }
+             else
+             {
+
+                 return PartialView("_DeleteBatiment", batiment);
+             }*/
+
+        }
     }
+
 }

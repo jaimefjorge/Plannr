@@ -15,5 +15,8 @@ namespace Plannr.DAL
         IEnumerable<Ue> GetList();
         void Entry(Ue u);
         void Save();
+        int Count();
+        Ue GetEager(int id);
+        void Edit(Ue m);
     }
 }

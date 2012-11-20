@@ -75,11 +75,15 @@ namespace Plannr.Filters
 
                         WebSecurity.CreateAccount("AnneLaurent", "AnneLaurent");
 
+                        WebSecurity.CreateAccount("Anne", "Anne");
+
                         WebSecurity.CreateAccount("TiberiuStratulat", "TiberiuStratulat");
 
 
                         Roles.AddUserToRole("Admin", adminRole);
                         Roles.AddUserToRole("Admin", enseignantRole);
+                        Roles.AddUserToRole("Anne", enseignantRole);
+                        Roles.AddUserToRole("Anne", respRole);
                         Roles.AddUserToRole("AnneLaurent", respRole);
                         Roles.AddUserToRole("AnneLaurent", enseignantRole);
                         Roles.AddUserToRole("TiberiuStratulat", enseignantRole);

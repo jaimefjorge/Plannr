@@ -80,6 +80,12 @@ namespace Plannr.DAL
         {
             return context.Enseignants.Count();
         }
+        public IEnumerable<Enseignant> GetList()
+        {
+
+            return this.context.Enseignants.ToList();
+        }
+
     }
 
 }

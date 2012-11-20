@@ -48,6 +48,11 @@ namespace Plannr.DAL
         {
             return this.context.ResponsablesUE.ToList();
         }
+        public IEnumerable<ResponsableUE> GetList()
+        {
+
+            return this.context.ResponsablesUE.ToList();
+        }
 
         public void Save()
         {

@@ -16,5 +16,6 @@ namespace Plannr.DAL
         IEnumerable<ResponsableUE> GetAll();
         void Entry(ResponsableUE e);
         int Count();
+        IEnumerable<ResponsableUE> GetList();
     }
 }

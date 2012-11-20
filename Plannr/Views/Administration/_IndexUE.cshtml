@@ -1,17 +1,17 @@
 ﻿@model IEnumerable<Plannr.Models.Ue>
 
 @{
-    ViewBag.Title = "IndexResponsable";
+    ViewBag.Title = "IndexUE";
 }
 
 <div id="choixContainer">
 <div id ="content-header">
-<h1>Gestion des responsables d'Ue</h1>
+<h1>Gestion des UEs</h1>
 </div>
 <div id="breadcrumb">
 				<a href="#" class="tip-bottom" data-original-title="Go to Home"><i class="icon-home"></i> Home</a>
 				<a href="#" class="tip-bottom"> Administration</a>
-                <a href="#" class="current">Gestion ResponsablesUe</a>
+                <a href="#" class="current">Gestion UEs</a>
 			</div>
 
 
@@ -19,7 +19,7 @@
 <div class="container-fluid">
     <div class="alert">
     <button class="close" data-dismiss="alert">×</button>
-    Il y a actuellement @ViewBag.count responsables(s) recensé(s) dans la base de données.
+    Il y a actuellement @ViewBag.count UE(s) recensée(s) dans la base de données.
 </div>
     <div class="row-fluid">
         <div class="span12">
@@ -28,15 +28,16 @@
 								<span class="icon">
 									<i class="icon-th"></i>
 								</span>
-                            <h5>Liste des responsables</h5>
+                            <h5>Liste des UEs</h5>
                         </div>
             <div class="widget-content nopadding">
   <table class="table table-bordered">
     <tr >
         <th>
             @Html.DisplayNameFor(model => model.Libelle)
-         </th>
-        <th>@Html.DisplayNameFor(model => model.ResponsableUe.UserName)</th>
+        </th>
+        <th></th>
+        <th></th>
         <th></th>
     </tr>
 
@@ -44,19 +45,21 @@
     <tr >
         <td>
             @Html.DisplayFor(modelItem => item.Libelle)
-            </td>
-       <<td>
-            @Html.DisplayFor(modelItem => item.ResponsableUe.UserName)
-            </td>
+        </td>
         <td ><center>
-            <a href="@Url.Action("DetailsResponsable", "Administration", new { id=item.Id })"  class ="btn btn-success"><i class="icon-eye-open"></i>Détails</a>      
+            <a href="@Url.Action("DetailsUE", "Administration", new { id=item.Id })"  class ="btn btn-success"><i class="icon-eye-open"></i>Details</a>      
             </center>
         </td>
         <td>
             <center>
-            <a href="@Url.Action("EditResponsable", "Administration", new { id=item.Id })"   class="btn btn-primary"><i class="icon-pencil icon-white"></i>Editer</a>
+            <a href="@Url.Action("EditUE", "Administration", new { id=item.Id })"   class="btn btn-primary"><i class="icon-pencil icon-white"></i>Editer</a>
             </center>
         </td>
+        <td>
+            <center>
+            <a href="@Url.Action("DeleteUE", "Administration", new { id=item.Id })" class="btn btn-danger"><i class="icon-remove icon-white"></i></a>
+            </center>
+    </td>
     </tr>
 }
 
@@ -70,7 +73,9 @@
     </div>
         </div>
 </div>
-
+<center>
+<a href="@Url.Action("CreateUE", "Administration")" class="btn btn-large btn-primary"  id="addUE"><i class="icon-pencil icon-white"></i>Créer une nouvelle UE</a>
+</center>
     </div>
 
 <div id="editContainer" style="display: none;">
@@ -104,9 +109,9 @@
         return false
     })
 
-    $('#addResp').live('click', function (e) {
+    $('#addUE').live('click', function (e) {
         if (!editLoaded) {
-            $.get("@Url.Action("AjoutResp","Administration")", function (data) {
+            $.get("@Url.Action("CreateUE","Administration")", function (data) {
 
                 $('#editContainer').html(data)
                 showEdit()
