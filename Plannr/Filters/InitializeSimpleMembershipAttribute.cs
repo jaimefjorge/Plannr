@@ -41,7 +41,7 @@ namespace Plannr.Filters
                             ((IObjectContextAdapter)context).ObjectContext.CreateDatabase();
                         }
 
-                        context.Enseignants.Find(1);
+                        context.Enseignants.Find(0);
                     }
                     
 
@@ -52,6 +52,11 @@ namespace Plannr.Filters
                     const string respRole = "ResponsableUE";
                     const string enseignantRole = "Enseignant";
                     const string adminRole = "Administrateur";
+
+                    if (!Roles.RoleExists(adminRole))
+                    {
+                        Roles.CreateRole(adminRole);
+                    }
 
                     if (!Roles.RoleExists(respRole))
                     {
@@ -64,14 +69,17 @@ namespace Plannr.Filters
                         Roles.CreateRole(enseignantRole);
                     }
 
-                    if (!Roles.IsUserInRole("AnneLaurent",respRole))
+                    if (!Roles.IsUserInRole("Admin",adminRole))
                     {
+                        WebSecurity.CreateAccount("Admin", "Admin");
+
                         WebSecurity.CreateAccount("AnneLaurent", "AnneLaurent");
 
                         WebSecurity.CreateAccount("TiberiuStratulat", "TiberiuStratulat");
 
 
-
+                        Roles.AddUserToRole("Admin", adminRole);
+                        Roles.AddUserToRole("Admin", enseignantRole);
                         Roles.AddUserToRole("AnneLaurent", respRole);
                         Roles.AddUserToRole("AnneLaurent", enseignantRole);
                         Roles.AddUserToRole("TiberiuStratulat", enseignantRole);

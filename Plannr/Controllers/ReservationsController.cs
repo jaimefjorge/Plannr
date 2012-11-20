@@ -12,7 +12,7 @@ using Plannr.Filters;
 
 namespace Plannr.Controllers
 {
-    [Authorize(Roles="ResponsableUE")]
+    [Authorize(Roles="Responsable")]
     [InitializeSimpleMembership]
 
     public class ReservationsController : Controller

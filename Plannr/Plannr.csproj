@@ -173,6 +173,7 @@
     <Compile Include="Controllers\ReservationsController.cs" />
     <Compile Include="DAL\BatimentsRepository.cs" />
     <Compile Include="DAL\CreneauxHorairesRepository.cs" />
+    <Compile Include="DAL\IResponsableUe.cs" />
     <Compile Include="DAL\IUeRepository.cs" />
     <Compile Include="DAL\MatieresRepository.cs" />
     <Compile Include="DAL\DemandesRepository.cs" />
@@ -187,6 +188,7 @@
     <Compile Include="DAL\IReservationsRepository.cs" />
     <Compile Include="DAL\ISallesRepository.cs" />
     <Compile Include="DAL\ReservationsRepository.cs" />
+    <Compile Include="DAL\ResponsableUERepository.cs" />
     <Compile Include="DAL\SallesRepository.cs" />
     <Compile Include="DAL\UeRepository.cs" />
     <Compile Include="Filters\InitializeSimpleMembershipAttribute.cs" />
@@ -410,6 +412,11 @@
     <Content Include="Views\Administration\DeleteSalle.cshtml" />
     <Content Include="Views\Administration\DetailsBatiment.cshtml" />
     <Content Include="Views\Administration\DetailsSalle.cshtml" />
+    <Content Include="Views\Manager\_Administrateur.cshtml" />
+    <Content Include="Views\Manager\Administrateur.cshtml" />
+    <Content Include="Views\Manager\_Enseignant.cshtml" />
+    <Content Include="Views\Administration\_IndexResponsable.cshtml" />
+    <Content Include="Views\Administration\IndexResponsable.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

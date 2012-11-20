@@ -1,15 +1,23 @@
-﻿<div id="content-header">
+﻿@{
+    ViewBag.Title = "Index";
+}
+
+
+<div id="content-header">
 
     <h1>Votre panel de gestion</h1>
 </div>
 <div id="breadcrumb">
     <a href="#" class="tip-bottom" data-original-title="Go to Home"><i class="icon-home"></i>Home</a>
     <a href="#">Dashboard</a>
-      <div class="alert">
+
+</div>
+
+            <div class="alert">
     Vous êtes connectés en tant que @ViewBag.login, bienvenu sur votre panel de gestion.
 </div>
-</div>
-<div class="container-fluid">
+    
+    <div class="container-fluid">
 
 
     <div class="row-fluid">
@@ -63,4 +71,3 @@
     </div>
 
 </div>
-

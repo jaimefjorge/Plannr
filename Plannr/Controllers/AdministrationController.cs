@@ -15,7 +15,7 @@ using Microsoft.Web.WebPages.OAuth;
 
 namespace Plannr.Controllers
 {
-    [Authorize(Roles = "ResponsableUE")]
+    [Authorize(Roles = "Administrateur")]
     [InitializeSimpleMembership]
     public class AdministrationController : Controller
     {
@@ -25,6 +25,7 @@ namespace Plannr.Controllers
         private IBatimentsRepository batimentRepository;
         private IMatieresRepository matiereRepository;
         private IUeRepository ueRepository;
+        private IResponsableUe respRepository;
 
         //
         // GET: /Administration/
@@ -36,15 +37,17 @@ namespace Plannr.Controllers
             batimentRepository = new BatimentsRepository(context);
             matiereRepository = new MatieresRepository(context);
             ueRepository = new UeRepository(context);
+            respRepository = new ResponsableUERepository(context);
         }
 
-        public AdministrationController(IEnseignantsRepository repo, IBatimentsRepository batrepo, ISallesRepository salrepo, IMatieresRepository matrepo, IUeRepository uerepo)
+        public AdministrationController(IEnseignantsRepository repo, IBatimentsRepository batrepo, ISallesRepository salrepo, IMatieresRepository matrepo, IUeRepository uerepo, IResponsableUe resprepo)
         {
             this.enseignantRepository = repo;
             this.batimentRepository = batrepo;
             this.salleRepository = salrepo;
             this.matiereRepository = matrepo;
             this.ueRepository = uerepo;
+            this.respRepository = resprepo;
         }
 
         //Administration's Index
@@ -703,6 +706,26 @@ namespace Plannr.Controllers
 
         }
 
+        //--------------------------Responsable-------------------------------
+
+        //Enseignant's Index
+        public ActionResult IndexResponsable()
+        {
+            ViewBag.count = this.respRepository.Count();
+
+            if (!Request.IsAjaxRequest())
+            {
+                System.Diagnostics.Debug.WriteLine("test0");
+                return View(this.respRepository.GetAll());
+            }
+            else
+            {
+                System.Diagnostics.Debug.WriteLine("test1");
+                return PartialView("_IndexResponsable", this.respRepository.GetAll());
+                
+            }
+
+        }
 
 
 
@@ -713,6 +736,7 @@ namespace Plannr.Controllers
             this.batimentRepository.Dispose();
             this.salleRepository.Dispose();
             this.matiereRepository.Dispose();
+            this.respRepository.Dispose();
             base.Dispose(disposing);
         }
     }

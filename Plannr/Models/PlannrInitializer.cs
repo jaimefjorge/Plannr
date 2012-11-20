@@ -88,9 +88,22 @@ namespace Plannr.Models
             context.TypesCours.Add(typeCours);
             context.SaveChanges();
 
-            var responsable = new ResponsableUE()
+            var admin = new Administrateur()
             {
                 UserId = 1,
+                UserName = "Admin",
+                Name = "Admin",
+                FirstName = "Admin",
+                Tel = "0601010100",
+                AdminDepuis = DateTime.Parse("10/01/2009")
+            };
+
+            context.Administrateurs.Add(admin);
+            context.SaveChanges();
+
+            var responsable = new ResponsableUE()
+            {
+                UserId = 2,
                 UserName = "AnneLaurent",
                 Name = "Laurent",
                 FirstName = "Anne",
@@ -103,7 +116,7 @@ namespace Plannr.Models
 
             var enseignant = new Enseignant()
             {
-                UserId = 1,
+                UserId = 3,
                 UserName = "TiberiuStratulat",
                 Name = "Stratulat",
                 FirstName = "Tiberiu",
@@ -249,7 +262,7 @@ namespace Plannr.Models
 
             var personne = new Personne()
             {
-                UserId = 2,
+                UserId = 4,
                 UserName = "TestProf",
                 Name = "Test",
                 FirstName = "prof"
