@@ -69,6 +69,11 @@ namespace Plannr.DAL
             this.context.Entry(u).State = System.Data.EntityState.Modified;
         }
 
+        public int Count()
+        {
+            return context.Ues.Count();
+        }
+
     }
 
 }

@@ -19,7 +19,7 @@
 <div class="container-fluid">
     <div class="alert">
     <button class="close" data-dismiss="alert">×</button>
-    Il y a actuellement @ViewBag.count enseignants(s) recensé(s) dans la base de données.
+    Il y a actuellement @ViewBag.count enseignant(s) recensé(s) dans la base de données.
 </div>
     <div class="row-fluid">
         <div class="span12">
@@ -31,7 +31,7 @@
                             <h5>Liste des enseignants</h5>
                         </div>
             <div class="widget-content nopadding">
-  -<table class="table table-bordered">
+  <table class="table table-bordered">
     <tr >
         <th>
             @Html.DisplayNameFor(model => model.UserName)
@@ -42,17 +42,38 @@
     </tr>
 
 @foreach (var item in Model) {
+    
     <tr >
         <td>
             @Html.DisplayFor(modelItem => item.UserName)
         </td>
         <td ><center>
             <a href="@Url.Action("DetailsEnseignant", "Administration", new { id=item.UserId })"  class ="btn btn-success" id="detailsEns"><i class="icon-eye-open"></i>Détails</a>      
-            </center>
+           <script> $('#editEns').live('click', function (e) {
+      if (!editLoaded) {
+
+          $.get("@Url.Action("EditEnseignant","Administration",new {id=item.UserId})", function (data) {
+
+                $('#editContainer').html(data)
+
+                showEdit()
+                editLoaded = true
+            })
+
+        } else {
+            showEdit()
+        }
+      e.preventDefault()
+      e.stopPropagation()
+      return false
+  }) </script>
+             </center>
         </td>
         <td>
             <center>
-            <a href="@Url.Action("EditEnseignant", "Administration", new { id=item.UserId })"   class="btn btn-primary" id="editEns"><i class="icon-pencil icon-white"></i>Editer</a>
+            <a href="@Url.Action("EditEnseignant", "Administration", new { id=item.UserId })" class="btn btn-primary" id="editEns"><i class="icon-pencil icon-white"></i>Editer</a>
+            
+
             </center>
         </td>
         <td>
@@ -61,6 +82,7 @@
             </center>
     </td>
     </tr>
+   
 }
 
 </table>
@@ -74,6 +96,7 @@
         </div>
 </div>
 <center>
+     
 <a href="@Url.Action("CreateEnseignant", "Administration")" class="btn btn-large btn-primary" id="addEnseignant"><i class="icon-pencil icon-white"></i>Créer un nouvel enseignant</a>
 </center>
     </div>
@@ -88,7 +111,7 @@
     function showEdit() {
         $('#choixContainer').fadeOut("fast", function () {
             $('#editContainer').fadeIn()
-            
+            editLoaded = false;
         })
 
     }
@@ -104,6 +127,7 @@
     $('#cancelEdit').live('click', function (e) {
 
         showIndex()
+        editLoaded = false;
 
         e.preventDefault()
         return false
@@ -125,5 +149,8 @@
          e.stopPropagation()
          return false
     })
+
+  
+    
 
      </script>

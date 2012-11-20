@@ -410,6 +410,16 @@
     <Content Include="Views\Administration\DeleteSalle.cshtml" />
     <Content Include="Views\Administration\DetailsBatiment.cshtml" />
     <Content Include="Views\Administration\DetailsSalle.cshtml" />
+    <Content Include="Views\Administration\_CreateUE.cshtml" />
+    <Content Include="Views\Administration\_DeleteUE.cshtml" />
+    <Content Include="Views\Administration\_DetailsUE.cshtml" />
+    <Content Include="Views\Administration\_EditUE.cshtml" />
+    <Content Include="Views\Administration\_IndexUE.cshtml" />
+    <Content Include="Views\Administration\IndexUE.cshtml" />
+    <Content Include="Views\Administration\EditUE.cshtml" />
+    <Content Include="Views\Administration\DetailsUE.cshtml" />
+    <Content Include="Views\Administration\DeleteUE.cshtml" />
+    <Content Include="Views\Administration\CreateUE.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

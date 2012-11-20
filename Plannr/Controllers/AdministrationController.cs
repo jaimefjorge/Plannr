@@ -89,7 +89,7 @@ namespace Plannr.Controllers
 
             if (!Request.IsAjaxRequest())
             {
-                System.Diagnostics.Debug.WriteLine("test");
+                
                 return View();
 
 
@@ -130,16 +130,17 @@ namespace Plannr.Controllers
         {
             Enseignant enseignant = this.enseignantRepository.Get(id);
             if (enseignant == null)
-            {
+            {System.Diagnostics.Debug.WriteLine("testedit0");
                 return HttpNotFound();
             }
-            if (!Request.IsAjaxRequest())
+            else if (!Request.IsAjaxRequest())
             {
+                System.Diagnostics.Debug.WriteLine("testedit1");
                 return View(enseignant);
             }
             else
             {
-
+                System.Diagnostics.Debug.WriteLine("testedit");
                 return PartialView("_EditEnseignant", enseignant);
             }
             
@@ -715,5 +716,147 @@ namespace Plannr.Controllers
             this.matiereRepository.Dispose();
             base.Dispose(disposing);
         }
+
+
+        //--------------------------------UE---------------------------------------------------------------
+
+
+        //UE/Index
+        public ActionResult IndexUE()
+        {
+            ViewBag.count = this.ueRepository.Count();
+
+            if (!Request.IsAjaxRequest())
+            {
+                return View(this.ueRepository.GetList());
+            }
+            else
+            {
+                return PartialView("_IndexUE", this.ueRepository.GetList());
+            }
+
+        }
+
+
+        // GET: /Administration/Create
+
+        public ActionResult CreateUE()
+        {
+
+            if (!Request.IsAjaxRequest())
+            {
+                return View();
+            }
+            else
+            {
+
+                return PartialView("_CreateUE");
+            }
+
+        }
+
+
+        [HttpPost]
+        public ActionResult CreateUE(Ue ue)
+        {
+   
+            if (ModelState.IsValid)
+            {
+   
+                this.ueRepository.Insert(ue);
+                this.ueRepository.Save();
+         
+                return RedirectToAction("IndexUE");
+            }
+
+            return View(ue);
+           
+        }
+
+        // GET: /Salle/Details/5
+
+        public ActionResult DetailsUE(int id = 0)
+        {
+
+            Ue ue = ueRepository.Get(id);
+            if (ue == null)
+            {
+                return HttpNotFound();
+            }
+            if (!Request.IsAjaxRequest())
+            {
+                return View(ue);
+            }
+            else
+            {
+
+                return PartialView("_DetailsUE", ue);
+            }
+
+        }
+
+        //Get
+        public ActionResult EditUE(int id = 0)
+        {
+
+            Ue ue = ueRepository.Get(id);
+            if (ue == null)
+            {
+                return HttpNotFound();
+            }
+            if (!Request.IsAjaxRequest())
+            {
+                return View(ue);
+            }
+            else
+            {
+
+                return PartialView("_EditUE", ue);
+            }
+
+        }
+
+        [HttpPost]
+        public ActionResult EditUE(Ue ue)
+        {
+            if (ModelState.IsValid)
+            {
+
+                ueRepository.Entry(ue);
+                ueRepository.Save();
+                return RedirectToAction("IndexUE");
+            }
+            return View(ue);
+        }
+
+        // GET: /Batiment/Delete/
+
+        public ActionResult DeleteUE(int id = 0)
+        {
+
+            Ue ue = ueRepository.Get(id);
+            if (ue == null)
+            {
+                return HttpNotFound();
+            }
+            else
+            {
+                this.ueRepository.Delete(id);
+                this.ueRepository.Save();
+
+                return RedirectToAction("IndexUE");
+            }
+            /* if (!Request.IsAjaxRequest())
+             {
+                 return View(batiment);
+             }
+             else
+             {
+
+                 return PartialView("_DeleteBatiment", batiment);
+             }*/
+
+        }
     }
+
 }
