@@ -23,7 +23,7 @@ namespace Plannr.DAL
         // REtourne la liste des reservations qu'un responsable doit vérifier
         public IEnumerable<DemandeReservation> GetReservationTo(int id)
         {
-            return this.context.DemandesReservation.Where(x => x.Enseignement.Cours.Matiere.Ue.ResponsableUe.UserId == id).ToList();
+            return this.context.DemandesReservation.Where(x => x.Enseignement.Cours.Matiere.Ue.ResponsableUe.UserId == id && x.ReservationAssociee == null).ToList();
         }
 
         public void Insert(DemandeReservation demande)
