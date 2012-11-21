@@ -32,7 +32,11 @@
                 { <text>class="active"</text> }><a href="@Url.Action("Index", "Manager")"><i class="icon icon-home"></i><span>Dashboard</span></a></li>
 
             <li @if (@HttpContext.Current.Request.RequestContext.RouteData.Values["controller"].ToString() == "Book")
-                { <text>class="active"</text> }><a href="@Url.Action("Index", "Book")"><i class="icon icon-tint"></i><span>Demandes de réservations</span></a></li>
+                { <text>class="active"</text> }><a href="@Url.Action("Index", "Book")"><i class="icon icon-file"></i><span>Demandes de réservations</span></a></li>
+
+
+                <li @if (@HttpContext.Current.Request.RequestContext.RouteData.Values["controller"].ToString() == "Reservations")
+                { <text>class="active"</text> }><a href="@Url.Action("Index", "Reservations")"><i class="icon icon-ok"></i><span>Valider réservations</span></a></li>
            
             
             

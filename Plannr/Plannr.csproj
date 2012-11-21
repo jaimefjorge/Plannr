@@ -171,8 +171,10 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManagerController.cs" />
     <Compile Include="Controllers\ReservationsController.cs" />
+    <Compile Include="DAL\AdministrateurRepository.cs" />
     <Compile Include="DAL\BatimentsRepository.cs" />
     <Compile Include="DAL\CreneauxHorairesRepository.cs" />
+    <Compile Include="DAL\IAdministrateurRepository.cs" />
     <Compile Include="DAL\IResponsableUe.cs" />
     <Compile Include="DAL\IUeRepository.cs" />
     <Compile Include="DAL\MatieresRepository.cs" />

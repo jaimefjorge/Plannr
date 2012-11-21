@@ -12,7 +12,7 @@ using Plannr.Filters;
 
 namespace Plannr.Controllers
 {
-    [Authorize(Roles="Responsable")]
+    [Authorize(Roles="ResponsableUE")]
     [InitializeSimpleMembership]
 
     public class ReservationsController : Controller
@@ -50,7 +50,14 @@ namespace Plannr.Controllers
         public ActionResult Index() 
         {
             var id = (int)Membership.GetUser().ProviderUserKey;
-            return View(this.demandesRepository.GetReservationTo(id));
+            if (!Request.IsAjaxRequest())
+            {
+                return View(this.demandesRepository.GetReservationTo(id));
+            }
+            else
+            {
+                return PartialView("Index", this.demandesRepository.GetReservationTo(id));
+            }
         }
 
 
