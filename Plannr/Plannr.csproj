@@ -393,6 +393,7 @@
     <Content Include="Views\Administration\_IndexSalle.cshtml" />
     <Content Include="Views\Administration\_IndexMatiere.cshtml" />
     <Content Include="Views\Administration\_CreateEnseignant.cshtml" />
+    <Content Include="Views\Administration\_CreateMatiere.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

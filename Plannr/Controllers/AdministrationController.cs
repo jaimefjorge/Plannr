@@ -446,7 +446,16 @@ namespace Plannr.Controllers
 
             IEnumerable<Ue> ueList = this.ueRepository.GetList();
             ViewBag.uesList = ueList;
-            return View();
+            if (!Request.IsAjaxRequest())
+            {
+                return View();
+            }
+            else
+            {
+                return PartialView("_CreateMatiere");
+            }
+
+           
         }
 
 
