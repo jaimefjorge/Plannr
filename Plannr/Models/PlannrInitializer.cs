@@ -41,7 +41,10 @@ namespace Plannr.Models
             var batiment = new Batiment()
             {
                 Id = 1,
-                Nom = "Polytech"
+                Nom = "Polytech",
+                carac="ta mere"
+
+               
             };
 
             context.Batiments.Add(batiment);
@@ -115,18 +118,7 @@ namespace Plannr.Models
             context.ResponsablesUE.Add(responsable);
             context.SaveChanges();
 
-            var responsable2 = new ResponsableUE()
-            {
-                UserId = 4,
-                UserName = "Anne",
-                Name = "Lauren",
-                FirstName = "Ann",
-                Tel = "0601010101",
-                ResponsableDepuis = DateTime.Parse("10/01/2009")
-            };
-
-            context.ResponsablesUE.Add(responsable2);
-            context.SaveChanges();
+         
 
             var enseignant = new Enseignant()
             {
@@ -277,9 +269,8 @@ namespace Plannr.Models
             var personne = new Personne()
             {
                 UserId = 4,
-                UserName = "TestProf",
-                Name = "Test",
-                FirstName = "prof"
+                UserName = "TestPersonne",
+                
             };
             context.Personnes.Add(personne);
             context.SaveChanges();

@@ -20,21 +20,23 @@
             <div class="widget-content nopadding">
   <table class="table table-bordered">
     <tr >
+        <th>@Html.DisplayNameFor(model => model.ResponsableUe.UserName)</th>
         <th>
             @Html.DisplayNameFor(model => model.Libelle)
         </th>
-  <th>@Html.DisplayNameFor(model => model.ResponsableUe.UserName)</th>
+  
     </tr>
 
     <tr >
         <th>
-        @Html.DisplayFor(model => model.Libelle)
-
-        </th>
-        <th>
         @Html.DisplayFor(model => model.ResponsableUe.UserName)
 
         </th>
+        <th>
+        @Html.DisplayFor(model => model.Libelle)
+
+        </th>
+        
     </tr>
 </table>
         </div>

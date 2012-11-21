@@ -88,8 +88,7 @@ namespace Plannr.DAL
         }
         public IEnumerable<Enseignant> GetList()
         {
-
-            return this.context.Enseignants.ToList();
+            return this.context.Enseignants.Where(x => x.UserName!="Admin").ToList();
         }
 
     }

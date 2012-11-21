@@ -547,19 +547,7 @@ namespace Plannr.Controllers
 
         }
 
-        //
-        /* POST: /Salle/Delete
-
-        [HttpPost, ActionName("DeleteSalle")]
-        public ActionResult DeleteConfirmed(int id)
-        {
-           
-            this.salleRepository.Delete(id);
-            this.salleRepository.Save();
-
-            return RedirectToAction("IndexSalle");
-        }
-         */
+        
         // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
         //--------------------------------------------------------------
@@ -742,7 +730,9 @@ namespace Plannr.Controllers
        public ActionResult EditResponsable(int id = 0)
         {
             Ue ue = this.ueRepository.Get(id);
-      
+           ResponsableUE resp = this.respRepository.Get(ue.ResponsableUe.UserId);
+
+           Roles.AddUserToRole(resp.UserName, "Enseignant");
             IEnumerable<Enseignant> ensList = this.enseignantRepository.GetList();
             ViewBag.enseignantList = ensList;
             if (ue == null)
@@ -767,19 +757,19 @@ namespace Plannr.Controllers
         [HttpPost]
         public ActionResult EditResponsable(Ue ue)
         {
-            Ue m = this.ueRepository.GetEager(ue.Id);
-            m.ResponsableUe = this.respRepository.Get(ue.ResponsableUe.UserId);
-            if (!Roles.IsUserInRole(m.ResponsableUe.UserName, "ResponsableUe"))
-            {
-                Roles.AddUserToRole(m.ResponsableUe.UserName, "ResponsableUe");
+            Ue m = this.ueRepository.Get(ue.Id);
+           
+            string name = m.ResponsableUe.UserName;
+            m.ResponsableUe = this.respRepository.GetEns(ue.ResponsableUe.UserId);
+           if (!Roles.IsUserInRole(name, "ResponsableUe"))
+           {
+                Roles.AddUserToRole(name, "ResponsableUe");
             }
-           /* m.Libelle = ue.Libelle;
-            m.ResponsableUe.UserName = ue.ResponsableUe.UserName;*/
-
+            
             if (ModelState.IsValid)
             {
                 this.ueRepository.Edit(m);
-                this.matiereRepository.Save();
+                this.ueRepository.Save();
                 return RedirectToAction("IndexResponsable");
             }
 

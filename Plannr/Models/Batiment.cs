@@ -13,7 +13,9 @@ namespace Plannr.Models
 
         public string Nom { get; set; }
 
+        [Required]
         public string carac { get; set; }
+
 
         public virtual ICollection<Salle> Salles { get; set; }
     }

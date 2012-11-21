@@ -41,7 +41,7 @@ namespace Plannr.Filters
                             ((IObjectContextAdapter)context).ObjectContext.CreateDatabase();
                         }
 
-                        context.Enseignants.Find(0);
+                        context.Enseignants.Find(2);
                     }
                     
 
@@ -75,16 +75,12 @@ namespace Plannr.Filters
 
                         WebSecurity.CreateAccount("AnneLaurent", "AnneLaurent");
 
-                        WebSecurity.CreateAccount("Anne", "Anne");
 
                         WebSecurity.CreateAccount("TiberiuStratulat", "TiberiuStratulat");
 
 
                         Roles.AddUserToRole("Admin", adminRole);
-                        Roles.AddUserToRole("Admin", enseignantRole);
-                        Roles.AddUserToRole("Admin", respRole);
-                        Roles.AddUserToRole("Anne", enseignantRole);
-                        Roles.AddUserToRole("Anne", respRole);
+
                         Roles.AddUserToRole("AnneLaurent", respRole);
                         Roles.AddUserToRole("AnneLaurent", enseignantRole);
                         Roles.AddUserToRole("TiberiuStratulat", enseignantRole);

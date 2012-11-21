@@ -22,6 +22,21 @@ namespace Plannr.DAL
             return this.context.ResponsablesUE.Find(id);
         }
 
+        public ResponsableUE GetEns(int id)
+        {
+            Enseignant ens = this.context.Enseignants.Find(id);
+            ResponsableUE resp = new ResponsableUE();
+            resp.UserId=ens.UserId;
+            resp.UserName=ens.UserName;
+             resp.Name=ens.Name;
+             resp.FirstName=ens.FirstName;
+             resp.Tel=ens.Tel;
+            resp.ResponsableDepuis= DateTime.Parse("10/01/2009");
+            resp.Enseignements = ens.Enseignements;
+            this.context.Enseignants.Remove(ens);
+
+             return resp;
+        }
 
         public void Insert(Models.ResponsableUE e)
         {
