@@ -85,7 +85,7 @@ namespace Plannr.Controllers
             ViewBag.creneaux = creneaux;
             ViewBag.salles = salles;
 
-            return View();
+            return View(new Reservation(){Date = demandeAssociee.DateVoulue});
         }
 
         //

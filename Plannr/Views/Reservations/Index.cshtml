@@ -26,6 +26,7 @@
                                 <th>Date demande  </th>
                                 <th>Demandeur  </th>
                                 <th>Enseignement  </th>
+                                <th>Date voulue</th>
                                 <th>Validation </th>
 
                             </tr>
@@ -47,6 +48,7 @@
                                     <td>@item.DateDemande</td>
                                     <td>@item.Enseignement.Enseignant.Name</td>
                                     <td>@item.Enseignement.Libelle</td>
+                                    <td>@item.DateVoulue</td>
                                     <td><a href="@Url.Action("Create", "Reservations",new {id=@item.Id})" class="btn btn-primary">Assigner</a></td>
 
                                 </tr>

@@ -51,7 +51,7 @@
                             <label class="control-label" for="">Date souhaitée</label>
                             <div class="controls">
                       
-                            @Html.EditorFor(model => model.Date, new {@Value = Html.Raw(ViewBag.demandeAssociee.DateVoulue)})
+                            @Html.EditorFor(model => model.Date)
                             @Html.ValidationMessageFor(model => model.Date)
                                 </div>
                         </div>
