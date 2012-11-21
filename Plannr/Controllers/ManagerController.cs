@@ -17,12 +17,14 @@ namespace Plannr.Controllers
     {
         private IDemandesRepository demandesRepository;
         private IReservationsRepository reservationsRepository;
+        private IEnseignantsRepository enseignantsRepository;
 
         public ManagerController()
         {
             var db = new PlannrContext();
             this.demandesRepository = new DemandesRepository(db);
             this.reservationsRepository = new ReservationsRepository(db);
+            this.enseignantsRepository = new EnseignantsRepository(db);
         
         }
         //
@@ -32,7 +34,8 @@ namespace Plannr.Controllers
         {
             var id = (int) Membership.GetUser().ProviderUserKey;
             ViewBag.unseen = this.demandesRepository.GetUnseenDemandes(id);
-
+            Enseignant ens = this.enseignantsRepository.Get(id);
+            ViewBag.login = ens.UserName;
 
             List<Reservation> resa = this.reservationsRepository.GetAll().ToList();
 
@@ -53,10 +56,31 @@ namespace Plannr.Controllers
                     return PartialView("_Responsable");
                 }
             }
+
+           else if (Roles.IsUserInRole(User.Identity.Name, "Administrateur"))
+            {
+                if (!Request.IsAjaxRequest())
+                {
+                    return View("Administrateur");
+                }
+                else
+                {
+                    return PartialView("_Administrateur");
+                }
+            }
             else if (Roles.IsUserInRole(User.Identity.Name,"Enseignant"))
             {
-                return View("Enseignant");
+                if (!Request.IsAjaxRequest())
+                {
+                    return View("Enseignant");
+                }
+                else
+                {
+                    return PartialView("_Enseignant");
+                }
+                
             }
+            
             else
             {
                 return View();

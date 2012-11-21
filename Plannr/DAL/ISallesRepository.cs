@@ -17,5 +17,6 @@ namespace Plannr.DAL
         void Entry(Salle e);
         void Save();
         Salle GetEager(int id);
+        int Count();
     }
 }

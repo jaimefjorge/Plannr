@@ -16,11 +16,11 @@ namespace Plannr.Models
         [Key]
         [DatabaseGeneratedAttribute(DatabaseGeneratedOption.Identity)]
         public int UserId { get; set; }
-        [Required]
+       // [Required]
         public string UserName { get; set; }
-        [Required]
+        //[Required]
         public string Name { get; set; }
-        [Required]
+       // [Required]
         public string FirstName { get; set; }
         public string Tel { get; set; }
     }

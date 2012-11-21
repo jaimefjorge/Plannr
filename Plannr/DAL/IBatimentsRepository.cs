@@ -15,5 +15,7 @@ namespace Plannr.DAL
         void Save();
         void Entry(Batiment e);
         IEnumerable<Batiment> GetAll();
+        IEnumerable<Batiment> GetList();
+        int Count();
     }
 }
