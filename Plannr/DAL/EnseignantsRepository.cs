@@ -23,6 +23,12 @@ namespace Plannr.DAL
             return this.context.Enseignants.Find(id);
         }
 
+        public Enseignant GetEager(int id)
+        {
+            var e = context.Enseignants.Where(x => x.UserId == id).First();
+            
+            return e;
+        }
 
         public void Insert(Models.Enseignant e)
         {

@@ -132,6 +132,8 @@ namespace Plannr.Controllers
         public ActionResult EditEnseignant(int id = 0)
         {
             Enseignant enseignant = this.enseignantRepository.Get(id);
+            System.Diagnostics.Debug.WriteLine("LALALA" + enseignant.UserId);
+
             if (enseignant == null)
             {System.Diagnostics.Debug.WriteLine("testedit0");
                 return HttpNotFound();
@@ -155,9 +157,13 @@ namespace Plannr.Controllers
         [HttpPost]
         public ActionResult EditEnseignant(Enseignant enseignant)
         {
+
+            System.Diagnostics.Debug.WriteLine("LALALA"+enseignant.UserId);
+           // Enseignant e = this.enseignantRepository.GetEager(enseignant.UserId);
+            //e.UserName = "salut";
             if (ModelState.IsValid)
             {
-                this.enseignantRepository.Edit(enseignant);
+                this.enseignantRepository.Entry(enseignant);
 
                 this.enseignantRepository.Save();
                 return RedirectToAction("IndexEnseignant");
@@ -654,6 +660,7 @@ namespace Plannr.Controllers
         [HttpPost]
         public ActionResult EditMatiere(Matiere matiere)
         {
+            System.Diagnostics.Debug.WriteLine("LOLO" + matiere.Id);
             Matiere m = this.matiereRepository.GetEager(matiere.Id);
             m.Ue = this.ueRepository.Get(matiere.Ue.Id);
             m.Libelle = matiere.Libelle;

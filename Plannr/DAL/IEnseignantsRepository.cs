@@ -10,6 +10,7 @@ namespace Plannr.DAL
     public interface IEnseignantsRepository : IDisposable
     {
         Enseignant Get(int id);
+        Enseignant GetEager(int id);
         void Insert(Enseignant e);
         void Delete(int id);
         void Edit(Enseignant e);
