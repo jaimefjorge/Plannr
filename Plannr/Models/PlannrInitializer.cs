@@ -42,7 +42,7 @@ namespace Plannr.Models
             {
                 Id = 1,
                 Nom = "Polytech",
-                carac="ta mere"
+                carac="Grand"
 
                
             };

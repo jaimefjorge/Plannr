@@ -18,5 +18,6 @@ namespace Plannr.DAL
         int Count();
         IEnumerable<ResponsableUE> GetList();
         ResponsableUE GetEns(int id);
+        Enseignant GetResp(int id);
     }
 }

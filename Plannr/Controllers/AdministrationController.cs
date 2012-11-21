@@ -76,12 +76,12 @@ namespace Plannr.Controllers
 
             if (!Request.IsAjaxRequest())
             {
-                return View(this.enseignantRepository.GetAll());
+                return View(this.enseignantRepository.GetList());
             }
             else
             {
 
-                return PartialView("_IndexEnseignant", this.enseignantRepository.GetAll());
+                return PartialView("_IndexEnseignant", this.enseignantRepository.GetList());
             }
             
         }
@@ -709,7 +709,7 @@ namespace Plannr.Controllers
         //Responsables Index
         public ActionResult IndexResponsable()
         {
-            ViewBag.count = this.respRepository.Count();
+            ViewBag.count = this.ueRepository.Count();
 
             if (!Request.IsAjaxRequest())
             {
@@ -730,15 +730,26 @@ namespace Plannr.Controllers
        public ActionResult EditResponsable(int id = 0)
         {
             Ue ue = this.ueRepository.Get(id);
-           ResponsableUE resp = this.respRepository.Get(ue.ResponsableUe.UserId);
-
-           Roles.AddUserToRole(resp.UserName, "Enseignant");
-            IEnumerable<Enseignant> ensList = this.enseignantRepository.GetList();
-            ViewBag.enseignantList = ensList;
             if (ue == null)
             {
                 return HttpNotFound();
             }
+         /* if (ue.ResponsableUe.UserId != 0 && Roles.IsUserInRole(ue.ResponsableUe.UserName, "ResponsableUE"))
+            {
+                Roles.RemoveUserFromRole(ue.ResponsableUe.UserName, "ResponsableUE");
+                Roles.AddUserToRole(ue.ResponsableUe.UserName, "Enseignant");
+            }*/
+            /*if (ue.ResponsableUe != null)
+            {
+                Enseignant ens = this.respRepository.GetResp(ue.ResponsableUe.UserId);
+            }
+            */
+            //Roles.RemoveUserFromRole(ens.UserName, "ResponsableUE");
+           // Roles.AddUserToRole(ens.UserName, "Enseignant");
+           
+            IEnumerable<Enseignant> ensList = this.enseignantRepository.GetList();
+            ViewBag.enseignantList = ensList;
+            
             if (!Request.IsAjaxRequest())
             {
                 return View(ue);
@@ -757,13 +768,28 @@ namespace Plannr.Controllers
         [HttpPost]
         public ActionResult EditResponsable(Ue ue)
         {
+            string name = null;
             Ue m = this.ueRepository.Get(ue.Id);
-           
-            string name = m.ResponsableUe.UserName;
-            m.ResponsableUe = this.respRepository.GetEns(ue.ResponsableUe.UserId);
+          
+            if (m.ResponsableUe != null)
+            {
+                name = m.ResponsableUe.UserName;
+                m.ResponsableUe = this.respRepository.GetEns(ue.ResponsableUe.UserId);
+            }
+            else
+            {
+                m.ResponsableUe = this.respRepository.GetEns(ue.ResponsableUe.UserId);
+                name = m.ResponsableUe.UserName;
+            }
+
            if (!Roles.IsUserInRole(name, "ResponsableUe"))
            {
+               if (Roles.IsUserInRole(name,"Enseignant")){
+                   Roles.RemoveUserFromRole(name, "Enseignant");
+               }
+
                 Roles.AddUserToRole(name, "ResponsableUe");
+                
             }
             
             if (ModelState.IsValid)
