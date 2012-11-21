@@ -96,6 +96,7 @@ namespace Plannr.Models
                 FirstName = "Admin",
                 Tel = "0601010100",
                 AdminDepuis = DateTime.Parse("10/01/2009")
+                
             };
 
             context.Administrateurs.Add(admin);

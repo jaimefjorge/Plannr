@@ -82,6 +82,7 @@ namespace Plannr.Filters
 
                         Roles.AddUserToRole("Admin", adminRole);
                         Roles.AddUserToRole("Admin", enseignantRole);
+                        Roles.AddUserToRole("Admin", respRole);
                         Roles.AddUserToRole("Anne", enseignantRole);
                         Roles.AddUserToRole("Anne", respRole);
                         Roles.AddUserToRole("AnneLaurent", respRole);
