@@ -168,12 +168,16 @@
     <Compile Include="Controllers\AdministrationController.cs" />
     <Compile Include="Controllers\BookController.cs" />
     <Compile Include="Controllers\AddController.cs" />
+    <Compile Include="Controllers\CoursController.cs" />
+    <Compile Include="Controllers\EnseignementController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManagerController.cs" />
     <Compile Include="Controllers\OptionController.cs" />
     <Compile Include="Controllers\ReservationsController.cs" />
     <Compile Include="DAL\AdministrateurRepository.cs" />
     <Compile Include="DAL\BatimentsRepository.cs" />
+    <Compile Include="DAL\CoursRepository.cs" />
+    <Compile Include="DAL\ICoursRepository.cs" />
     <Compile Include="DAL\CreneauxHorairesRepository.cs" />
     <Compile Include="DAL\IAdministrateurRepository.cs" />
     <Compile Include="DAL\IResponsableUe.cs" />
@@ -451,6 +455,20 @@
     <Content Include="Views\Account\EditData.cshtml" />
     <Content Include="Views\Account\_EditData.cshtml" />
     <Content Include="Views\Manager\_NotifDemandeAVerifier.cshtml" />
+    <Content Include="Views\Cours\Index.cshtml" />
+    <Content Include="Views\Cours\Details.cshtml" />
+    <Content Include="Views\Cours\Create.cshtml" />
+    <Content Include="Views\Cours\Edit.cshtml" />
+    <Content Include="Views\Cours\Delete.cshtml" />
+    <Content Include="Views\Cours\_Index.cshtml" />
+    <Content Include="Views\Cours\_Create.cshtml" />
+    <Content Include="Views\Enseignement\Index.cshtml" />
+    <Content Include="Views\Enseignement\Details.cshtml" />
+    <Content Include="Views\Enseignement\Create.cshtml" />
+    <Content Include="Views\Enseignement\Edit.cshtml" />
+    <Content Include="Views\Enseignement\Delete.cshtml" />
+    <Content Include="Views\Enseignement\_Index.cshtml" />
+    <Content Include="Views\Enseignement\_Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

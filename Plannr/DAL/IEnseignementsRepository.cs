@@ -12,6 +12,7 @@ namespace Plannr.DAL
         void Insert(Enseignement e);
         void Delete(int id);
         void Save();
+        IEnumerable<Enseignement> GetList();
 
     }
 }

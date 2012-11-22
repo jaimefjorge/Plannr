@@ -37,8 +37,12 @@
 
                 <li @if (@HttpContext.Current.Request.RequestContext.RouteData.Values["controller"].ToString() == "Reservations")
                 { <text>class="active"</text> }><a href="@Url.Action("Index", "Reservations")"><i class="icon icon-ok"></i><span>Valider réservations</span></a></li>
+
+             <li @if (@HttpContext.Current.Request.RequestContext.RouteData.Values["controller"].ToString() == "Cours")
+                { <text>class="active"</text> }><a href="@Url.Action("Index", "Cours")"><i class="icon icon-ok"></i><span>Ajouter un cours</span></a></li>
            
-            
+             <li @if (@HttpContext.Current.Request.RequestContext.RouteData.Values["controller"].ToString() == "Enseignement")
+                { <text>class="active"</text> }><a href="@Url.Action("Index", "Enseignement")"><i class="icon icon-ok"></i><span>Ajouter un enseignement</span></a></li>
             
             
              <!--<li><a href="@Url.Action("Index", "Administration")"><i class="icon icon-pencil"></i><span>Administration</span></a></li>-->

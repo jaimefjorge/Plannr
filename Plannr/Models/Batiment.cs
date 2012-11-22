@@ -13,7 +13,7 @@ namespace Plannr.Models
 
         public string Nom { get; set; }
 
-       
+       [Required]
         public string carac { get; set; }
 
 

@@ -3,6 +3,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Web.Security;
+using WebMatrix.WebData;
 
 namespace Plannr.DAL
 {
@@ -62,6 +64,13 @@ namespace Plannr.DAL
             Dispose(true);
             GC.SuppressFinalize(this);
         }
+
+        public IEnumerable<Enseignement> GetList()
+        {
+            return this.context.Enseignements.ToList();
+        }
+
+        
     }
     
 }

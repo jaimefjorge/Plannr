@@ -11,7 +11,7 @@ using WebMatrix.WebData;
 namespace Plannr.Models
 {
 
-    public class PlannrInitializer : DropCreateDatabaseIfModelChanges<PlannrContext>
+    public class PlannrInitializer : DropCreateDatabaseAlways<PlannrContext>
     {
         protected override void Seed(PlannrContext context)
         {
@@ -42,7 +42,7 @@ namespace Plannr.Models
             {
                 Id = 1,
                 Nom = "Polytech",
-                
+                carac="ta mere"
 
                
             };
@@ -89,6 +89,26 @@ namespace Plannr.Models
             };
 
             context.TypesCours.Add(typeCours);
+            context.SaveChanges();
+
+            var td = new TypeCours()
+            {
+                Id = 3,
+                Type = "TD"
+
+            };
+
+            context.TypesCours.Add(td);
+            context.SaveChanges();
+
+            var tp = new TypeCours()
+            {
+                Id = 2,
+                Type = "TP"
+
+            };
+
+            context.TypesCours.Add(tp);
             context.SaveChanges();
 
             var admin = new Administrateur()
@@ -231,6 +251,19 @@ namespace Plannr.Models
                     Id = 1,
                     Libelle = "IG5"
                 };
+
+               /* var groupe1 = new Groupe()
+                {
+                    Id = 2,
+                    Libelle = "IG5 groupe 1"
+                };
+
+
+                var groupe2 = new Groupe()
+                {
+                    Id = 3,
+                    Libelle = "IG5 groupe 2"
+                };*/
                 var sous_groupe = new Groupe()
                 {
                     Id = 2,
