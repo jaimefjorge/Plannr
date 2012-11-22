@@ -36,7 +36,12 @@ namespace Plannr.DAL
 
         public void Insert(Models.Matiere m)
         {
-            this.context.Matieres.Add(m);
+            IEnumerable<Matiere> matieres = GetAll();
+            IEnumerable<Matiere> test = matieres.Where(x => x.Libelle == m.Libelle && x.Ue == m.Ue);
+            if (test.Count() == 0)
+            {
+                this.context.Matieres.Add(m);
+            }
         }
 
         public void Edit(Matiere m)

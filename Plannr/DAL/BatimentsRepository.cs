@@ -25,10 +25,20 @@ namespace Plannr.DAL
             return this.context.Batiments.Find(id);
         }
 
+      /*  public Batiment Get(String name)
+        {
+            return this.context.Batiments.;
+        }*/
+
 
         public void Insert(Models.Batiment e)
         {
-            this.context.Batiments.Add(e);
+            IEnumerable<Batiment> batiments = GetAll();
+            IEnumerable<Batiment> test = batiments.Where(x => x.Nom == e.Nom);
+            if (test.Count() == 0)
+            {
+                this.context.Batiments.Add(e);
+            }
         }
 
         public void Delete(int id)

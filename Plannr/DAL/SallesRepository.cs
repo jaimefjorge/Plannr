@@ -42,7 +42,12 @@ namespace Plannr.DAL
 
         public void Insert(Models.Salle e)
         {
-            this.context.Salles.Add(e);
+            IEnumerable<Salle> salles = GetList();
+            IEnumerable<Salle> test = salles.Where(x => x.Libelle == e.Libelle && x.Batiment == e.Batiment);
+            if (test.Count() == 0)
+            {
+                this.context.Salles.Add(e);
+            }
         }
 
         public void Delete(int id)

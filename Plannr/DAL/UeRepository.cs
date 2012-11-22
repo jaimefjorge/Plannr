@@ -24,7 +24,13 @@ namespace Plannr.DAL
 
         public void Insert(Models.Ue u)
         {
-            this.context.Ues.Add(u);
+            IEnumerable<Ue> ues = GetList();
+            IEnumerable<Ue> test = ues.Where(x => x.Libelle == u.Libelle);
+            if (test.Count() == 0)
+            {
+                this.context.Ues.Add(u);
+            }
+           
         }
 
         public void Delete(int id)

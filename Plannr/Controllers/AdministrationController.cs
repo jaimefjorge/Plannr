@@ -283,10 +283,11 @@ namespace Plannr.Controllers
         {
             if (ModelState.IsValid)
             {
-
-                this.batimentRepository.Insert(batiment);
-                this.batimentRepository.Save();
-                return RedirectToAction("IndexBatiment");
+               
+                    this.batimentRepository.Insert(batiment);
+                    this.batimentRepository.Save();
+                    return RedirectToAction("IndexBatiment");
+                
             }
 
             return View(batiment);
@@ -447,9 +448,16 @@ namespace Plannr.Controllers
             }
             if (ModelState.IsValid)
             {
-                this.salleRepository.Insert(salle);
-                this.salleRepository.Save();
-                return RedirectToAction("IndexSalle");
+                if (salle.Capacite <= 0)
+                {
+                    System.Diagnostics.Debug.WriteLine("La capacit&eacute; de la salle est incorrecte.");
+                }
+                else
+                {
+                    this.salleRepository.Insert(salle);
+                    this.salleRepository.Save();
+                    return RedirectToAction("IndexSalle");
+                }
             }
 
             return View(salle);
@@ -488,6 +496,10 @@ namespace Plannr.Controllers
             Salle s = this.salleRepository.GetEager(salle.Id);
             s.Batiment = this.batimentRepository.Get(salle.Batiment.Id);
             s.Libelle = salle.Libelle;
+            s.Capacite = salle.Capacite;
+            s.APrises = salle.APrises;
+            s.AProjecteur = salle.AProjecteur;
+
             if (ModelState.IsValid)
             {
 
