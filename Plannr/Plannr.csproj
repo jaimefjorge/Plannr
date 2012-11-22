@@ -170,6 +170,7 @@
     <Compile Include="Controllers\AddController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManagerController.cs" />
+    <Compile Include="Controllers\OptionController.cs" />
     <Compile Include="Controllers\ReservationsController.cs" />
     <Compile Include="DAL\AdministrateurRepository.cs" />
     <Compile Include="DAL\BatimentsRepository.cs" />
@@ -434,6 +435,14 @@
     <Content Include="Views\Administration\EditResponsable.cshtml" />
     <Content Include="Views\Administration\_DetailsResponsable.cshtml" />
     <Content Include="Views\Administration\DetailsResponsable.cshtml" />
+    <Content Include="Views\Option\Index.cshtml" />
+    <Content Include="Views\Option\_Index.cshtml" />
+    <Content Include="Views\Option\ChangeData.cshtml" />
+    <Content Include="Views\Option\_ChangeData.cshtml" />
+    <Content Include="Views\Option\ChangeUserName.cshtml" />
+    <Content Include="Views\Option\_ChangeUserName.cshtml" />
+    <Content Include="Views\Option\ChangePwd.cshtml" />
+    <Content Include="Views\Option\_ChangePwd.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
