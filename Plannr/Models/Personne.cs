@@ -23,6 +23,8 @@ namespace Plannr.Models
        // [Required]
         public string FirstName { get; set; }
         public string Tel { get; set; }
+        public string Discriminator { get; set; }
+        
     }
 
     public class RegisterExternalLoginModel

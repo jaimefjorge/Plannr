@@ -49,24 +49,7 @@
         </td>
         <td ><center>
             <a href="@Url.Action("DetailsEnseignant", "Administration", new { id=item.UserId })"  class ="btn btn-success" id="detailsEns"><i class="icon-eye-open"></i>Détails</a>      
-           <script> $('#editEns').live('click', function (e) {
-      if (!editLoaded) {
-
-          $.get("@Url.Action("EditEnseignant","Administration",new {id=item.UserId})", function (data) {
-
-                $('#editContainer').html(data)
-
-                showEdit()
-                editLoaded = true
-            })
-
-        } else {
-            showEdit()
-        }
-      e.preventDefault()
-      e.stopPropagation()
-      return false
-  }) </script>
+          
              </center>
         </td>
         <td>

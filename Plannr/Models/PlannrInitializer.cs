@@ -42,7 +42,7 @@ namespace Plannr.Models
             {
                 Id = 1,
                 Nom = "Polytech",
-                carac="Grand"
+                
 
                
             };
@@ -105,7 +105,21 @@ namespace Plannr.Models
             context.Administrateurs.Add(admin);
             context.SaveChanges();
 
+            
+
             var responsable = new ResponsableUE()
+            {
+                UserId = 3,
+                UserName = "ClementJonquet",
+                Name = "Jonquet",
+                FirstName = "Clement",
+                Tel = "0601010102",
+                ResponsableDepuis = DateTime.Parse("10/01/2009")
+            };
+            context.ResponsablesUE.Add(responsable);
+            context.SaveChanges();
+
+            var responsable2 = new ResponsableUE()
             {
                 UserId = 2,
                 UserName = "AnneLaurent",
@@ -114,15 +128,26 @@ namespace Plannr.Models
                 Tel = "0601010101",
                 ResponsableDepuis = DateTime.Parse("10/01/2009")
             };
-
-            context.ResponsablesUE.Add(responsable);
+            context.ResponsablesUE.Add(responsable2);
             context.SaveChanges();
 
-         
+            var responsable3 = new ResponsableUE()
+            {
+                UserId = 5,
+                UserName = "LysianneBuisson",
+                Name = "Lysianne",
+                FirstName = "Buisson",
+                Tel = "0601010103",
+                ResponsableDepuis = DateTime.Parse("10/01/2009")
+            };
+
+
+            context.ResponsablesUE.Add(responsable3);
+            context.SaveChanges();
 
             var enseignant = new Enseignant()
             {
-                UserId = 3,
+                UserId = 4,
                 UserName = "TiberiuStratulat",
                 Name = "Stratulat",
                 FirstName = "Tiberiu",
@@ -133,27 +158,49 @@ namespace Plannr.Models
 
           
 
-            var ue = new Ue()
+            var ue1 = new Ue()
             {
                 Id = 1,
                 ResponsableUe = responsable,
-                Libelle = "FLIN201",
-                Description = "UE tranquillement sa mere"
+                Libelle = "UE Architecture des Systèmes d'Information & Internet",
+                Description = "Architecture des Systèmes d'Information & Internet"
             };
-            context.Ues.Add(ue);
+            context.Ues.Add(ue1);
             context.SaveChanges();
+
+            var ue2 = new Ue()
+            {
+                Id = 2,
+                ResponsableUe = responsable2,
+                Libelle = "UE Système d’Information",
+                Description = "Système d’Information"
+            };
+            context.Ues.Add(ue2);
+            context.SaveChanges();
+
+            var ue3 = new Ue()
+            {
+                Id = 3,
+                ResponsableUe = responsable3,
+                Libelle = " UE Entreprise et Droit",
+                Description = "Entreprise et Droit"
+            };
+            context.Ues.Add(ue3);
+            context.SaveChanges();
+            
+
 
             var matiere = new List<Matiere>() {
                 new Matiere() {
                     Id = 1,
-                    Ue = ue,
+                    Ue = ue3,
                     Libelle = "Droit"
                 },
                 new Matiere() {
 
                     Id = 2,
-                    Ue = ue,
-                    Libelle = "Oriented Object Engeneering"
+                    Ue = ue1,
+                    Libelle = "AIOP"
                 }
              
               };
@@ -171,7 +218,7 @@ namespace Plannr.Models
                 },
                 new Cours() {
                     Id = 2,
-                    Libelle = "Java",
+                    Libelle = "Prog Web",
                     TypeCours = typeCours,
                     Matiere = matiere[1]
                 }
@@ -190,7 +237,13 @@ namespace Plannr.Models
                     Libelle = "IG5 Groupe 1",
                     GroupePere = groupe
                 };
-       
+
+                var sous_groupe2 = new Groupe()
+                {
+                    Id = 3,
+                    Libelle = "IG5 Groupe 2",
+                    GroupePere = groupe
+                };
 
             context.Groupes.Add(groupe);
             
@@ -198,6 +251,10 @@ namespace Plannr.Models
 
             context.Groupes.Add(sous_groupe);
             context.SaveChanges();
+
+            context.Groupes.Add(sous_groupe2);
+            context.SaveChanges();
+
 
             var enseignement = new List<Enseignement>()
             {
@@ -266,14 +323,7 @@ namespace Plannr.Models
             demande.ForEach(x => context.DemandesReservation.Add(x));
             context.SaveChanges();
 
-            var personne = new Personne()
-            {
-                UserId = 4,
-                UserName = "TestPersonne",
-                
-            };
-            context.Personnes.Add(personne);
-            context.SaveChanges();
+           
 
         
             

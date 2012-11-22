@@ -1,7 +1,7 @@
 ﻿@model Plannr.Models.Salle
 
 @{
-    ViewBag.Title = "CreateSalle";
+    ViewBag.Title = "_CreateSalle";
 }
 
 <div id ="content-header">
@@ -47,7 +47,24 @@
             @Html.EditorFor(model => model.Capacite)
             @Html.ValidationMessageFor(model => model.Capacite)
         </div>
-            
+
+        <div class="editor-label">
+            Pr&eacute;sence d'un vid&eacute;oprojecteur :
+        </div>
+        <div class="editor-field">
+            @Html.CheckBoxFor(model => model.AProjecteur)
+            @Html.ValidationMessageFor(model => model.AProjecteur)
+        </div>
+        
+        <div class="editor-label">
+           Pr&eacute;sence de prises &eacute;l&eacute;ctriques :
+        </div>
+        <div class="editor-field">
+            @Html.CheckBoxFor(model => model.APrises)
+            @Html.ValidationMessageFor(model => model.APrises)
+        </div>    
+
+        <p><br /></p>
 
         <p>
             <input class="btn btn-large btn-primary" type="submit" value="Create"  />

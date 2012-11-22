@@ -75,6 +75,9 @@ namespace Plannr.Filters
 
                         WebSecurity.CreateAccount("AnneLaurent", "AnneLaurent");
 
+                        WebSecurity.CreateAccount("LysianneBuisson", "LysianneBuisson");
+
+                        WebSecurity.CreateAccount("ClementJonquet", "ClementJonquet");
 
                         WebSecurity.CreateAccount("TiberiuStratulat", "TiberiuStratulat");
 
@@ -83,6 +86,10 @@ namespace Plannr.Filters
 
                         Roles.AddUserToRole("AnneLaurent", respRole);
                         Roles.AddUserToRole("AnneLaurent", enseignantRole);
+                        Roles.AddUserToRole("ClementJonquet", respRole);
+                        Roles.AddUserToRole("ClementJonquet", enseignantRole);
+                        Roles.AddUserToRole("LysianneBuisson", respRole);
+                        Roles.AddUserToRole("LysianneBuisson", enseignantRole);
                         Roles.AddUserToRole("TiberiuStratulat", enseignantRole);
                     }
 

@@ -19,5 +19,6 @@ namespace Plannr.DAL
         void Insert(Reservation e);
         void Delete(int id);
         void Save();
+
     }
 }

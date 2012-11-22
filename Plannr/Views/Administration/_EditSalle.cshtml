@@ -32,6 +32,12 @@
         <th>
             @Html.DisplayNameFor(model => model.Batiment.Nom)
         </th>
+        <th>
+            Vid&eacute;oprojecteur
+        </th>
+        <th>
+            Prises &eacute;l&eacute;ctriques
+        </th>
   
     </tr>
 
@@ -46,7 +52,15 @@
             @Html.ValidationMessageFor(model => model.Capacite)
           </th>
          <th>@Html.DropDownListFor(model => model.Batiment.Id, new SelectList( ViewBag.batsList ,"Id", "Nom"), "Modifier le batiment")
-               @Html.ValidationMessageFor(model => model.Batiment.Id) </th>
+             @Html.ValidationMessageFor(model => model.Batiment.Id) </th>
+        <th>
+            @Html.CheckBoxFor(model => model.AProjecteur)
+            @Html.ValidationMessageFor(model => model.AProjecteur)
+        </th>
+        <th>
+            @Html.CheckBoxFor(model => model.APrises)
+            @Html.ValidationMessageFor(model => model.APrises)
+        </th>
     </tr>
 </table>
  

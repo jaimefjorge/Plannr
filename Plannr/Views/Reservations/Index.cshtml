@@ -37,7 +37,10 @@
                         </thead>
 
                         <tbody id="listing">
-
+                            @if (Model.Count() == 0)
+                            {
+                                <b>Aucune réservation à valider pour l'instant</b>
+                            }
 
                             @foreach (var item in Model)
                             {

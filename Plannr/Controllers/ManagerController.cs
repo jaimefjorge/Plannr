@@ -34,10 +34,11 @@ namespace Plannr.Controllers
         {
             var id = (int) Membership.GetUser().ProviderUserKey;
             ViewBag.unseen = this.demandesRepository.GetUnseenDemandes(id);
+
             Enseignant ens = this.enseignantsRepository.Get(id);
             ViewBag.login = ens.UserName;
 
-            List<Reservation> resa = this.reservationsRepository.GetAll().ToList();
+            List<Reservation> resa = this.reservationsRepository.GetReservationsFor(id).ToList();
 
             // Static method
             ViewBag.calendarJSON = ReservationCalendar.ReservationsToJson(resa);
@@ -47,6 +48,8 @@ namespace Plannr.Controllers
 
             if (Roles.IsUserInRole(User.Identity.Name,"ResponsableUE"))
             {
+                ViewBag.demandesAVerifCount = this.demandesRepository.GetReservationTo(id).Count();
+
                 if (!Request.IsAjaxRequest())
                 {
                     return View("Responsable");
