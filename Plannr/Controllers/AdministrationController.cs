@@ -116,8 +116,8 @@ namespace Plannr.Controllers
 
                 this.enseignantRepository.Insert(enseignant);
                 this.enseignantRepository.Save();
-               // Roles.AddUserToRole(enseignant.UserName, "Enseignant");
-                //WebSecurity.CreateAccount(enseignant.UserName, enseignant.UserName);
+                Roles.AddUserToRole(enseignant.UserName, "Enseignant");
+                WebSecurity.CreateAccount(enseignant.UserName, enseignant.UserName);
 
                 
                 return RedirectToAction("IndexEnseignant");
@@ -781,41 +781,67 @@ namespace Plannr.Controllers
         public ActionResult EditResponsable(Ue ue)
         {
             string name = null;
+
             Ue m = this.ueRepository.Get(ue.Id);
+           
+            int id = ue.ResponsableUe.UserId;
             
-            if (m.ResponsableUe != null)
+            Enseignant ens = this.enseignantRepository.Get(id);
+            
+           
+           ResponsableUE resp = new ResponsableUE();
+            resp.UserName = ens.UserName;
+            resp.Name = ens.Name;
+            resp.FirstName = ens.FirstName;
+            resp.Tel = ens.Tel;
+            resp.ResponsableDepuis = DateTime.Parse("10/01/2009");
+            resp.Enseignements = ens.Enseignements;
+            m.ResponsableUe = resp;
+
+
+            //ens.UserName = ens.UserName + "_";
+           // this.enseignantRepository.Save();
+            
+           // this.respRepository.Insert(resp);
+            
+            
+          /*  Roles.AddUserToRole(resp.UserName, "ResponsableUE");
+            WebSecurity.CreateAccount(resp.UserName, resp.UserName);*/
+            
+            
+           // WebSecurity.CreateAccount(resp.UserName, resp.UserName);
+
+            /*if (m.ResponsableUe != null  )
             {
+                System.Diagnostics.Debug.WriteLine("T1");
                 name = m.ResponsableUe.UserName;
                 m.ResponsableUe = this.respRepository.GetEns(ue.ResponsableUe.UserId);
+               /* Roles.AddUserToRole(ue.ResponsableUe.UserName, "ResponsableUE");
+                System.Diagnostics.Debug.WriteLine("m.ResponsableUe.UserName" + m.ResponsableUe.UserName);
+                Roles.RemoveUserFromRole(ue.ResponsableUe.UserName, "Enseignant");
+               
+                Roles.AddUserToRole(m.ResponsableUe.UserName, "Enseignant");
+                Roles.RemoveUserFromRole(m.ResponsableUe.UserName, "ResponsableUE");
+                System.Diagnostics.Debug.WriteLine("ue.ResponsableUe.UserName" + ue.ResponsableUe.UserName);
             }
             else
             {
+                System.Diagnostics.Debug.WriteLine("T2");
                 m.ResponsableUe = this.respRepository.GetEns(ue.ResponsableUe.UserId);
                 name = m.ResponsableUe.UserName;
-            }
+            }*/
 
-           if (!Roles.IsUserInRole(name, "ResponsableUe"))
-           {
-               if (Roles.IsUserInRole(name,"Enseignant")){
-                   Roles.RemoveUserFromRole(name, "Enseignant");
-               }
-
-                Roles.AddUserToRole(name, "ResponsableUe");
-                
-            }
-           if (!WebSecurity.UserExists(name)){
-               WebSecurity.CreateAccount(name, name);
-           }
-          
+           
             
             if (ModelState.IsValid)
             {
+                
                 this.ueRepository.Edit(m);
                 this.ueRepository.Save();
                 return RedirectToAction("IndexResponsable");
             }
 
-            return View(m);
+            return View(ue);
         }
 
         // GET: /Responsable/Details/5

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Web;
+using WebMatrix.WebData;
 
 namespace Plannr.DAL
 {
@@ -33,7 +34,10 @@ namespace Plannr.DAL
              resp.Tel=ens.Tel;
             resp.ResponsableDepuis= DateTime.Parse("10/01/2009");
             resp.Enseignements = ens.Enseignements;
+            
             this.context.Enseignants.Remove(ens);
+            
+            //WebSecurity.CreateAccount(resp.UserName, resp.UserName);
 
              return resp;
         }

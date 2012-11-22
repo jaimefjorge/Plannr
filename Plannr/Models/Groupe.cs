@@ -13,11 +13,13 @@ namespace Plannr.Models
         public int Id { get; set; }
         [Required]
         public string Libelle { get; set; }
+       
 
 
         public virtual ICollection<Groupe> SousGroupes { get; set; }
         public virtual Groupe GroupePere { get; set; }
         public virtual ICollection<Enseignement> Enseignements { get; set; }
+       
 
 
     }
