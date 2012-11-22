@@ -713,12 +713,12 @@ namespace Plannr.Controllers
 
             if (!Request.IsAjaxRequest())
             {
-                System.Diagnostics.Debug.WriteLine("test0");
+                
                 return View(this.ueRepository.GetList());
             }
             else
             {
-                System.Diagnostics.Debug.WriteLine("test1");
+                
                 return PartialView("_IndexResponsable", this.ueRepository.GetList());
                 
             }
@@ -770,7 +770,7 @@ namespace Plannr.Controllers
         {
             string name = null;
             Ue m = this.ueRepository.Get(ue.Id);
-          
+            
             if (m.ResponsableUe != null)
             {
                 name = m.ResponsableUe.UserName;
@@ -791,6 +791,10 @@ namespace Plannr.Controllers
                 Roles.AddUserToRole(name, "ResponsableUe");
                 
             }
+           if (!WebSecurity.UserExists(name)){
+               WebSecurity.CreateAccount(name, name);
+           }
+          
             
             if (ModelState.IsValid)
             {

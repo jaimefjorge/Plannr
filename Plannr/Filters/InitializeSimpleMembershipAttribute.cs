@@ -41,7 +41,7 @@ namespace Plannr.Filters
                             ((IObjectContextAdapter)context).ObjectContext.CreateDatabase();
                         }
 
-                        context.Enseignants.Find(2);
+                        context.Enseignants.Find(1);
                     }
                     
 
