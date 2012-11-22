@@ -84,7 +84,9 @@ namespace Plannr.DAL
 
         public int Count()
         {
-            return context.Enseignants.Count();
+            int cpt = 0;
+            cpt = context.Enseignants.Count() - 1;
+            return cpt;
         }
         public IEnumerable<Enseignant> GetList()
         {

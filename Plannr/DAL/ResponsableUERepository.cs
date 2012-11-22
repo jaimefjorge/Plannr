@@ -26,7 +26,7 @@ namespace Plannr.DAL
         {
             Enseignant ens = this.context.Enseignants.Find(id);
             ResponsableUE resp = new ResponsableUE();
-            resp.UserId=ens.UserId;
+            //resp.UserId=ens.UserId;
             resp.UserName=ens.UserName;
              resp.Name=ens.Name;
              resp.FirstName=ens.FirstName;
@@ -36,6 +36,21 @@ namespace Plannr.DAL
             this.context.Enseignants.Remove(ens);
 
              return resp;
+        }
+
+        public Enseignant GetResp(int id)
+        {
+            ResponsableUE resp = this.context.ResponsablesUE.Find(id);
+            Enseignant ens = new Enseignant();
+            ens.UserId = resp.UserId;
+            ens.UserName = resp.UserName;
+            ens.Name = resp.Name;
+            ens.FirstName = resp.FirstName;
+            ens.Tel = resp.Tel;
+            ens.Enseignements = resp.Enseignements;
+            this.context.ResponsablesUE.Remove(resp);
+
+            return ens;
         }
 
         public void Insert(Models.ResponsableUE e)
