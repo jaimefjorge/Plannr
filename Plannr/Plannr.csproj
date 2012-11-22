@@ -443,6 +443,7 @@
     <Content Include="Views\Option\_ChangeUserName.cshtml" />
     <Content Include="Views\Option\ChangePwd.cshtml" />
     <Content Include="Views\Option\_ChangePwd.cshtml" />
+    <Content Include="Views\Manager\_NotifDemandeAVerifier.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -469,7 +470,7 @@
         <WebProjectProperties>
           <UseIIS>True</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>0</DevelopmentServerPort>
+          <DevelopmentServerPort>49532</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
           <IISUrl>http://localhost:63886/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>

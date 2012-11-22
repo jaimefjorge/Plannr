@@ -13,7 +13,10 @@ namespace Plannr.DAL
         IEnumerable<DemandeReservation> GetReservationTo(int id);
         // Obtient les réservations validées non vues par l'enseignant
         IEnumerable<DemandeReservation> GetUnseenDemandes(int id);
+        
         DemandeReservation Find(int id);
+        DemandeReservation FindEager(int id);
+        void Edit(DemandeReservation demande);
         void Insert(DemandeReservation demande);
         void Delete(int id);
         void Delete(DemandeReservation demande);

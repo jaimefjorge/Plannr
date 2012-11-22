@@ -26,6 +26,16 @@ namespace Plannr.DAL
             return this.context.DemandesReservation.Where(x => x.Enseignement.Cours.Matiere.Ue.ResponsableUe.UserId == id && x.ReservationAssociee == null).ToList();
         }
 
+        public DemandeReservation FindEager(int id)
+        {
+            return this.context.DemandesReservation.Include("ReservationAssociee").Single(s => s.Id == id);
+        }
+
+        public void Edit(DemandeReservation demande)
+        {
+            this.context.Entry(demande).State = System.Data.EntityState.Modified;
+        }
+
         public void Insert(DemandeReservation demande)
         {
             this.context.DemandesReservation.Add(demande);
@@ -50,7 +60,7 @@ namespace Plannr.DAL
         public IEnumerable<DemandeReservation> GetUnseenDemandes(int id)
         {
 
-            return this.context.DemandesReservation.Where(x => x.Id == id && x.CheckedByTeacher == false && x.ReservationAssociee != null).ToList();
+            return this.context.DemandesReservation.Where(x => x.Enseignement.Enseignant.UserId == id && x.CheckedByTeacher == false && x.ReservationAssociee != null).ToList();
 
         }
 

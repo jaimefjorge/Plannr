@@ -22,7 +22,7 @@ namespace Plannr.Controllers
         private IDemandesRepository demandesRepository;
         private ISallesRepository sallesRepository;
         private ICreneauxHorairesRepository creneauxRepository;
-       
+        private IEnseignementsRepository ensRepository;
           // Constructor
         public ReservationsController()
         {
@@ -32,6 +32,8 @@ namespace Plannr.Controllers
             this.demandesRepository = new DemandesRepository(context);
             this.sallesRepository = new SallesRepository(context);
             this.creneauxRepository = new CreneauxHorairesRepository(context);
+            this.ensRepository = new EnseignementsRepository(context);
+
         }
 
         // Give it as a parameter aswel for unit testing
@@ -84,27 +86,41 @@ namespace Plannr.Controllers
             ViewBag.demandeAssociee = demandeAssociee;
             ViewBag.creneaux = creneaux;
             ViewBag.salles = salles;
-
-            return View(new Reservation(){Date = demandeAssociee.DateVoulue});
+            ViewBag.DemandeId = id;
+            return View(new Reservation() { Date = demandeAssociee.DateVoulue, Enseignement = new Enseignement() { Id = demandeAssociee.Enseignement.Id } });
         }
 
         //
         // POST: /Reservations/Create
 
         [HttpPost]
-        public ActionResult Create(Reservation reservation)
+        public ActionResult Create(Reservation reservation, int DemandeId)
         {
 
+            var origEnsId = reservation.Enseignement.Id;
 
             reservation.Creneau = this.creneauxRepository.Find(reservation.Creneau.Id);
             reservation.Salle = this.sallesRepository.Get(reservation.Salle.Id);
-            reservation.Date = DateTime.Now;
-            //reservation.Enseignement = this.ensRepository.Get(1);
+
+            System.Diagnostics.Debug.WriteLine(origEnsId);
+            reservation.Enseignement = this.ensRepository.Get(origEnsId);
+
+            
+
 
             if (ModelState.IsValid)
             {
                 this.repository.Insert(reservation);
                 this.repository.Save();
+
+                // Edit associated dmeande
+             
+                var d = this.demandesRepository.FindEager(DemandeId);
+                d.ReservationAssociee = reservation;
+                this.demandesRepository.Edit(d);
+                this.demandesRepository.Save();
+                
+
                 return RedirectToAction("Index");
             }
 

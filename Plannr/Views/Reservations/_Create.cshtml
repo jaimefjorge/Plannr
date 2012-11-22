@@ -40,6 +40,10 @@
                             </div>
                         </div>
                         
+                        @Html.HiddenFor(model => model.Enseignement.Id)
+
+                        <input type="hidden" name="DemandeId" value="@ViewBag.DemandeId" />
+                        
                         <div class="control-group">
                             <label class="control-label" for="">Promotion concernée</label>
                             <div class="controls">
@@ -68,6 +72,7 @@
                         <label class="control-label" for="">Créneau</label>
                         <div class="controls">
                             @Html.DropDownListFor(model => model.Creneau.Id, new SelectList(ViewBag.creneaux, "Id", "HeureConcat"))
+                            
                         </div>
                     </div>
                         
