@@ -1,4 +1,5 @@
-﻿@{
+﻿@model Plannr.Models.Enseignant
+@{
     ViewBag.Title = "ChangeData";
 }
 
@@ -15,34 +16,7 @@
 						</div>
  <div class="container-fluid">
 				
-				<div class="row-fluid">
-					<div class="span12">
-						<div class="widget-box">
-							<div class="widget-title">
-								<span class="icon">
-									<i class="icon-align-justify"></i>									
-								</span>
-								<h5>Mon nom d'utilisateur</h5>
-							</div>
-							<div class="widget-content nopadding">
-									@using (Html.BeginForm("ChangeUserName", "Option", FormMethod.Post, new { @class = "form-horizontal", @id = "EditUsernamePerso" }))
-                                 {
-                                     @Html.ValidationSummary(true)
-									<div class="control-group">
-										<label class="control-label">Nouveau nom d'utilisateur</label>
-										<div class="controls">
-											<input type="text" name="min" id="min">
-										</div>
-									</div>
-
-
-									<div class="form-actions">
-										<input type="submit" value="Valider" class="btn btn-primary">
-									</div>
-                                  }
-							</div>
-						</div>
-					</div>	
+				
 					<div class="row-fluid">
 						<div class="span12">
 							<div class="widget-box">
@@ -55,6 +29,7 @@
 								<div class="widget-content nopadding">
 										@using (Html.BeginForm("ChangePwd", "Option", FormMethod.Post, new { @class = "form-horizontal", @id = "EditPassword" }))
                                  {
+                                     @Html.HiddenFor(model => model.UserId)                        
                                      @Html.ValidationSummary(true)
 										<div class="control-group">
 											<label class="control-label">Nouveau mot de passe</label>

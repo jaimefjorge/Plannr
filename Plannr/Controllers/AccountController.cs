@@ -19,6 +19,14 @@ namespace Plannr.Controllers
     {
         //
         // GET: /Account/Login
+        private PlannrContext db = new PlannrContext();
+        private Plannr.DAL.IEnseignantsRepository enseignantRepository;
+
+        public AccountController()
+        {
+            var context = new PlannrContext();
+            enseignantRepository = new Plannr.DAL.EnseignantsRepository(context);
+        }
 
         [AllowAnonymous]
         public ActionResult Login(string returnUrl)
@@ -117,7 +125,15 @@ namespace Plannr.Controllers
                 : "";
             ViewBag.HasLocalPassword = OAuthWebSecurity.HasLocalAccount(WebSecurity.GetUserId(User.Identity.Name));
             ViewBag.ReturnUrl = Url.Action("Manage");
-            return View();
+            if (!Request.IsAjaxRequest())
+            {
+                return View();
+            }
+            else
+            {
+
+                return PartialView("_Manage");
+            }
         }
 
         //
@@ -180,7 +196,15 @@ namespace Plannr.Controllers
             }
 
             // Si nous sommes arrivés là, quelque chose a échoué, réafficher le formulaire
-            return View(model);
+            if (!Request.IsAjaxRequest())
+            {
+                return View(model);
+            }
+            else
+            {
+
+                return PartialView("_Manage", model);
+            }
         }
 
         //
@@ -272,6 +296,45 @@ namespace Plannr.Controllers
             ViewBag.ReturnUrl = returnUrl;
             return View(model);
         }
+
+
+        public ActionResult EditData(ManageMessageId? message)
+        {
+             ViewBag.StatusMessage =
+                message == ManageMessageId.ChangePasswordSuccess ? "Votre profil a été mis à jour.":"";
+            var ensId = WebSecurity.CurrentUserId;
+            Enseignant e = enseignantRepository.Get(ensId);
+            System.Diagnostics.Debug.WriteLine("Coucou" + e.Name);
+            if (!Request.IsAjaxRequest())
+            {
+                return View(e);
+            }
+            else
+            {
+
+                return PartialView("_EditData", e);
+            }
+        }
+
+        [HttpPost]
+        public ActionResult EditData(Enseignant enseignant)
+        {
+            Enseignant e = enseignantRepository.Get(enseignant.UserId);
+            e.FirstName = enseignant.FirstName;
+            e.Name = enseignant.Name;
+            e.Tel = enseignant.Tel;
+            if (ModelState.IsValid)
+            {
+                this.enseignantRepository.Edit(e);
+
+                this.enseignantRepository.Save();
+                return RedirectToAction("EditData", new { Message = ManageMessageId.ChangePasswordSuccess });
+            }
+            return View(enseignant);
+
+        }
+
+
 
         //
         // GET: /Account/ExternalLoginFailure

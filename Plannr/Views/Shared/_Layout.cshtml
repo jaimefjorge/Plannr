@@ -55,9 +55,16 @@
 
 					</ul>
 				</li>
+                
+                 <li class="submenu">
+					<a href="#"><i class="icon icon-wrench"></i> <span>Mon compte</span> <span class="label">2</span></a>
+					<ul style="display: none;">
+						<li> <a href="@Url.Action("Manage","Account")">Mon mot de passe</a></li>
+						<li><a href="@Url.Action("EditData", "Account")">Mes infos personnelles</a></li>
+                  
 
-                   <li @if (@HttpContext.Current.Request.RequestContext.RouteData.Values["controller"].ToString() == "Option")
-                { <text>class="active"</text> }><a href="@Url.Action("Index", "Option")"><i class="icon icon-wrench"></i><span>Mon compte</span></a></li>
+					</ul>
+				</li>
 
         
         </ul>
