@@ -20,7 +20,9 @@
                         <i class="icon-exclamation-sign"></i>
                     </span>
                     <h5>Notifications</h5>
-                    <span class="label label-info">@ViewBag.demandesAVerifCount</span>
+                    @if (ViewBag.demandesAVerifCount > 0) {
+                        <span class="label label-info">@ViewBag.demandesAVerifCount</span>
+                    }
                 </div>
                 <div class="widget-content nopadding">
 

@@ -11,7 +11,7 @@ using WebMatrix.WebData;
 namespace Plannr.Models
 {
 
-    public class PlannrInitializer : DropCreateDatabaseAlways<PlannrContext>
+    public class PlannrInitializer : DropCreateDatabaseIfModelChanges<PlannrContext>
     {
         protected override void Seed(PlannrContext context)
         {
