@@ -33,7 +33,7 @@ namespace Plannr.DAL
         public IEnumerable<Salle> GetSallesCriteres(int capacite, bool projo, DateTime date)
         {
 
-            return (from salle in this.context.Salles.Where(x => x.Capacite >= capacite && x.AProjecteur == projo).ToList()
+            return (from salle in this.context.Salles.Where(x => x.Capacite >= capacite && x.AProjecteur == projo && (projo == false || x.AProjecteur == projo)).ToList()
                     where !(from resa in this.context.Reservations where resa.Date == date select resa.Salle.Id).Contains(salle.Id)
                     select salle).ToList();
        
